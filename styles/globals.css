@@ -1,0 +1,138 @@
+html,
+body {
+  padding: 0;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+@media (prefers-color-scheme: dark) {
+  html {
+    color-scheme: dark;
+  }
+  body {
+    color: white;
+    background: black;
+  }
+}
+
+.loader {
+  display: flex;
+  overflow: hidden;
+  width: 18rem;
+  border-radius: 100vh;
+  border: 1px solid hsl(240, 100%, 0%);
+}
+.loader::before {
+  content: "♙";
+  font-size: 2rem;
+  animation: promotion 5000ms forwards infinite 220ms,
+    colorChange 5000ms forwards infinite;
+  /* transition: transform 100ms ease; */
+}
+@keyframes promotion {
+  /* 1   */
+  0% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+  5% {
+    transform: translate(1rem, -0.6rem) rotate(-22.5deg);
+  }
+  10% {
+    transform: translate(2rem, 0rem) rotate(0deg);
+  }
+  /* 2 */
+
+  15% {
+    transform: translate(2rem, 0) rotate(0deg);
+  }
+  20% {
+    transform: translate(3rem, -0.6rem) rotate(-22.5deg);
+  }
+  25% {
+    transform: translate(4rem, 0rem) rotate(0deg);
+  }
+  /* 3 */
+  30% {
+    transform: translate(4rem, 0) rotate(0deg);
+  }
+  35% {
+    transform: translate(5rem, -0.6rem) rotate(-22.5deg);
+  }
+  40% {
+    transform: translate(6rem, 0rem) rotate(0deg);
+  }
+  /*   4
+} */
+  45% {
+    transform: translate(6rem, 0) rotate(0deg);
+  }
+  50% {
+    transform: translate(7rem, -0.6rem) rotate(-22.5deg);
+  }
+  55% {
+    transform: translate(8rem, 0rem) rotate(0deg);
+  }
+
+  /*  5 */
+  60% {
+    transform: translate(8rem, 0) rotate(0deg);
+  }
+  65% {
+    transform: translate(9rem, -0.6rem) rotate(-22.5deg);
+  }
+  70% {
+    transform: translate(10rem, 0rem) rotate(0deg);
+  }
+
+  /*  6 */
+  75% {
+    transform: translate(10rem, 0) rotate(0deg);
+  }
+  80% {
+    transform: translate(11rem, -0.6rem) rotate(-22.5deg);
+  }
+  85% {
+    transform: translate(12rem, 0rem) rotate(0deg);
+  }
+
+  90% {
+    transform: translate(12rem, 0) rotate(0deg);
+  }
+  95% {
+    transform: translate(13rem, -0.6rem) rotate(-22.5deg);
+    content: "♙";
+  }
+  100% {
+    transform: translate(14rem, 0rem) rotate(0deg);
+    content: "♕";
+    color: hsl(293, 72%, 50%) !important;
+  }
+}
+
+@keyframes colorChange {
+  0% {
+    color: hsl(0, 84%, 55%);
+  }
+  25% {
+    color: hsl(59, 84%, 55%);
+  }
+  50% {
+    color: hsl(123, 84%, 55%);
+  }
+  75% {
+    color: hsl(194, 84%, 55%);
+  }
+  100% {
+    color: hsl(288, 84%, 55%);
+  }
+}
