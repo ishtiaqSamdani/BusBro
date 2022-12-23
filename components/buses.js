@@ -29,6 +29,10 @@ function Buses({ admin }) {
     useEffect(() => {
         getData();
     }, [])
+
+    // const unsub = onSnapshot(doc(database, "buses",), (doc) => {
+    //     console.log("Current data: ", doc.data());
+    // });
     return (
         <>
             <h2>
