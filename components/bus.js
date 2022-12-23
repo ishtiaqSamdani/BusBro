@@ -5,6 +5,7 @@ import { collection } from 'firebase/firestore';
 import { doc, onSnapshot } from "firebase/firestore";
 
 import { database } from '../firebaseConfig';
+import { setRevalidateHeaders } from 'next/dist/server/send-payload';
 
 const Bus = (props) => {
     const [bus, setbus] = useState(props.bus);
@@ -20,9 +21,10 @@ const Bus = (props) => {
             }
         )
     }
-    onSnapshot(doc(database, "buses", bus.id), (doc) => {
-        console.log("Current data: ", doc.data());
-    });
+    // const unsub = onSnapshot(doc(database, "buses", bus.id), (doc) => {
+    //     console.log("Current data: ", doc.data());
+    //     setbus(doc.data())
+    // });
     return (
         <>
             <div style={{ "backgroundColor": "hotpink", 'color': '#333', 'width': '50vw', "margin": '3rem' }}>
