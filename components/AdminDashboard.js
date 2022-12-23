@@ -17,13 +17,14 @@ const AdminDashboard = ({ admin }) => {
     const openDialog = () => {
         document.querySelector('.dialog').showModal();
     }
-    const closeDialog = () => {
+    const closeDialog = (e) => {
+        e.preventDefault();
         document.querySelector('.dialog').close();
     }
     const handlesubmit = (e) => {
         e.preventDefault();
         addData();
-        closeDialog();
+        closeDialog(e);
     }
 
 
@@ -139,11 +140,11 @@ const AdminDashboard = ({ admin }) => {
                         ></input>
                         <br></br>
                         <input type="text"
-                            onChange={(e) => { setBusData({ ...busData, route: [busData.route[0],e.target.value, busData.route[2]] }) }}
+                            onChange={(e) => { setBusData({ ...busData, route: [busData.route[0], e.target.value, busData.route[2]] }) }}
                             value={busData.route[1]} ></input>
                         <br></br>
                         <input type="text"
-                            onChange={(e) => { setBusData({ ...busData, route: [ busData.route[0], busData.route[1],e.target.value] }) }}
+                            onChange={(e) => { setBusData({ ...busData, route: [busData.route[0], busData.route[1], e.target.value] }) }}
                             value={busData.route[2]}  ></input>
                         <br></br>
                     </label>
@@ -158,7 +159,7 @@ const AdminDashboard = ({ admin }) => {
                     <input type='submit'>
                     </input>
 
-                    <button onClick={closeDialog}>cancel</button>
+                    <button onClick={(e) => closeDialog(e)}>cancel</button>
 
                 </form>
 
