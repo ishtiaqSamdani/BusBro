@@ -1,8 +1,20 @@
 import Link from 'next/link'
 import React, { useState } from 'react'
+import Router from 'next/router'
 
 const Bus = (props) => {
-    const [bus, setbus] = useState(props.bus)
+    const [bus, setbus] = useState(props.bus);
+    const pushData = () => {
+        Router.push(
+            {
+                pathname : '/view-more',
+                query : {
+                    busNumber : bus.busNumber,
+                    admin : props.admin
+                }
+            }
+        )
+    }
     return (
         <>
             <div style={{ "backgroundColor": "hotpink", 'color': '#333', 'width': '50vw', "margin": '3rem' }}>
@@ -23,9 +35,9 @@ const Bus = (props) => {
                 }
 
                 <button>
-                    <Link href="/view-more">
-                        view more {"->"}
-                    </Link>
+                    <a onClick={()=>{pushData()}}>view more...</a>
+                        
+                    
                 </button>
 
 

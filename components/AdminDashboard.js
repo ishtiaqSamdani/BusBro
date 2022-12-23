@@ -10,10 +10,9 @@ const AdminDashboard = ({ admin }) => {
         busPlateNumber: "",
         driver: ["", "", ""],
         GSMMobile: "",
-        route: [""],
+        route: ["", "", ""],
     }
     const [busData, setBusData] = useState(dataToPush);
-    const [routes, setRoutes] = useState([{ name: '' }]);
     const databaseRef = collection(database, 'buses');
     const openDialog = () => {
         document.querySelector('.dialog').showModal();
@@ -97,7 +96,6 @@ const AdminDashboard = ({ admin }) => {
                             value={busData.driver[1]}
                         />
                     </label>
-                    <br />
 
 
 
@@ -122,6 +120,7 @@ const AdminDashboard = ({ admin }) => {
                         />
                     </label>
                     <br />
+                    <br />
                     <label>GSM mobile
 
                         <input
@@ -133,33 +132,27 @@ const AdminDashboard = ({ admin }) => {
 
                     </label>
                     <h2>Route</h2>
-                    {
-                        routes.map((val, idx) => {
-                            return (
-                                <>
-
-                                    <label>
-                                        {idx}:
-                                        <input
-                                            type="text"
-                                            name=""
-                                            onChange={(e) => { setBusData({ ...busData, route: [...busData.route, e.target.value] }) }}
-                                        // value={busData.route[idx]}
-                                        />
-                                    </label>
-                                    <br />
-                                    <button>
-                                        +
-                                    </button>
-                                    <br />
-                                </>
-                            )
-                        })
+                    <label>
+                        <input type="text"
+                            onChange={(e) => { setBusData({ ...busData, route: [e.target.value, busData.route[1], busData.route[2]] }) }}
+                            value={busData.route[0]}
+                        ></input>
+                        <br></br>
+                        <input type="text"
+                            onChange={(e) => { setBusData({ ...busData, route: [busData.route[0],e.target.value, busData.route[2]] }) }}
+                            value={busData.route[1]} ></input>
+                        <br></br>
+                        <input type="text"
+                            onChange={(e) => { setBusData({ ...busData, route: [ busData.route[0], busData.route[1],e.target.value] }) }}
+                            value={busData.route[2]}  ></input>
+                        <br></br>
+                    </label>
+                    <br></br>
 
 
 
 
-                    }
+
 
 
                     <input type='submit'>
