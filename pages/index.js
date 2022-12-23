@@ -18,7 +18,7 @@ export default function Home(props) {
           </>
 
         ) : (
-          <Buses />)
+          <Buses admin={props.admin}/>)
 
       }
 
