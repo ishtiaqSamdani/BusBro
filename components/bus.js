@@ -8,8 +8,8 @@ import { database } from '../firebaseConfig';
 import { setRevalidateHeaders } from 'next/dist/server/send-payload';
 
 const Bus = (props) => {
-    const [bus, setbus] = useState(props.bus);
-    console.log(bus)
+    const bus = props.bus;
+    // console.log(bus)
     const pushData = () => {
         Router.push(
             {

@@ -19,6 +19,7 @@ const Login = (props) => {
         signInWithEmailAndPassword(auth, email, password)
             .then((response) => {
                 props.setAdmin(response.user);
+                window.localStorage.setItem('busbro-token', response.user.uid);
             })
             .catch(err => {
                 alert("Not A Valid User")

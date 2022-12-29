@@ -1,9 +1,11 @@
+import { getAuth } from 'firebase/auth';
 import { addDoc, collection } from 'firebase/firestore';
 import React, { useEffect, useState } from 'react'
 import { database } from '../firebaseConfig';
 import Buses from './buses';
 
-const AdminDashboard = ({ admin }) => {
+const AdminDashboard = ({ admin,setAdmin }) => {
+    const auth = getAuth();
     let cnt = 0;
     const dataToPush = {
         busNumber: "",
@@ -41,9 +43,7 @@ const AdminDashboard = ({ admin }) => {
             })
     }
 
-    useEffect(() => {
-        console.log(busData)
-    }, [busData])
+    
 
 
 
@@ -54,7 +54,8 @@ const AdminDashboard = ({ admin }) => {
             <h1>Admin</h1>
             <button onClick={() => {
                 auth.signOut();
-                props.setAdmin(null);
+                setAdmin(null)
+                window.localStorage.removeItem('busbro-token');
             }}>Sign Out</button>
 
 

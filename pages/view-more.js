@@ -34,7 +34,16 @@ const viewMore = (props) => {
             return bus.busNumber == busNumber;
         })
         : null;
-    console.log(singleBus, "singleBus");
+        const [token, setToken] = useState(null);
+        useEffect(() => {
+          setToken(window.localStorage.getItem("busbro-token"));
+        }, [props.admin]);
+
+    useEffect(() => {
+        if (singleBus) {
+            setBusData(singleBus);
+        }
+    }, [data]);
     // console.log(busData);
     const openDialog = () => {
         document.querySelector(".dialog").showModal();
@@ -67,9 +76,7 @@ const viewMore = (props) => {
             });
     };
 
-    useEffect(() => {
-        console.log(busData);
-    }, [busData]);
+
 
     const databaseRef = collection(database, "buses");
 
@@ -105,7 +112,7 @@ const viewMore = (props) => {
                 })}
             </div>
 
-            {props.admin && (
+            {(props.admin || token) && (
                 <>
                     <button className="add_bus" onClick={openDialog}>
                         Update Bus
