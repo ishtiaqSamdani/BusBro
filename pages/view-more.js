@@ -61,8 +61,13 @@ const viewMore = (props) => {
 
     const updateFields = () => {
         let fieldToEdit = doc(database, "buses", singleBus.id);
-
-        updateDoc(fieldToEdit, busData)
+        let search = busData.busNumber+",";
+        busData.route.map((item, index) => {
+            if (item !== "") {
+                search += (item+",");
+            }
+        })
+        updateDoc(fieldToEdit, {...busData,search:search})
             .then(() => {
                 alert("Data Updated");
                 Router.push("/");

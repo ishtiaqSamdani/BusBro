@@ -1,5 +1,5 @@
 import Head from "next/head";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import styles from "../styles/Home.module.css";
 import { app, database } from "../firebaseConfig";
 import {
@@ -17,6 +17,7 @@ import Bus from "../components/bus";
 function Buses({ admin }) {
   const databaseRef = collection(database, "buses");
   const [data, setData] = useState(null);
+  const [query, setQuery] = useState("")
 
 
 // onsnapshot
@@ -33,14 +34,18 @@ function Buses({ admin }) {
     useEffect(() => {
         console.log(data);
     }, [data])
-
+const filteredItems = useMemo(() => {
+    return data?.filter(item => {
+      return item.search.toLowerCase().includes(query.toLowerCase())
+    })
+  }, [data, query])
   return (
     <>
       <h2>search</h2>
-      <input type="text" className="search" />
+      <input type="search" onChange={e=>setQuery(e.target.value)} value={query} className="search" />
 
-      {data ? (
-        data.map((bus) => {
+      {filteredItems ? (
+        filteredItems.map((bus) => {
           return <Bus bus={bus} admin={admin} />;
         })
       ) : (

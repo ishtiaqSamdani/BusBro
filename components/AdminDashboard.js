@@ -13,6 +13,7 @@ const AdminDashboard = ({ admin,setAdmin }) => {
         driver: ["", "", ""],
         GSMMobile: "",
         route: ["", "", ""],
+        search: "",
     }
     const [busData, setBusData] = useState(dataToPush);
     const databaseRef = collection(database, 'buses');
@@ -31,7 +32,14 @@ const AdminDashboard = ({ admin,setAdmin }) => {
 
 
     const addData = () => {
-        addDoc(databaseRef, busData)
+        let search = busData.busNumber+",";
+        busData.route.map((item, index) => {
+            if (item !== "") {
+                search += (item+",");
+            }
+        })
+        console.log(search);
+        addDoc(databaseRef, {...busData,search:search})
             .then(() => {
                 alert('Data Sent')
                 // getData()
@@ -41,6 +49,7 @@ const AdminDashboard = ({ admin,setAdmin }) => {
             .catch((err) => {
                 console.error(err);
             })
+            setBusData(dataToPush);
     }
 
     
@@ -72,7 +81,7 @@ const AdminDashboard = ({ admin,setAdmin }) => {
                         <input
                             type="text"
                             name="bus_number"
-                            onChange={(e) => { setBusData({ ...busData, busNumber: e.target.value }) }}
+                            onChange={(e) => { setBusData({ ...busData, busNumber: e.target.value}) }}
                             value={busData.busNumber}
                         />
                     </label>
