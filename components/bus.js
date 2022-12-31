@@ -25,6 +25,10 @@ const Bus = (props) => {
     //     console.log("Current data: ", doc.data());
     //     setbus(doc.data())
     // });
+
+    let route = bus.route;
+    route = [route[0],route[Math.floor(route.length/2)],route[route.length-1]];
+    console.log(route)
     return (
         <>
             <div style={{ "backgroundColor": "hotpink", 'color': '#333', 'width': '50vw', "margin": '3rem' }}>
@@ -32,17 +36,11 @@ const Bus = (props) => {
                     {bus.busNumber}
                 </h1>
 
-                {
-                    bus.route.map((item, index) => {
-                        return (
-                            <div key={index} className="bus_route">
-                                <h3>
-                                    {item} {"- >"}
-                                </h3>
-                            </div>
-                        )
-                    })
-                }
+                {route.map((item)=>{
+                    return(
+                    <h3>{item} {`-->`}</h3> 
+                    )
+                })}
 
                 <button>
                     <a onClick={() => { pushData() }}>view more...</a>

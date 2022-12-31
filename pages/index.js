@@ -5,6 +5,7 @@ import { app } from "../firebaseConfig";
 import Buses from "../components/buses";
 import AdminDashboard from "../components/AdminDashboard";
 import { useEffect, useState } from "react";
+// import fav from "../static/bus.png"
 
 export default function Home(props) {
   const auth = getAuth();
@@ -16,6 +17,10 @@ export default function Home(props) {
 
   return (
     <>
+    {/* <Head>
+      <title>veer</title>
+  <link rel="icon"  href="../static/bus.png"/>
+  </Head> */}
       {token || props.admin ? (
         <>
           <AdminDashboard admin={props.admin} setAdmin={props.setAdmin} />
