@@ -15,7 +15,8 @@ const Login = (props) => {
     const [d, setd] = useState(null)
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const signIn = () => {
+    const signIn = (e) => {
+        e.preventDefault();
         signInWithEmailAndPassword(auth, email, password)
             .then((response) => {
                 props.setAdmin(response.user);
@@ -29,7 +30,7 @@ const Login = (props) => {
     }
     return (
         <>
-            <div className="cont">
+            <form className="cont" onSubmit={(e) => signIn(e)}>
                 <input
                     type="text"
                     name=""
@@ -42,8 +43,8 @@ const Login = (props) => {
                     id=""
                     onChange={(event) => setPassword(event.target.value)}
                 />
-                <input type="submit" value="submit" onClick={() => signIn()} />
-            </div>
+                <input type="submit" value="submit"/>
+            </form>
         </>
     )
 }
