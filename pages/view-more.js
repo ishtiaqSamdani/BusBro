@@ -144,6 +144,7 @@ const viewMore = (props) => {
                       ? singleBus?.busNumber
                       : busData.busNumber
                   }
+                  required
                 />
               </label>
               <br />
@@ -161,6 +162,7 @@ const viewMore = (props) => {
                       ? singleBus?.busPlateNumber
                       : busData.busPlateNumber
                   }
+                  required
                 />
               </label>
               <br />
@@ -193,6 +195,8 @@ const viewMore = (props) => {
                       ? singleBus?.driver[1]
                       : busData.driver[1]
                   }
+                  pattern="^[6-9]\d{9}$"
+                  required
                 />
               </label>
               <br />
@@ -224,6 +228,7 @@ const viewMore = (props) => {
                       ? singleBus?.driver[0]
                       : busData.driver[0]
                   }
+                  required
                 />
               </label>
               <br />
@@ -273,6 +278,8 @@ const viewMore = (props) => {
                       ? singleBus?.GSMMobile
                       : busData.GSMMobile
                   }
+                  pattern="^[6-9]\d{9}$"
+                  required
                 />
               </label>
               <h2>Route</h2>
@@ -305,6 +312,7 @@ const viewMore = (props) => {
                           ? singleBus?.route[index]
                           : busData.route[index]
                       }
+                      required
                     />
                     <button
                       style={{

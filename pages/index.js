@@ -17,10 +17,6 @@ export default function Home(props) {
 
   return (
     <>
-    {/* <Head>
-      <title>veer</title>
-  <link rel="icon"  href="../static/bus.png"/>
-  </Head> */}
       {token || props.admin ? (
         <>
           <AdminDashboard admin={props.admin} setAdmin={props.setAdmin} />

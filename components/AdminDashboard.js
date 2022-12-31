@@ -107,6 +107,7 @@ const AdminDashboard = ({ admin, setAdmin }) => {
                 setBusData({ ...busData, busNumber: e.target.value });
               }}
               value={busData.busNumber}
+              required
             />
           </label>
           <br />
@@ -119,6 +120,7 @@ const AdminDashboard = ({ admin, setAdmin }) => {
                 setBusData({ ...busData, busPlateNumber: e.target.value });
               }}
               value={busData.busPlateNumber}
+              required
             />
           </label>
           <br />
@@ -139,6 +141,8 @@ const AdminDashboard = ({ admin, setAdmin }) => {
                 });
               }}
               value={busData.driver[1]}
+              pattern="^[6-9]\d{9}$"
+              required
             />
           </label>
 
@@ -159,6 +163,7 @@ const AdminDashboard = ({ admin, setAdmin }) => {
                 });
               }}
               value={busData.driver[0]}
+              required
             />
           </label>
           <br />
@@ -178,6 +183,7 @@ const AdminDashboard = ({ admin, setAdmin }) => {
                 });
               }}
               value={busData.driver[2]}
+              
             />
           </label>
           <br />
@@ -191,6 +197,8 @@ const AdminDashboard = ({ admin, setAdmin }) => {
                 setBusData({ ...busData, GSMMobile: e.target.value });
               }}
               value={busData.GSMMobile}
+              pattern="^[6-9]\d{9}$"
+              required
             />
           </label>
           <h2>Route</h2>
@@ -203,6 +211,7 @@ const AdminDashboard = ({ admin, setAdmin }) => {
                   name={index}
                   onChange={(e) => routeChange(e)}
                   value={item}
+                  required
                 />
                 <button
                   className="delete-route"

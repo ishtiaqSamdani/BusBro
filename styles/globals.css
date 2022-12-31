@@ -1,3 +1,9 @@
+*,*::before,*::after :not(dialog){
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 html,
 body {
   padding: 0;
@@ -6,7 +12,7 @@ body {
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 }
 
-body{
+body {
   background-color: #333;
 }
 
@@ -139,4 +145,25 @@ a {
   100% {
     color: hsl(288, 84%, 55%);
   }
+}
+.cont{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.show-password {
+  position: relative;
+  /* display: flex; */
+}
+
+.password{
+  width: 100%;
+}
+.eye {
+  position: absolute;
+  width: 1.05rem;
+  height: auto;
+  top: 50%;
+  right: .5rem;
+  transform: translate(0, -50%);
 }
