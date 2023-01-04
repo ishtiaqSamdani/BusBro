@@ -1,23 +1,45 @@
 import { getAuth } from "firebase/auth";
 import { addDoc, collection } from "firebase/firestore";
 import Head from "next/head";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { database } from "../firebaseConfig";
 import Buses from "./buses";
+import {
+  ref,
+  uploadBytes,
+  getDownloadURL,
+  listAll,
+  list,
+} from "firebase/storage";
+import { storage } from "../firebaseConfig";
 
 const AdminDashboard = ({ admin, setAdmin }) => {
   const auth = getAuth();
   const dataToPush = {
     busNumber: "",
     busPlateNumber: "",
-    driver: ["", "", ""],
+    driver: ["", ""],
     GSMMobile: "",
     route: ["", "", ""],
     search: "",
+    img : ""
   };
+  const submitBtn = useRef(null);
+  const [imageUpload, setImageUpload] = useState(null);
+  const [imgurl,setImgurl] = useState(null);
   const [busData, setBusData] = useState(dataToPush);
   const databaseRef = collection(database, "buses");
   // const [route, setRoute] = useState(["", "", ""]);
+  const uploadFile = async () => {
+    if (imageUpload == null) return;
+    const imageRef = ref(storage, `drivers/${imageUpload.name}`);
+    await uploadBytes(imageRef, imageUpload).then((snapshot) => {
+      getDownloadURL(snapshot.ref).then((url) => {
+        console.log("File available at", url);
+        setImgurl(url);
+      });
+    });
+  };
   const openDialog = () => {
     document.querySelector(".dialog").showModal();
   };
@@ -34,15 +56,23 @@ const AdminDashboard = ({ admin, setAdmin }) => {
     closeDialog(e);
   };
 
-  const addData = () => {
+  const addData = async () => {
+    submitBtn.current.disabled = true;
+    submitBtn.current.innerText = "Uploading...";
+    await uploadFile();
+    submitBtn.current.innerText = "uploaded";
+    submitBtn.current.disabled = false;
     let search = busData.busNumber + ",";
     busData.route.map((item, index) => {
       if (item !== "") {
         search += item + ",";
       }
     });
-    console.log(search);
-    addDoc(databaseRef, { ...busData, search: search})
+    // console.log('-------------------------temp-------------------',temp);
+    // setImgurl(temp);
+    // console.log('-------------------------url-------------------',imgurl);
+    console.log("awiat eorking");
+    addDoc(databaseRef, { ...busData, search: search,img:imgurl})
       .then(() => {
         alert("Data Sent");
         // getData()
@@ -107,7 +137,8 @@ const AdminDashboard = ({ admin, setAdmin }) => {
                 setBusData({ ...busData, busNumber: e.target.value });
               }}
               value={busData.busNumber}
-              required
+              // required
+
             />
           </label>
           <br />
@@ -120,7 +151,8 @@ const AdminDashboard = ({ admin, setAdmin }) => {
                 setBusData({ ...busData, busPlateNumber: e.target.value });
               }}
               value={busData.busPlateNumber}
-              required
+              // required
+
             />
           </label>
           <br />
@@ -136,13 +168,13 @@ const AdminDashboard = ({ admin, setAdmin }) => {
                   driver: [
                     busData.driver[0],
                     e.target.value,
-                    busData.driver[2],
                   ],
                 });
               }}
               value={busData.driver[1]}
               pattern="^[6-9]\d{9}$"
-              required
+              // required
+
             />
           </label>
 
@@ -158,12 +190,12 @@ const AdminDashboard = ({ admin, setAdmin }) => {
                   driver: [
                     e.target.value,
                     busData.driver[1],
-                    busData.driver[2],
                   ],
                 });
               }}
               value={busData.driver[0]}
-              required
+              // required
+
             />
           </label>
           <br />
@@ -171,19 +203,9 @@ const AdminDashboard = ({ admin, setAdmin }) => {
             Driver photo:
             <input
               type="file"
-              name={"1"}
-              onChange={(e) => {
-                setBusData({
-                  ...busData,
-                  driver: [
-                    busData.driver[0],
-                    busData.driver[1],
-                    e.target.value,
-                  ],
-                });
-              }}
-              value={busData.driver[2]}
-              
+              onChange={(e)=> setImageUpload(e.target.files[0]) }
+              // required
+
             />
           </label>
           <br />
@@ -198,7 +220,8 @@ const AdminDashboard = ({ admin, setAdmin }) => {
               }}
               value={busData.GSMMobile}
               pattern="^[6-9]\d{9}$"
-              required
+              // required
+
             />
           </label>
           <h2>Route</h2>
@@ -211,7 +234,8 @@ const AdminDashboard = ({ admin, setAdmin }) => {
                   name={index}
                   onChange={(e) => routeChange(e)}
                   value={item}
-                  required
+                  // required
+
                 />
                 <button
                   className="delete-route"
@@ -235,7 +259,9 @@ const AdminDashboard = ({ admin, setAdmin }) => {
           <br />
           <br />
 
-          <input type="submit"></input>
+          <input type="submit" ref={submitBtn}></input>
+
+  
 
           <button onClick={(e) => closeDialog(e)}>cancel</button>
         </form>

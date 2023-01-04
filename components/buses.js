@@ -36,7 +36,7 @@ function Buses({ admin }) {
     }, [data])
 const filteredItems = useMemo(() => {
     return data?.filter(item => {
-      return item.search.toLowerCase().includes(query.toLowerCase())
+      return item.search?.toLowerCase().includes(query.toLowerCase())
     })
   }, [data, query])
   return (
