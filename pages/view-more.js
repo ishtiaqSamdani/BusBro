@@ -5,8 +5,16 @@ import {
   getDocs,
   updateDoc,
 } from "firebase/firestore";
+import {
+  ref,
+  uploadBytes,
+  getDownloadURL,
+  listAll,
+  list,
+} from "firebase/storage";
+import { storage } from "../firebaseConfig";
 import Router, { useRouter } from "next/router";
-import React, { useEffect, useState } from "react";
+import React, { use, useEffect, useState } from "react";
 import { database } from "../firebaseConfig";
 
 const viewMore = (props) => {
@@ -27,6 +35,7 @@ const viewMore = (props) => {
   const [busData, setBusData] = useState(dataToPush);
   const [inpChecker, setInpChecker] = useState(inpTemp);
   const [data, setData] = useState(null);
+  const [imgSrc,setImgSrc] = useState(null);
   const router = useRouter();
   const busNumber = router.query.busNumber;
   const singleBus = data
@@ -43,6 +52,7 @@ const viewMore = (props) => {
     if (singleBus) {
       setBusData(singleBus);
     }
+    
   }, [data]);
   // console.log(busData);
   const openDialog = () => {
@@ -92,10 +102,20 @@ const viewMore = (props) => {
         })
       );
     });
+    // console.log('---------------------data img ------------------',data?.img);
   };
   useEffect(() => {
     getData();
   }, []);
+
+  
+  
+  singleBus?.img? (
+    getDownloadURL(ref(storage,  `drivers/${singleBus.img}`))
+  .then((url) => {
+    setImgSrc(url);
+  }
+  )):null
 
   const clickAdd = (e) => {
     e.preventDefault();
@@ -111,11 +131,14 @@ const viewMore = (props) => {
       <div style={{ margin: "2rem" }}>
         <h1>{singleBus?.busNumber}</h1>
         <h3>{singleBus?.GSMMobile}</h3>
+
+        
         <h3>{singleBus?.busPlateNumber}</h3>
 
         <br></br>
         <h3>{singleBus?.driver[0]}</h3>
         <h3>{singleBus?.driver[1]}</h3>
+        <img src={imgSrc} alt="error" style={{width:"13rem"}}></img>
 
         {singleBus?.route.map((rt) => {
           return <li>{rt}</li>;

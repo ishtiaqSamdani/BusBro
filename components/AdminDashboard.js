@@ -33,12 +33,7 @@ const AdminDashboard = ({ admin, setAdmin }) => {
   const uploadFile = async () => {
     if (imageUpload == null) return;
     const imageRef = ref(storage, `drivers/${imageUpload.name}`);
-    await uploadBytes(imageRef, imageUpload).then((snapshot) => {
-      getDownloadURL(snapshot.ref).then((url) => {
-        console.log("File available at", url);
-        setImgurl(url);
-      });
-    });
+    await uploadBytes(imageRef, imageUpload);
   };
   const openDialog = () => {
     document.querySelector(".dialog").showModal();
@@ -71,8 +66,9 @@ const AdminDashboard = ({ admin, setAdmin }) => {
     // console.log('-------------------------temp-------------------',temp);
     // setImgurl(temp);
     // console.log('-------------------------url-------------------',imgurl);
-    console.log("awiat eorking");
-    addDoc(databaseRef, { ...busData, search: search,img:imgurl})
+    // console.log("awiat eorking");
+    console.log('----------------imgUpload-----------------',imageUpload.name);
+    addDoc(databaseRef, { ...busData, search: search,img:imageUpload.name})
       .then(() => {
         alert("Data Sent");
         // getData()
@@ -137,7 +133,7 @@ const AdminDashboard = ({ admin, setAdmin }) => {
                 setBusData({ ...busData, busNumber: e.target.value });
               }}
               value={busData.busNumber}
-              // required
+               required
 
             />
           </label>
@@ -151,7 +147,7 @@ const AdminDashboard = ({ admin, setAdmin }) => {
                 setBusData({ ...busData, busPlateNumber: e.target.value });
               }}
               value={busData.busPlateNumber}
-              // required
+               required
 
             />
           </label>
@@ -173,7 +169,7 @@ const AdminDashboard = ({ admin, setAdmin }) => {
               }}
               value={busData.driver[1]}
               pattern="^[6-9]\d{9}$"
-              // required
+               required
 
             />
           </label>
@@ -194,7 +190,7 @@ const AdminDashboard = ({ admin, setAdmin }) => {
                 });
               }}
               value={busData.driver[0]}
-              // required
+               required
 
             />
           </label>
@@ -204,7 +200,7 @@ const AdminDashboard = ({ admin, setAdmin }) => {
             <input
               type="file"
               onChange={(e)=> setImageUpload(e.target.files[0]) }
-              // required
+               required
 
             />
           </label>
@@ -220,7 +216,7 @@ const AdminDashboard = ({ admin, setAdmin }) => {
               }}
               value={busData.GSMMobile}
               pattern="^[6-9]\d{9}$"
-              // required
+               required
 
             />
           </label>
@@ -234,7 +230,7 @@ const AdminDashboard = ({ admin, setAdmin }) => {
                   name={index}
                   onChange={(e) => routeChange(e)}
                   value={item}
-                  // required
+                   required
 
                 />
                 <button
