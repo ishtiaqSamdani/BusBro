@@ -127,7 +127,7 @@ const AdminDashboard = ({ admin, setAdmin }) => {
           <label>
             Bus Number:
             <input
-              type="text"
+              type="number"
               name="bus_number"
               onChange={(e) => {
                 setBusData({ ...busData, busNumber: e.target.value });

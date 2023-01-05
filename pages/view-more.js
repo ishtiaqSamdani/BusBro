@@ -21,21 +21,24 @@ const viewMore = (props) => {
   const dataToPush = {
     busNumber: "",
     busPlateNumber: "",
-    driver: ["", "", ""],
+    driver: ["", ""],
     GSMMobile: "",
     route: ["", "", ""],
+    img: "",
   };
   const inpTemp = {
     busNumber: true,
     busPlateNumber: true,
-    driver: [true, true, true],
+    driver: [true, true],
     GSMMobile: true,
     route: [true, true, true],
+    img: true,
   };
   const [busData, setBusData] = useState(dataToPush);
   const [inpChecker, setInpChecker] = useState(inpTemp);
   const [data, setData] = useState(null);
-  const [imgSrc,setImgSrc] = useState(null);
+  const [updatedImg,setUpdatedImg] = useState(null);
+  const [imgSrc, setImgSrc] = useState(null);
   const router = useRouter();
   const busNumber = router.query.busNumber;
   const singleBus = data
@@ -51,8 +54,8 @@ const viewMore = (props) => {
   useEffect(() => {
     if (singleBus) {
       setBusData(singleBus);
+      console.log(singleBus.id);
     }
-    
   }, [data]);
   // console.log(busData);
   const openDialog = () => {
@@ -91,6 +94,32 @@ const viewMore = (props) => {
         alert(err);
       });
   };
+  const updateImg = async (e) => {
+    e.preventDefault();
+    let fieldToEdit = doc(database, "buses", singleBus.id);
+    // let search = busData.busNumber + ",";
+    // busData.route.map((item, index) => {
+    //   if (item !== "") {f
+    //     search += item + ",";
+    //   }
+    // });
+    await uploadFile();
+    updateDoc(fieldToEdit, { ...busData, img:updatedImg.name})
+      .then(() => {
+        alert("Data Updated");
+        Router.push("/");
+        // getData()
+        // setName('')
+        // setAge(null)
+        // setIsUpdate(false)
+      })
+      .catch((err) => {
+        alert(err);
+      });
+      const updateImgDialog= document.querySelector(".img-update");
+      updateImgDialog.close();
+      
+  };
 
   const databaseRef = collection(database, "buses");
 
@@ -108,37 +137,62 @@ const viewMore = (props) => {
     getData();
   }, []);
 
-  
-  
-  singleBus?.img? (
-    getDownloadURL(ref(storage,  `drivers/${singleBus.img}`))
-  .then((url) => {
-    setImgSrc(url);
-  }
-  )):null
+  singleBus?.img
+    ? getDownloadURL(ref(storage, `drivers/${singleBus.img}`)).then((url) => {
+        setImgSrc(url);
+      })
+    : null;
 
   const clickAdd = (e) => {
     e.preventDefault();
     // setRoute([...route, ""]);
-    setBusData({...busData, route: [...busData.route, ""]});
+    setBusData({ ...busData, route: [...busData.route, ""] });
   };
+  const uploadFile = async () => {
+    if (updatedImg == null) return;
+    const imageRef = ref(storage, `drivers/${updatedImg.name}`);
+    await uploadBytes(imageRef, updatedImg);
+  };
+
+  const UpdatePicBtn =()=>{
+    const updateImgDialog= document.querySelector(".img-update");
+    updateImgDialog.showModal();
+  }
+  const closeModal = (e) => {
+    e.preventDefault();
+    const updateImgDialog= document.querySelector(".img-update");
+    updateImgDialog.close();
+  }
 
   return (
     <>
       <h4>View More</h4>
       <br></br>
+     
 
       <div style={{ margin: "2rem" }}>
+        {/* a tag for tel ph number */}
+        {/* <a href={`tel:${singleBus?.GSMMobile}`}></a> */}
+
+        {/* <a href={`sms:+916281805011?&body=Location`}>Track </a> */}
+
         <h1>{singleBus?.busNumber}</h1>
         <h3>{singleBus?.GSMMobile}</h3>
 
-        
         <h3>{singleBus?.busPlateNumber}</h3>
 
         <br></br>
         <h3>{singleBus?.driver[0]}</h3>
         <h3>{singleBus?.driver[1]}</h3>
-        <img src={imgSrc} alt="error" style={{width:"13rem"}}></img>
+        <img src={imgSrc} alt="error" style={{ width: "13rem" }} />
+        <br />
+        {(props.admin || token) && (
+          <>
+            <button className="update_pic" onClick={UpdatePicBtn}>
+              Update pic
+            </button>
+          </>
+        )}
 
         {singleBus?.route.map((rt) => {
           return <li>{rt}</li>;
@@ -156,7 +210,7 @@ const viewMore = (props) => {
               <label>
                 Bus Number:
                 <input
-                  type="text"
+                  type="number"
                   name="bus_number"
                   onChange={(e) => {
                     setBusData({ ...busData, busNumber: e.target.value });
@@ -198,19 +252,11 @@ const viewMore = (props) => {
                   onChange={(e) => {
                     setBusData({
                       ...busData,
-                      driver: [
-                        busData.driver[0],
-                        e.target.value,
-                        busData.driver[2],
-                      ],
+                      driver: [busData.driver[0], e.target.value],
                     });
                     setInpChecker({
                       ...inpChecker,
-                      driver: [
-                        inpChecker.driver[0],
-                        false,
-                        inpChecker.driver[2],
-                      ],
+                      driver: [inpChecker.driver[0], false],
                     });
                   }}
                   value={
@@ -220,69 +266,6 @@ const viewMore = (props) => {
                   }
                   pattern="^[6-9]\d{9}$"
                   required
-                />
-              </label>
-              <br />
-              <label>
-                Driver Name:
-                <input
-                  type="text"
-                  name="Name_number"
-                  onChange={(e) => {
-                    setBusData({
-                      ...busData,
-                      driver: [
-                        e.target.value,
-                        busData.driver[1],
-                        busData.driver[2],
-                      ],
-                    });
-                    setInpChecker({
-                      ...inpChecker,
-                      driver: [
-                        false,
-                        inpChecker.driver[1],
-                        inpChecker.driver[2],
-                      ],
-                    });
-                  }}
-                  value={
-                    inpChecker.driver[0]
-                      ? singleBus?.driver[0]
-                      : busData.driver[0]
-                  }
-                  required
-                />
-              </label>
-              <br />
-              <label>
-                Driver photo:
-                <input
-                  type="file"
-                  name={"1"}
-                  onChange={(e) => {
-                    setBusData({
-                      ...busData,
-                      driver: [
-                        busData.driver[0],
-                        busData.driver[1],
-                        e.target.value,
-                      ],
-                    });
-                    setInpChecker({
-                      ...inpChecker,
-                      driver: [
-                        inpChecker.driver[0],
-                        inpChecker.driver[1],
-                        false,
-                      ],
-                    });
-                  }}
-                  value={
-                    inpChecker.driver[2]
-                      ? singleBus?.driver[2]
-                      : busData.driver[2]
-                  }
                 />
               </label>
               <br />
@@ -339,8 +322,7 @@ const viewMore = (props) => {
                     />
                     <button
                       style={{
-                        display:
-                          busData.route.length === 3 ? "none" : "inline",
+                        display: busData.route.length === 3 ? "none" : "inline",
                       }}
                       onClick={(e) => {
                         e.preventDefault();
@@ -372,6 +354,15 @@ const viewMore = (props) => {
               <br />
               <input type="submit"></input>
               <button onClick={(e) => closeDialog(e)}>cancel</button>
+            </form>
+          </dialog>
+
+          <dialog className="img-update">
+            <form className="form_img">
+              <input type="file" onChange={(e)=>{setUpdatedImg(e.target.files[0])}} className="update_file" />
+              <br />
+              <input type="submit" onClick={(e)=>updateImg(e)}/>
+              <button className="cancel" onClick={(e)=>closeModal(e)}>cancel</button>
             </form>
           </dialog>
         </>
