@@ -111,6 +111,7 @@ const AdminDashboard = ({ admin, setAdmin }) => {
           auth.signOut();
           setAdmin(null);
           window.localStorage.removeItem("busbro-token");
+          window.location.reload();
         }}
       >
         Sign Out
