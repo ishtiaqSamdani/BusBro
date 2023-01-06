@@ -1,5 +1,5 @@
 import { getAuth } from "firebase/auth";
-import { addDoc, collection } from "firebase/firestore";
+import { addDoc, collection, onSnapshot } from "firebase/firestore";
 import Head from "next/head";
 import React, { useEffect, useRef, useState } from "react";
 import { database } from "../firebaseConfig";
@@ -29,7 +29,17 @@ const AdminDashboard = ({ admin, setAdmin }) => {
   const [imgurl,setImgurl] = useState(null);
   const [busData, setBusData] = useState(dataToPush);
   const databaseRef = collection(database, "buses");
+  const [data, setData] = useState(null);
   // const [route, setRoute] = useState(["", "", ""]);
+  useEffect(() => {
+    const unsub = onSnapshot(databaseRef, (querySnapshot) => {
+        setData(querySnapshot.docs.map((doc) => {
+            return { ...doc.data(), id: doc.id }
+        }))
+    });
+    
+    return unsub;
+},[]);
   const uploadFile = async () => {
     if (imageUpload == null) return;
     const imageRef = ref(storage, `drivers/${imageUpload.name}`);
@@ -100,6 +110,22 @@ const AdminDashboard = ({ admin, setAdmin }) => {
     // setRoute(temp);
     setBusData({...busData, route: temp});
   };
+  const validateBus = (e) =>{
+    let flag = false;
+    data?.map((item)=>{
+      if(item.busNumber == e.target.value)
+      {
+        flag=true;
+      }
+    })
+    if(flag)
+    {
+      alert('busNumber already exist');
+    }
+    else{
+      setBusData({ ...busData, busNumber: e.target.value })
+    }
+  }
   return (
     <>
     <Head>
@@ -131,7 +157,7 @@ const AdminDashboard = ({ admin, setAdmin }) => {
               type="number"
               name="bus_number"
               onChange={(e) => {
-                setBusData({ ...busData, busNumber: e.target.value });
+                validateBus(e)
               }}
               value={busData.busNumber}
                required
