@@ -52,8 +52,8 @@ const Bus = (props) => {
 
         <p>
           Updated {days > 0 && <span>{days} days </span>}
-          {hours>0 && <span>{hours} hours </span>}
-          {minutes>0 && <span>{minutes} minutes </span>} 
+          {(hours>0 && hours<24) && <span>{hours} hours </span>}
+          {(minutes>0 && minutes<60) && <span>{minutes} minutes </span>} 
           { (days==0 && hours==0 && minutes==0) ? <span>just now</span>:<span>ago</span> }
         </p>
         {route.map((item) => {
