@@ -47,7 +47,7 @@ const filteredItems = useMemo(() => {
           return <Bus bus={bus} admin={admin} />;
         })
       ) : (
-        <div class="loader" style={{ marginTop: "3rem" }}></div>
+        <div className="loader" style={{ marginTop: "3rem" }}></div>
       )}
     </>
   );
