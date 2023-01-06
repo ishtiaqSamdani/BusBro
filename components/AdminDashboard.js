@@ -50,6 +50,12 @@ const AdminDashboard = ({ admin, setAdmin }) => {
     addData();
     closeDialog(e);
   };
+  
+  // var diff = Math.abs(new Date() - compareDate);
+
+  // modiff(moment('2010-10-20'), 'days');
+
+
 
   const addData = async () => {
     submitBtn.current.disabled = true;
@@ -67,8 +73,21 @@ const AdminDashboard = ({ admin, setAdmin }) => {
     // setImgurl(temp);
     // console.log('-------------------------url-------------------',imgurl);
     // console.log("awiat eorking");
-    console.log('----------------imgUpload-----------------',imageUpload.name);
-    addDoc(databaseRef, { ...busData, search: search,img:imageUpload.name})
+    // console.log('----------------imgUpload-----------------',imageUpload.name);
+    // fetch('https://worldtimeapi.org/api/ip')
+    //   .then((res) => res.json())
+    //   .then((data) => {
+    //     settime(data.datetime);
+    //   });
+
+    // give serverTimestamp() in firebase
+
+
+
+    const dateTime = new Date().toLocaleString();
+    // console.log('----------------date-----------------',dateTime);
+
+    addDoc(databaseRef, { ...busData, search: search,img:imageUpload.name,timestamp: dateTime})
       .then(() => {
         alert("Data Sent");
         // getData()

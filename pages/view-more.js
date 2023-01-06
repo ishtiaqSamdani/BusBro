@@ -54,7 +54,7 @@ const viewMore = (props) => {
   useEffect(() => {
     if (singleBus) {
       setBusData(singleBus);
-      console.log(singleBus.id);
+      // console.log(singleBus.id);
     }
   }, [data]);
   // console.log(busData);
@@ -184,7 +184,10 @@ const viewMore = (props) => {
         <br></br>
         <h3>{singleBus?.driver[0]}</h3>
         <h3>{singleBus?.driver[1]}</h3>
-        <img src={imgSrc} alt="error" style={{ width: "13rem" }} />
+        {
+          busData.img?<img src={imgSrc} alt={`bus_driver_${singleBus?.busNumber}`} style={{ width: "13rem" }} />:<p>loading</p>
+        }
+        
         <br />
         {(props.admin || token) && (
           <>
