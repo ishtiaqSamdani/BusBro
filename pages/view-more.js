@@ -1,6 +1,7 @@
 import {
   addDoc,
   collection,
+  deleteDoc,
   doc,
   getDocs,
   updateDoc,
@@ -66,6 +67,9 @@ const viewMore = (props) => {
     setBusData(singleBus);
     document.querySelector(".dialog").close();
   };
+  const openDeleteDialog = (e)=>{
+    document.querySelector(".delete-bus").showModal();
+  }
   const handlesubmit = (e) => {
     e.preventDefault();
 
@@ -164,6 +168,19 @@ const viewMore = (props) => {
     updateImgDialog.close();
   }
 
+  const deleteBus =  (e) => {
+    e.preventDefault();
+    deleteDoc(doc(database, "buses", singleBus.id));
+    router.push("/");
+  }
+
+  const closeModalDeleteBus=(e)=>{
+    e.preventDefault();
+    const deleteBusDialog = document.querySelector(".delete-bus");
+    deleteBusDialog.close();
+  }
+
+
   return (
     <>
       <h4>View More</h4>
@@ -206,6 +223,10 @@ const viewMore = (props) => {
         <>
           <button className="add_bus" onClick={openDialog}>
             Update Bus
+          </button>
+<br />
+          <button onClick={()=>{openDeleteDialog()}}>
+            Delete Bus
           </button>
 
           <dialog className="dialog">
@@ -366,6 +387,14 @@ const viewMore = (props) => {
               <br />
               <input type="submit" onClick={(e)=>updateImg(e)}/>
               <button className="cancel" onClick={(e)=>closeModal(e)}>cancel</button>
+            </form>
+          </dialog>
+
+          <dialog className="delete-bus">
+            <form className="form_delete">
+              <h2>Are you sure you want to delete this bus?</h2>
+              <button className="delete" onClick={(e)=>deleteBus(e)}>Yes,Delete</button>
+              <button className="cancel" onClick={(e)=>closeModalDeleteBus(e)}>cancel</button>
             </form>
           </dialog>
         </>
