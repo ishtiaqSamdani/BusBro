@@ -212,6 +212,10 @@ nav.navbar {
 .active {
   opacity: 1;
   pointer-events: all;
+  transition: top 250ms cubic-bezier(0.79, 0.6, 0.25, 1.36),
+    right 250ms cubic-bezier(0.79, 0.6, 0.25, 1.36) 100ms,
+    rotate 250ms ease,
+    opacity 250ms ease;
 }
 .list__item {
   list-style-type: none;
@@ -241,7 +245,8 @@ nav.navbar {
     right 250ms cubic-bezier(0.79, 0.6, 0.25, 1.36),
     rotate 250ms ease 600ms,
     background-color 250ms ease,
-    box-shadow 250ms ease
+    box-shadow 250ms ease,
+    opacity 250ms ease
     ;
 }
 
@@ -257,7 +262,8 @@ nav.navbar {
     right 250ms cubic-bezier(0.79, 0.6, 0.25, 1.36) 200ms,
     rotate 250ms ease 500ms,
     background-color 250ms ease,
-    box-shadow 250ms ease
+    box-shadow 250ms ease,
+    opacity 250ms ease 
     ;
     ;
   /* display: none; */
