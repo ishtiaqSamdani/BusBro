@@ -261,9 +261,11 @@ nav.navbar {
   /* display: none; */
 }
 
-.list__item:hover {
-  background-color: #f2f2f2;
+.list__item:not(:nth-child(2)):hover {
   box-shadow: none;
+}
+.list__item:hover{
+  background-color: #f2f2f2;
 }
 
 .active .list__item:first-child {
