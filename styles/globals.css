@@ -16,7 +16,7 @@ body {
 }
 
 body {
-  background-color: #333;
+  background-color: #D9D9D9;
 }
 
 a {
@@ -453,4 +453,14 @@ nav.navbar {
 .deleteImgArea{
   display: flex;
   justify-content: center;
+}
+.loginBox{
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem;
+  width: 80%;
+  margin-top: 3rem;
+  border-radius: 1rem;
+  box-shadow: 4px 4px 10px grey;
 }

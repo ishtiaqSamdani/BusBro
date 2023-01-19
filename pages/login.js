@@ -32,30 +32,48 @@ const Login = (props) => {
   return (
     <>
       <form className="cont" onSubmit={(e) => signIn(e)}>
-        <input
-          type="text"
-          name=""
-          id=""
-          onChange={(event) => setEmail(event.target.value)}
-          required
-        />
-        <div className="show-password">
-          <input
-            className="password"
-            type={showPassword ? "text" : "password"}
-            name=""
-            id=""
-            onChange={(event) => setPassword(event.target.value)}
-            required
-          />
-          <Image
-            className="eye"
-            src={showPassword ? eyeClose : eyeOpen}
-            alt="eye-open"
-            onClick={showPassword?()=>setShowPassword(false):()=>setShowPassword(true)}
-          />
+        <div className="loginBox">
+          <center>
+            <h1>Login</h1>
+          </center>
+          <div class="user-input-wrp">
+            <br />
+            <input type="text"
+              className="inputText"
+              name=""
+              id=""
+              onChange={(event) => setEmail(event.target.value)}
+
+              required />
+            <span class="floating-label">Email</span>
+          </div>
+
+          <div className="show-password">
+            <div class="user-input-wrp">
+              <br />
+              <input type={showPassword ? "text" : "password"}
+                className="inputText"
+                name=""
+                id=""
+                onChange={(event) => setPassword(event.target.value)}
+                required />
+              <span class="floating-label">Password</span>
+            </div>
+
+            
+            <Image
+              className="eye"
+              src={showPassword ? eyeClose : eyeOpen}
+              alt="eye-open"
+              onClick={showPassword ? () => setShowPassword(false) : () => setShowPassword(true)}
+            />
+          </div>
+          <br></br>
+          
+          <div className="submitCancel">
+              <input className="popUpSubmit" type="submit"></input>
+            </div>
         </div>
-        <input type="submit" value="submit" />
       </form>
     </>
   );
