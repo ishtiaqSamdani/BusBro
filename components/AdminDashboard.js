@@ -22,24 +22,24 @@ const AdminDashboard = ({ admin, setAdmin }) => {
     GSMMobile: "",
     route: ["", "", ""],
     search: "",
-    img : ""
+    img: ""
   };
   const submitBtn = useRef(null);
   const [imageUpload, setImageUpload] = useState(null);
-  const [imgurl,setImgurl] = useState(null);
+  const [imgurl, setImgurl] = useState(null);
   const [busData, setBusData] = useState(dataToPush);
   const databaseRef = collection(database, "buses");
   const [data, setData] = useState(null);
   // const [route, setRoute] = useState(["", "", ""]);
   useEffect(() => {
     const unsub = onSnapshot(databaseRef, (querySnapshot) => {
-        setData(querySnapshot.docs.map((doc) => {
-            return { ...doc.data(), id: doc.id }
-        }))
+      setData(querySnapshot.docs.map((doc) => {
+        return { ...doc.data(), id: doc.id }
+      }))
     });
-    
+
     return unsub;
-},[]);
+  }, []);
   const uploadFile = async () => {
     if (imageUpload == null) return;
     const imageRef = ref(storage, `drivers/${imageUpload.name}`);
@@ -60,7 +60,7 @@ const AdminDashboard = ({ admin, setAdmin }) => {
     addData();
     closeDialog(e);
   };
-  
+
   // var diff = Math.abs(new Date() - compareDate);
 
   // modiff(moment('2010-10-20'), 'days');
@@ -97,7 +97,7 @@ const AdminDashboard = ({ admin, setAdmin }) => {
     const dateTime = new Date().toLocaleString();
     // console.log('----------------date-----------------',dateTime);
 
-    addDoc(databaseRef, { ...busData, search: search,img:imageUpload.name,timestamp: dateTime})
+    addDoc(databaseRef, { ...busData, search: search, img: imageUpload.name, timestamp: dateTime })
       .then(() => {
         alert("Data Sent");
         // getData()
@@ -112,14 +112,14 @@ const AdminDashboard = ({ admin, setAdmin }) => {
   const clickAdd = (e) => {
     e.preventDefault();
     // setRoute([...route, ""]);
-    setBusData({...busData, route: [...busData.route, ""]});
+    setBusData({ ...busData, route: [...busData.route, ""] });
   };
   const routeChange = (e) => {
     let temp = [...busData.route];
     let ind = parseInt(e.target.name);
     temp[ind] = e.target.value;
     // console.log({temp, ind,route});
-    setBusData({...busData, route: temp});
+    setBusData({ ...busData, route: temp });
   };
   const deleteRoute = (e) => {
     e.preventDefault();
@@ -127,29 +127,27 @@ const AdminDashboard = ({ admin, setAdmin }) => {
     let ind = parseInt(e.target.name);
     temp.splice(ind, 1);
     // setRoute(temp);
-    setBusData({...busData, route: temp});
+    setBusData({ ...busData, route: temp });
   };
-  const validateBus = (e) =>{
+  const validateBus = (e) => {
     let flag = false;
-    data?.map((item)=>{
-      if(item.busNumber == e.target.value)
-      {
-        flag=true;
+    data?.map((item) => {
+      if (item.busNumber == e.target.value) {
+        flag = true;
       }
     })
-    if(flag)
-    {
+    if (flag) {
       alert('busNumber already exist');
     }
-    else{
+    else {
       setBusData({ ...busData, busNumber: e.target.value })
     }
   }
   return (
     <>
-    <Head>
+      <Head>
         <title>Bus Bro | Admin</title>
-    </Head>
+      </Head>
       <h1>Admin</h1>
       <button
         onClick={() => {
@@ -164,148 +162,164 @@ const AdminDashboard = ({ admin, setAdmin }) => {
 
       <Buses admin={admin} />
 
+
+
       <button className="add_bus" onClick={openDialog}>
         Add Bus
       </button>
 
       <dialog className="dialog">
-        <form className="form" onSubmit={handlesubmit}>
-          <label>
-            Bus Number:
-            <input
-              type="number"
-              name="bus_number"
-              onChange={(e) => {
-                validateBus(e)
-              }}
-              value={busData.busNumber}
-               required
-
-            />
-          </label>
-          <br />
-          <label>
-            Bus Plate Number
-            <input
-              type="text"
-              name="bus_plate_number"
-              onChange={(e) => {
-                setBusData({ ...busData, busPlateNumber: e.target.value });
-              }}
-              value={busData.busPlateNumber}
-               required
-
-            />
-          </label>
-          <br />
-          <h2>Driver Details</h2>
-          <label>
-            Mobile Number:
-            <input
-              type="text"
-              name="mobile_number"
-              onChange={(e) => {
-                setBusData({
-                  ...busData,
-                  driver: [
-                    busData.driver[0],
-                    e.target.value,
-                  ],
-                });
-              }}
-              value={busData.driver[1]}
-              pattern="^[6-9]\d{9}$"
-               required
-
-            />
-          </label>
-
-          <br />
-          <label>
-            Driver Name:
-            <input
-              type="text"
-              name="Name_number"
-              onChange={(e) => {
-                setBusData({
-                  ...busData,
-                  driver: [
-                    e.target.value,
-                    busData.driver[1],
-                  ],
-                });
-              }}
-              value={busData.driver[0]}
-               required
-
-            />
-          </label>
-          <br />
-          <label>
-            Driver photo:
-            <input
-              type="file"
-              onChange={(e)=> setImageUpload(e.target.files[0]) }
-               required
-
-            />
-          </label>
-          <br />
-          <br />
-          <label>
-            GSM mobile
-            <input
-              type="text"
-              name="gsm_mobile_number"
-              onChange={(e) => {
-                setBusData({ ...busData, GSMMobile: e.target.value });
-              }}
-              value={busData.GSMMobile}
-              pattern="^[6-9]\d{9}$"
-               required
-
-            />
-          </label>
-          <h2>Route</h2>
-          <div className="dynamic-bus-add-delete">
-          {busData.route.map((item, index) => {
-            return (
-              <>
-                <input
-                  type="text"
-                  name={index}
-                  onChange={(e) => routeChange(e)}
-                  value={item}
-                   required
-
-                />
-                <button
-                  className="delete-route"
-                  name={index}
-                  onClick={(e) => {
-                    deleteRoute(e);
-                  }}
-                  style={{ display: busData.route.length === 3 ? "none" : "inline" }}
-                >
-                  delete
-                </button>
-                <br />
-              </>
-            );
-        })}
+        <div className="popUpHead">
+          <h2>Add Bus</h2>
+          <img src="./static/close.svg" className="cancelImg" onClick={(e) => closeDialog(e)} alt="close"></img>
         </div>
-          <br />
-          <button className="add" onClick={(e) => clickAdd(e)}>
-            add
-          </button>
-          <br />
-          <br />
+        <form className="form" onSubmit={handlesubmit}>
 
-          <input type="submit" ref={submitBtn}></input>
+          <div>
+            <label>
+              <div class="user-input-wrp">
+                <br />
+                <input type="number"
+                  className="inputText"
+                  name="bus_number"
+                  onChange={(e) => {
+                    validateBus(e)
+                  }}
+                  value={busData.busNumber}
+                  required />
+                <span class="floating-label">Bus Number</span>
+              </div>
+            </label>
+            <label>
+              <div class="user-input-wrp">
+                <br />
+                <input type="text"
+                  className="inputText"
+                  name="bus_plate_number"
+                  onChange={(e) => {
+                    setBusData({ ...busData, busPlateNumber: e.target.value });
+                  }}
+                  value={busData.busPlateNumber}
+                  required />
+                <span class="floating-label">Bus Plate Number</span>
+              </div>
+            </label>
+            <label>
+              <div class="user-input-wrp">
+                <br />
+                <input type="text"
+                  className="inputText"
+                  name="gsm_mobile_number"
+                  onChange={(e) => {
+                    setBusData({ ...busData, GSMMobile: e.target.value });
+                  }}
+                  value={busData.GSMMobile}
+                  pattern="^[6-9]\d{9}$"
+                  required />
+                <span class="floating-label">GSM mobile</span>
+              </div>
 
-  
+            </label>
 
-          <button onClick={(e) => closeDialog(e)}>cancel</button>
+            <h4>Driver Details</h4>
+            <div className="driverDetail">
+              <label>
+                <div class="user-input-wrp">
+                  <br />
+                  <input type="text"
+                    className="inputText"
+                    name="mobile_number"
+                    onChange={(e) => {
+                      setBusData({
+                        ...busData,
+                        driver: [
+                          busData.driver[0],
+                          e.target.value,
+                        ],
+                      });
+                    }}
+                    value={busData.driver[1]}
+                    pattern="^[6-9]\d{9}$"
+                    required />
+                  <span class="floating-label">Mobile Number</span>
+                </div>
+              </label>
+
+
+              <label>
+                <div class="user-input-wrp">
+                  <br />
+                  <input type="text"
+                    className="inputText"
+                    name="Name_number"
+                    onChange={(e) => {
+                      setBusData({
+                        ...busData,
+                        driver: [
+                          e.target.value,
+                          busData.driver[1],
+                        ],
+                      });
+                    }}
+                    value={busData.driver[0]}
+                    required />
+                  <span class="floating-label">Driver Name</span>
+                </div>
+
+              </label>
+              <br />
+              <label>
+                <span className="driverPhoto">Driver Photo</span><br></br>
+                <input
+                  type="file"
+                  onChange={(e) => setImageUpload(e.target.files[0])}
+                  required
+                />
+              </label>
+            </div>
+
+
+            <h4>Route</h4>
+            <div className="dynamic-bus-add-delete">
+              {busData.route.map((item, index) => {
+                return (
+                  <>
+                    <div className="routesArea">
+                      <div class="user-input-wrap">
+                        <br />
+                        <input type="text"
+                          className="inputText"
+                          name={index}
+                          onChange={(e) => routeChange(e)}
+                          value={item}
+                          required />
+                        <span class="floating-label">Route {index + 1}</span>
+                      </div>
+
+                      <img src="./static/minus.svg" alt="delete"
+                        className="delete-route"
+                        style={{ display: busData.route.length === 3 ? "none" : "inline" }}
+                        onClick={(e) => {
+                          deleteRoute(e);
+                        }}></img>
+
+                    </div>
+                  </>
+                );
+              })}
+            </div>
+            <br />
+            <div className="addArea">
+              <img src="./static/plus.svg" className="addBtn" onClick={(e) => clickAdd(e)} ></img>
+            </div>
+
+            <br />
+           
+
+            <div className="submitCancel">
+              <input className="popUpSubmit" type="submit" ref={submitBtn}></input>
+            </div>
+          </div>
         </form>
       </dialog>
     </>

@@ -301,3 +301,156 @@ nav.navbar {
   --calculated: calc(var(--width) * calc(-0.5 / 1.85));
   translate: var(--calculated) calc(var(--calculated) * -1);
 }
+
+.popUpHead{
+  display: grid;
+  grid-template-columns: 85% 15%;
+  text-align: center;
+}
+.cancelImg{
+  width: 2rem;
+}
+.dialog{
+  border: 0;
+  border-radius: 1rem;
+}
+.inpLabel{
+  font-size: 10px;
+}
+.floating-label{
+  font-size: .9rem;
+}
+.user-input-wrp {
+	position: relative;
+	width: 90%;
+}
+.user-input-wrp .inputText{
+	width: 100%;
+	outline: none;
+	border:none;
+	border-bottom: 1px solid #777;
+ 	box-shadow: none !important;
+}
+.user-input-wrp .inputText:focus{
+	border-color: blue;
+	border-width: medium medium 2px;
+}
+.user-input-wrp .floating-label {
+	position: absolute;
+	pointer-events: none;
+	top: 18px;
+	left: 10px;
+	transition: 0.2s ease all;
+}
+.user-input-wrp input:focus ~ .floating-label,
+.user-input-wrp input:not(:focus):valid ~ .floating-label{
+	top: 0px;
+	left: 10px;
+	font-size: 13px;
+	opacity: 1;
+}
+.driverDetail{
+  margin-left: 1rem;
+  margin-top: 0;
+}
+.driverPhoto{
+  margin-left: 10px;
+  
+}
+.addBtn{
+  width: 1.7rem;
+  align-content: center ;
+}
+.user-input-wrap {
+	position: relative;
+	width: 80%;
+}
+.user-input-wrap .inputText{
+	width: 100%;
+	outline: none;
+	border:none;
+	border-bottom: 1px solid #777;
+ 	box-shadow: none !important;
+}
+.user-input-wrap .inputText:focus{
+	border-color: blue;
+	border-width: medium medium 2px;
+}
+.user-input-wrap .floating-label {
+	position: absolute;
+	pointer-events: none;
+	top: 18px;
+	left: 10px;
+	transition: 0.2s ease all;
+}
+.user-input-wrap input:focus ~ .floating-label,
+.user-input-wrap input:not(:focus):valid ~ .floating-label{
+	top: 0px;
+	left: 10px;
+	font-size: 13px;
+	opacity: 1;
+}
+.addArea{
+  display: grid;
+  align-items: center;
+  justify-content: center;
+}
+.routesArea{
+  display: grid;
+  grid-template-columns: 60% 20%;
+  justify-content: center;
+  align-items: center;
+  
+}
+.delete-route{
+  width: 1rem;
+  border: 2px solid black;
+  border-radius: 50%;
+}
+.submitCancel{
+  display: grid;
+  justify-content: center;
+}
+.popUpSubmit{
+  background-image: linear-gradient(
+    100.76deg,
+    #9372c5 0%,
+    #e76bb5 50.76%,
+    #ff7487 72.43%,
+    #ff9f4b 98.83%,
+    #ffd700 137.39%
+  );
+  border: none;
+  border-radius: 20px;
+  padding: 8px;
+  padding-left: 4rem;
+  padding-right: 4rem;
+  color: white;
+}
+.img-update{
+  border: none;
+  border-radius: 1rem;
+}
+.delete-bus{
+  border: none;
+  border-radius: 1rem;
+}
+.deleteImgBtn{
+  background-image: linear-gradient(
+    100.76deg,
+    #9372c5 0%,
+    #e76bb5 50.76%,
+    #ff7487 72.43%,
+    #ff9f4b 98.83%,
+    #ffd700 137.39%
+  );
+  border: none;
+  border-radius: 20px;
+  padding: 8px;
+  color: white;
+  margin-right: 5px;
+}
+.deleteImgArea{
+  display: flex;
+  justify-content: center;
+}
