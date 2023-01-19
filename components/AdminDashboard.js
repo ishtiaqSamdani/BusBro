@@ -148,17 +148,8 @@ const AdminDashboard = ({ admin, setAdmin }) => {
       <Head>
         <title>Bus Bro | Admin</title>
       </Head>
-      <h1>Admin</h1>
-      <button
-        onClick={() => {
-          auth.signOut();
-          setAdmin(null);
-          window.localStorage.removeItem("busbro-token");
-          window.location.reload();
-        }}
-      >
-        Sign Out
-      </button>
+      <h1 style={{textAlign:"center"}}>Admin</h1>
+      
 
       <Buses admin={admin} />
 
@@ -322,6 +313,20 @@ const AdminDashboard = ({ admin, setAdmin }) => {
           </div>
         </form>
       </dialog>
+<br />
+<br />
+<br />
+<br />
+      <button
+        onClick={() => {
+          auth.signOut();
+          setAdmin(null);
+          window.localStorage.removeItem("busbro-token");
+          window.location.reload();
+        }}
+      >
+        Sign Out
+      </button>
     </>
   );
 };

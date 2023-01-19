@@ -1,17 +1,30 @@
 import { useRouter } from "next/router";
-import React from "react";
+import React, { useEffect } from "react";
+
 
 const Navbar = () => {
+  const roter = useRouter();
     const showList = () => {
         const list = document.querySelector('.list');
         list.classList.toggle('active');
     }
+    const navigateHome = () => {
+      roter.push("/");
+    }
+
+   useEffect(() => {
+    const header= document.querySelector('nav');
+    // set propert --mt to client height
+    console.log(header.clientHeight);
+    document.body.style.setProperty('--mt', `${header.clientHeight}px`);
+   }, [])
+   
   const router = useRouter();
   return (
     <header>
       <nav className="navbar">
         <div className="navbar__logo" >
-          <img className="logo" src="./static/nav-bus-logo.svg" alt="logo"/>
+          <img className="logo" src="./static/nav-bus-logo.svg" onClick={navigateHome} alt="logo"/>
         </div>
 
         <div className="burger-menu">

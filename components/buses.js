@@ -13,34 +13,47 @@ import {
 } from "firebase/firestore";
 import { useRouter } from "next/router";
 import Bus from "../components/bus";
+import Image from "next/image";
+import background from "./assets/background-buses.jpg";
 
 function Buses({ admin }) {
   const databaseRef = collection(database, "buses");
   const [data, setData] = useState(null);
-  const [query, setQuery] = useState("")
+  const [query, setQuery] = useState("");
 
+  // onsnapshot
+  useEffect(() => {
+    const unsub = onSnapshot(databaseRef, (querySnapshot) => {
+      setData(
+        querySnapshot.docs.map((doc) => {
+          return { ...doc.data(), id: doc.id };
+        })
+      );
+    });
 
-// onsnapshot
-    useEffect(() => {
-        const unsub = onSnapshot(databaseRef, (querySnapshot) => {
-            setData(querySnapshot.docs.map((doc) => {
-                return { ...doc.data(), id: doc.id }
-            }))
-        });
-        
-        return unsub;
-    },[])
+    return unsub;
+  }, []);
 
-
-const filteredItems = useMemo(() => {
-    return data?.filter(item => {
-      return item.search?.toLowerCase().includes(query.toLowerCase())
-    })
-  }, [data, query])
+  const filteredItems = useMemo(() => {
+    return data?.filter((item) => {
+      return item.search?.toLowerCase().includes(query.toLowerCase());
+    });
+  }, [data, query]);
   return (
     <>
-      <h2>search</h2>
-      <input type="search" onChange={e=>setQuery(e.target.value)} value={query} className="search" />
+      <div className="landing__page">
+        <Image className="landing__page--img" src={background} />
+        <div className="search__container">
+          <img src="./static/search.svg" alt="search-icon" className="search__img" />
+          <input
+            type="search"
+            onChange={(e) => setQuery(e.target.value)}
+            value={query}
+            className="search"
+            placeholder="Destination or Bus Number"
+          />
+        </div>
+      </div>
 
       {filteredItems ? (
         filteredItems.map((bus) => {
