@@ -26,6 +26,7 @@ export default function Home(props) {
           <Buses admin={props.admin} />
         </>
       )}
+      
     </>
   );
 }

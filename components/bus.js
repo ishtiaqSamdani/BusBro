@@ -18,7 +18,8 @@ const Bus = (props) => {
   //console.log("----------------date-----------------", hours, days, minutes);
   // console.log(bus)
   // console.log('--------------------momentA--------------------',momentA);
-  const timeDiff = new Date().getDate() - new Date(props.bus.timestamp).getDate()
+  const timeDiff =
+    new Date().getDate() - new Date(props.bus.timestamp).getDate();
   const pushData = () => {
     Router.push({
       pathname: "/view-more",
@@ -42,42 +43,41 @@ const Bus = (props) => {
 
   return (
     <>
-      <div
-        style={{
-          backgroundColor: "hotpink",
-          color: "#333",
-          width: "50vw",
-          margin: "3rem",
-        }}
-      >
-        <h1 className="bus_number">{bus.busNumber}</h1>
-        {/* <p>
+      {/* <p>
           Updated {days > 0 && <span>{days} days </span>}
           {(hours>0 && hours<24) && <span>{hours} {hours==1?"hour":"hours"} </span>}
           {(minutes>0 && minutes<60) && <span>{minutes} {minutes==1?"minute":"minutes"}  </span>} 
           { (days==0 && hours==0 && minutes==0) ? <span>just now</span>:<span>ago</span> }
         </p> */}
-        <p>
-          Updated {timeDiff>1 && <span>{timeDiff} days ago</span>} 
-          {timeDiff <=1  && <span>today</span>}
-        </p>
-        {route.map((item) => {
-          return (
-            <h3>
-              {item} {`-->`}
-            </h3>
-          );
-        })}
+      <div className="busContainer">
+        <div className="busNumUpdate">
+          <h1 className="bus_number busNumBox">{bus.busNumber}</h1>
+          <p className="updatedBox">
+            updated {timeDiff > 1 && <span>{timeDiff} days ago</span>}
+            {timeDiff <= 1 && <span>today</span>}
+          </p>
+          
+        </div>
+        <div className="routeViewFlex">
 
-        <button>
+          <div className="routesFlex">
+            <p className="routeText routeAditya">{route[0]}</p>
+            {/* <p className="routeText">{route[1]}</p> */}
+            <img className="rightArrowRoute" src="./static/rightArrow.svg" alt="right"></img>
+            <p className="routeText routeHyd">{route[2]}</p>
+          </div>
+          <div className="viewMoreArea">
           <a
             onClick={() => {
               pushData();
             }}
+            className="viewMoreText"
           >
-            view more...
+            view more&nbsp;
           </a>
-        </button>
+          <img src="./static/rightArrow.svg" alt="right"></img>
+          </div>
+        </div>
       </div>
     </>
   );

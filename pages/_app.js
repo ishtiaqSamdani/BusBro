@@ -12,6 +12,10 @@ function MyApp({ Component, pageProps }) {
   </Head>
     <Navbar admin={admin} setAdmin={setAdmin} />
     <Component {...pageProps} admin={admin} setAdmin={setAdmin} />
+    <div class="footer">
+        <p>Made with </p>
+        <img src="./static/love.svg" alt="love" className="loveImg"></img>
+      </div>
   </>;
 }
 

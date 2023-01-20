@@ -1,31 +1,27 @@
-*,
+*:not(dialog),
 *::before,
-*::after :not(dialog) {
+*::after {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-html,
 body {
   padding: 0;
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
-}
-
-body {
-  background-color: #d9d9d9;
-  margin-top: var(--mt, 2.5rem);
+  }
+ 
+  body {
+    background-color: #d9d9d9;
+    margin-top: var(--mt, 2.5rem);
+    
 }
 
 a {
   color: inherit;
   text-decoration: none;
-}
-
-* {
-  box-sizing: border-box;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -293,6 +289,9 @@ nav.navbar {
 .login__text {
   --calculated: calc(var(--width) * calc(-0.5 / 1.85));
   translate: var(--calculated) calc(var(--calculated) * -1);
+  color: white;
+  font-weight: bold;
+  text-shadow: 2px 4px 5px grey;
 }
 
 .popUpHead {
@@ -551,5 +550,488 @@ dialog::-webkit-scrollbar{
 ::-webkit-scrollbar-thumb:hover{
   background: #555;
 }
+.busContainer{
+  margin : 1rem;
+}
 
+.busNumUpdate{
+  display: flex;
+  flex-direction : row;
+ 
+
+}
+.updatedBox{
+  margin : 0px;
+  margin-left : auto;
+  font-size : .9rem;
+  
+}
+.busNumBox{
+  font-size : 2.5rem;
+  font-weight: bold;
+  background: -webkit-linear-gradient(100.76deg,
+  #9372c5 0%,
+  #e76bb5 50.76%,
+  #ff7487 72.43%,
+  #ff9f4b 98.83%,
+  #ffd700 137.39%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin:0px;
+  
+}
+.busContainer{
+  background-color: white;
+  border-radius : 12px;
+  padding: .5rem;
+  box-shadow: 4px 4px 10px grey;
+  margin-top: 2rem;
+}
+.routeViewFlex{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-top: 1rem;
+}
+.routeText{
+  margin: 0px;
+  font-size : .8rem;
+  padding : 1px;
+  padding-left : 4px;
+  padding-right : 4px;
+  border : 1px solid black;
+  border-radius: 12px;
+}
+.viewMoreText{
+  margin-left : auto;
+  font-size : .8rem;
+}
+.routesFlex{
+  display : flex;
+  flex-direction: row;
+  margin-bottom: 1rem;
+  align-items: center;
+}
+.rightArrowRoute{
+  width: 1.5rem;
+  height : 1rem;
+  margin : 0px;
+}
+.routeHyd{
+  translate: -3px 0;
+}
+.routeAditya{
+  translate: 3px 0;
+}
+.footer{
+  display: flex;
+  flex-direction : row;
+  align-items: center;
+  justify-content: center;
+  gap: .5rem;
+  color: white;
+  width: 100%;
+  background-image: linear-gradient(
+    100.76deg,
+    #9372c5 0%,
+    #e76bb5 50.76%,
+    #ff7487 72.43%,
+    #ff9f4b 98.83%,
+    #ffd700 137.39%
+  );
+  padding: .5rem;
+  
+}
+.loveImg{
+  width: 1.2rem;
+}
+.amHeading{
+  background: -webkit-linear-gradient(100.76deg,
+  #9372c5 0%,
+  #e76bb5 50.76%,
+  #ff7487 72.43%,
+  #ff9f4b 98.83%,
+  #ffd700 137.39%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  padding: 1rem;
+  font-size: 1.3rem;
+  
+}
+.AdminDashHead{
+  display:flex;
+  flex-direction: row;
+  align-items: center;
+
+}
+.verticalLine{
+  border-left: 1px solid #333;
+  height: 2.5rem;
+}
+.signOutBtn{
+  background-color: transparent;
+  border: 2px solid  #6e00bd;
+  color:  #6e00bd;
+  margin-left: auto;
+  margin-right: 1rem;
+  padding: 4px;
+  border-radius: 5px;
+}
+.viewMoreArea{
+  margin-left:auto;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.driver__profile--container{
+  display: grid;
+  grid-template-columns: 1fr 4fr;
+  width: min(100% - 2rem,500px);
+  margin:0 auto;
+  gap:.5em;
+  margin-top: 5rem;
+  height: 5rem;
+}
+.driver__profile--pic--container{
+  aspect-ratio: 1/1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  border-radius: .5em;
+}
+.driver__profile--pic{
+  width: calc(100% - 1em);
+  height: calc(100% - 1em);
+  object-fit: cover;
+  object-position: 10% 50%;
+  border-radius: 50%;
+}
+
+.driver__profile--details{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: white;
+  border-radius: .5em;
+  position: relative;
+}
+.driver__profile--details::after{
+  content: '';
+  position: absolute;
+  width: calc(100% - 1rem);
+  height:.01em;
+  background-color: rgb(0, 0, 0);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.driver__profile--details > *{
+  padding: .5em;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.driver__profile--details img{
+  width: 1.5em;
+  height: 1.5em;
+  margin-right: .5em;
+}
+.driver__profile--details *:first-child{
+}
+.driver__profile--details--name{
+  font-weight: bold;
+}
+
+.driver__profile--details--number{
+  font-weight: bold;
+}
+
+
+.bus__details{
+  background-color: rgb(255, 255, 255);
+  width:min(100% - 2rem,500px);
+  margin:2rem auto;
+  border-radius: 12px;
+}
+
+.bus__details--number{
+  display: flex;
+  /* background-color: rebeccapurple; */
+  padding:1rem;
+}
+.path{
+}
+.butttons{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+
+.update_btn{
+  background-color: #6e00bd;
+  color: white;
+  padding: .5rem 1.25rem;
+  border-radius: 100vh;
+  border: none;
+  font-weight: bold;
+  cursor: pointer;
+  margin:1rem 0;
+}
+.delete_btn{
+  background-color: white;
+  color: #6e00bd;
+  padding: .425rem 1.25rem;
+  border-radius: 100vh;
+  border: 2px solid #6e00bd;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* path css start */
+.container_ {
+  width: min(800px, 100% - 2rem);
+  margin: 1rem auto 0 auto;
+}
+.vertical_progress {
+  --number: "1";
+  --col-row-number: 1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: repeat(6, 1fr);
+  gap: 1rem;
+  grid-column-gap: 5rem;
+}
+.vertical_progress > * {
+  position: relative;
+  /* padding: 2rem 1rem; */
+  padding: 1rem;
+  border-radius: 0.25em;
+  background: linear-gradient(150deg, #3a5cca 15%, #1fa1c9 70%, #555abf 94%);
+  color: white;
+}
+.vertical_progress > *::after {
+  display: grid;
+  place-items: center;
+}
+.progress_cards:nth-child(2n + 1) {
+  grid-column: 1 / span 1;
+  grid-row: var(--col-row-number) / span 1;
+}
+.progress_cards:nth-child(2n) {
+  grid-column: 2 / span 1;
+  grid-row: var(--col-row-number) / span 1;
+}
+.progress_cards:nth-child(2n + 1)::after {
+  content: var(--number);
+  position: absolute;
+  bottom: 50%;
+  right: 0;
+  translate: calc(100% + 1.5rem) 50%;
+  width: 2rem;
+  aspect-ratio: 1/1;
+  border-radius: 50%;
+  background-color: rebeccapurple;
+  color: white;
+}
+.progress_cards:not(:last-child):nth-child(2n + 1)::before {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: calc(100% + 0.5rem);
+  width: 3px;
+  background-color: rgba(53, 16, 90, 0.37);
+  translate: calc(50% + 2.5rem) 50%;
+}
+.progress_cards:nth-child(2n)::after {
+  content: var(--number);
+  position: absolute;
+  top: 50%;
+  left: 0;
+  translate: calc(-1 * calc(100% + 1.5rem)) -50%;
+  width: 2rem;
+  aspect-ratio: 1/1;
+  border-radius: 50%;
+  background-color: rebeccapurple;
+  color: white;
+}
+.progress_cards:not(:last-child):nth-child(2n)::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: calc(100% + 0.5rem);
+  width: 3px;
+  background-color: rgba(53, 16, 90, 0.37);
+  translate: calc(-1 * calc(50% + 2.5rem)) 50%;
+}
+
+@media screen and (max-width: 767px) {
+  .vertical_progress {
+    display: block;
+  }
+  .vertical_progress > * {
+    margin: 0 0 1rem 3rem;
+  }
+  /* .vertical_progress>*::after,.vertical_progress>*::before{
+        display: none;
+    } */
+  .progress_cards:nth-child(n)::after {
+    content: var(--number);
+    position: absolute;
+    top: 50%;
+    left: 0;
+    translate: calc(-1 * calc(100% + 1.5rem)) -50%;
+    width: 2rem;
+    aspect-ratio: 1/1;
+    border-radius: 50%;
+    background-color: rebeccapurple;
+    color: white;
+  }
+  .progress_cards:not(:last-child):nth-child(n)::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: calc(100% + 0.5rem);
+    width: 3px;
+    background-color: rgba(53, 16, 90, 0.37);
+    translate: calc(-1 * calc(50% + 2.5rem)) 50%;
+  }
+}
+
+
+/* path css end */
 

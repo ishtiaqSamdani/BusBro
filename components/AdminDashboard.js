@@ -22,7 +22,7 @@ const AdminDashboard = ({ admin, setAdmin }) => {
     GSMMobile: "",
     route: ["", "", ""],
     search: "",
-    img: ""
+    img: "",
   };
   const submitBtn = useRef(null);
   const [imageUpload, setImageUpload] = useState(null);
@@ -33,9 +33,11 @@ const AdminDashboard = ({ admin, setAdmin }) => {
   // const [route, setRoute] = useState(["", "", ""]);
   useEffect(() => {
     const unsub = onSnapshot(databaseRef, (querySnapshot) => {
-      setData(querySnapshot.docs.map((doc) => {
-        return { ...doc.data(), id: doc.id }
-      }))
+      setData(
+        querySnapshot.docs.map((doc) => {
+          return { ...doc.data(), id: doc.id };
+        })
+      );
     });
 
     return unsub;
@@ -65,8 +67,6 @@ const AdminDashboard = ({ admin, setAdmin }) => {
 
   // modiff(moment('2010-10-20'), 'days');
 
-
-
   const addData = async () => {
     submitBtn.current.disabled = true;
     submitBtn.current.innerText = "Uploading...";
@@ -92,12 +92,15 @@ const AdminDashboard = ({ admin, setAdmin }) => {
 
     // give serverTimestamp() in firebase
 
-
-
     const dateTime = new Date().toLocaleString();
     // console.log('----------------date-----------------',dateTime);
 
-    addDoc(databaseRef, { ...busData, search: search, img: imageUpload.name, timestamp: dateTime })
+    addDoc(databaseRef, {
+      ...busData,
+      search: search,
+      img: imageUpload.name,
+      timestamp: dateTime,
+    })
       .then(() => {
         alert("Data Sent");
         // getData()
@@ -135,25 +138,35 @@ const AdminDashboard = ({ admin, setAdmin }) => {
       if (item.busNumber == e.target.value) {
         flag = true;
       }
-    })
+    });
     if (flag) {
-      alert('busNumber already exist');
+      alert("busNumber already exist");
+    } else {
+      setBusData({ ...busData, busNumber: e.target.value });
     }
-    else {
-      setBusData({ ...busData, busNumber: e.target.value })
-    }
-  }
+  };
   return (
     <>
       <Head>
         <title>Bus Bro | Admin</title>
       </Head>
-      <h1 style={{textAlign:"center"}}>Admin</h1>
-      
+      <div className="AdminDashHead">
+        <h3 className="amHeading">Admin Dashboard</h3>
+        <div className="verticalLine"></div>
+        <button
+        className="signOutBtn"
+          onClick={() => {
+            auth.signOut();
+            setAdmin(null);
+            window.localStorage.removeItem("busbro-token");
+            window.location.reload();
+          }}
+        >
+          Sign Out
+        </button>
+      </div>
 
       <Buses admin={admin} />
-
-
 
       <button className="add_bus" onClick={openDialog}>
         Add Bus
@@ -162,43 +175,52 @@ const AdminDashboard = ({ admin, setAdmin }) => {
       <dialog className="dialog">
         <div className="popUpHead">
           <h2>Add Bus</h2>
-          <img src="./static/close.svg" className="cancelImg" onClick={(e) => closeDialog(e)} alt="close"></img>
+          <img
+            src="./static/close.svg"
+            className="cancelImg"
+            onClick={(e) => closeDialog(e)}
+            alt="close"
+          ></img>
         </div>
         <form className="form" onSubmit={handlesubmit}>
-
           <div>
             <label>
               <div class="user-input-wrp">
                 <br />
-                <input type="number"
+                <input
+                  type="number"
                   className="inputText"
                   name="bus_number"
                   onChange={(e) => {
-                    validateBus(e)
+                    validateBus(e);
                   }}
                   value={busData.busNumber}
-                  required />
+                  required
+                />
                 <span class="floating-label">Bus Number</span>
               </div>
             </label>
             <label>
               <div class="user-input-wrp">
                 <br />
-                <input type="text"
+                <input
+                  type="text"
                   className="inputText"
                   name="bus_plate_number"
                   onChange={(e) => {
                     setBusData({ ...busData, busPlateNumber: e.target.value });
                   }}
                   value={busData.busPlateNumber}
-                  required />
+                  required
+                />
                 <span class="floating-label">Bus Plate Number</span>
               </div>
             </label>
             <label>
               <div class="user-input-wrp">
                 <br />
-                <input type="text"
+                <input
+                  type="text"
                   className="inputText"
                   name="gsm_mobile_number"
                   onChange={(e) => {
@@ -206,10 +228,10 @@ const AdminDashboard = ({ admin, setAdmin }) => {
                   }}
                   value={busData.GSMMobile}
                   pattern="^[6-9]\d{9}$"
-                  required />
+                  required
+                />
                 <span class="floating-label">GSM mobile</span>
               </div>
-
             </label>
 
             <h4>Driver Details</h4>
@@ -217,50 +239,47 @@ const AdminDashboard = ({ admin, setAdmin }) => {
               <label>
                 <div class="user-input-wrp">
                   <br />
-                  <input type="text"
+                  <input
+                    type="text"
                     className="inputText"
                     name="mobile_number"
                     onChange={(e) => {
                       setBusData({
                         ...busData,
-                        driver: [
-                          busData.driver[0],
-                          e.target.value,
-                        ],
+                        driver: [busData.driver[0], e.target.value],
                       });
                     }}
                     value={busData.driver[1]}
                     pattern="^[6-9]\d{9}$"
-                    required />
+                    required
+                  />
                   <span class="floating-label">Mobile Number</span>
                 </div>
               </label>
 
-
               <label>
                 <div class="user-input-wrp">
                   <br />
-                  <input type="text"
+                  <input
+                    type="text"
                     className="inputText"
                     name="Name_number"
                     onChange={(e) => {
                       setBusData({
                         ...busData,
-                        driver: [
-                          e.target.value,
-                          busData.driver[1],
-                        ],
+                        driver: [e.target.value, busData.driver[1]],
                       });
                     }}
                     value={busData.driver[0]}
-                    required />
+                    required
+                  />
                   <span class="floating-label">Driver Name</span>
                 </div>
-
               </label>
               <br />
               <label>
-                <span className="driverPhoto">Driver Photo</span><br></br>
+                <span className="driverPhoto">Driver Photo</span>
+                <br></br>
                 <input
                   type="file"
                   onChange={(e) => setImageUpload(e.target.files[0])}
@@ -268,7 +287,6 @@ const AdminDashboard = ({ admin, setAdmin }) => {
                 />
               </label>
             </div>
-
 
             <h4>Route</h4>
             <div className="dynamic-bus-add-delete">
@@ -278,22 +296,29 @@ const AdminDashboard = ({ admin, setAdmin }) => {
                     <div className="routesArea">
                       <div class="user-input-wrap">
                         <br />
-                        <input type="text"
+                        <input
+                          type="text"
                           className="inputText"
                           name={index}
                           onChange={(e) => routeChange(e)}
                           value={item}
-                          required />
+                          required
+                        />
                         <span class="floating-label">Route {index + 1}</span>
                       </div>
 
-                      <img src="./static/minus.svg" alt="delete"
+                      <img
+                        src="./static/minus.svg"
+                        alt="delete"
                         className="delete-route"
-                        style={{ display: busData.route.length === 3 ? "none" : "inline" }}
+                        style={{
+                          display:
+                            busData.route.length === 3 ? "none" : "inline",
+                        }}
                         onClick={(e) => {
                           deleteRoute(e);
-                        }}></img>
-
+                        }}
+                      ></img>
                     </div>
                   </>
                 );
@@ -301,32 +326,29 @@ const AdminDashboard = ({ admin, setAdmin }) => {
             </div>
             <br />
             <div className="addArea">
-              <img src="./static/plus.svg" className="addBtn" onClick={(e) => clickAdd(e)} ></img>
+              <img
+                src="./static/plus.svg"
+                className="addBtn"
+                onClick={(e) => clickAdd(e)}
+              ></img>
             </div>
 
             <br />
-           
 
             <div className="submitCancel">
-              <input className="popUpSubmit" type="submit" ref={submitBtn}></input>
+              <input
+                className="popUpSubmit"
+                type="submit"
+                ref={submitBtn}
+              ></input>
             </div>
           </div>
         </form>
       </dialog>
-<br />
-<br />
-<br />
-<br />
-      <button
-        onClick={() => {
-          auth.signOut();
-          setAdmin(null);
-          window.localStorage.removeItem("busbro-token");
-          window.location.reload();
-        }}
-      >
-        Sign Out
-      </button>
+      <br />
+      <br />
+      <br />
+      <br />
     </>
   );
 };
