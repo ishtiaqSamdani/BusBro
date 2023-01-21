@@ -41,7 +41,8 @@ function Buses({ admin }) {
   }, [data, query]);
   return (
     <>
-      <div className="landing__page">
+    <div className="minHeight">
+    <div className="landing__page">
         <Image className="landing__page--img" src={background} />
         <div className="search__container">
           <img src="./static/search.svg" alt="search-icon" className="search__img" />
@@ -68,8 +69,10 @@ function Buses({ admin }) {
         
         </div>
       ) : (
-        <div className="loader" style={{ marginTop: "3rem" }}></div>
+        <div className="loader" style={{ marginTop: "3rem",marginBottom:"100vh" }}></div>
       )}
+    </div>
+      
     </>
   );
 }

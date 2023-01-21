@@ -191,7 +191,7 @@ const viewMore = (props) => {
 
 
   return (
-    <>
+    <div className="minHeight">
       {singleBus ? (
         <>
           <div className="driver__profile--container">
@@ -315,7 +315,7 @@ const viewMore = (props) => {
           </div>
         </>
       ) : (
-        <div class="loader"></div>
+        <div class="loader" style={{marginBottom:"100vh"}}></div>
       )}
 
       <dialog className="update_pic_dialog">
@@ -615,7 +615,7 @@ const viewMore = (props) => {
           </div>
         </form>
       </dialog>
-    </>
+    </div>
   );
 };
 
