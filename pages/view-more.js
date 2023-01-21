@@ -44,8 +44,8 @@ const viewMore = (props) => {
   const busNumber = router.query.busNumber;
   const singleBus = data
     ? data.find((bus) => {
-        return bus.busNumber == busNumber;
-      })
+      return bus.busNumber == busNumber;
+    })
     : null;
   const [token, setToken] = useState(null);
   useEffect(() => {
@@ -142,8 +142,8 @@ const viewMore = (props) => {
 
   singleBus?.img
     ? getDownloadURL(ref(storage, `drivers/${singleBus.img}`)).then((url) => {
-        setImgSrc(url);
-      })
+      setImgSrc(url);
+    })
     : null;
 
   const clickAdd = (e) => {
@@ -211,7 +211,7 @@ const viewMore = (props) => {
         {/* a tag for tel ph number */}
         {/* <a href={`tel:${singleBus?.GSMMobile}`}></a> */}
 
-        {/* <a href={`sms:+916281805011?&body=Location`}>Track </a> */}
+        {/* <a href={`sms:${singleBus?.GSMMobile}?&body=Location`}>Track </a> */}
 
         {/* <h3>{singleBus?.driver[0]}</h3>
         <h3>{singleBus?.driver[1]}</h3>
@@ -227,64 +227,49 @@ const viewMore = (props) => {
 
         <div className="bus__details">
           <div className="bus__details--number">
-            <h1>{singleBus?.busNumber}</h1>
+            <h1 className="busNumViewD">{singleBus?.busNumber}</h1>
+            <a className="trackVM" href={`sms:${singleBus?.GSMMobile}?&body=Location`}>Track </a>
           </div>
           <div className="path">
             <div class="container_">
               <div class="vertical_progress">
 
                 {/* ekada */}
-                <div
-                  style={{ "--number": `'V'`, "--col-row-number": "1" }}
-                  class="progress_cards"
-                >
-                  <p>Lorem ipsum dolor</p>
-                </div>
-                <div
-                  style={{ "--number": `'2'`, "--col-row-number": "2" }}
-                  class="progress_cards"
-                >
-                  <p>Sit totam</p>
-                </div>
-                <div
-                  style={{ "--number": `'3'`, "--col-row-number": "3" }}
-                  class="progress_cards"
-                >
-                  <p>Autem quibusdam odit</p>
-                </div>
-                <div
-                  style={{ "--number": `'4'`, "--col-row-number": "4" }}
-                  class="progress_cards"
-                >
-                  <p>Autem quibusdam odit</p>
-                </div>
-                <div
-                  style={{ "--number": `'5'`, "--col-row-number": "5" }}
-                  class="progress_cards"
-                >
-                  <p>Autem quibusdam odit</p>
-                </div>
-                <div
-                  style={{ "--number": `'6'`, "--col-row-number": "6" }}
-                  class="progress_cards"
-                >
-                  <p>Autem quibusdam odit</p>
-                </div>
+                {singleBus?.route.map((rt) => {
+                  return <>
+                    <div
+                      style={{ "--number": `'V'`, "--col-row-number": "1" }}
+                      class="progress_cards"
+                    >
+                      <p>{rt}</p>
+                    </div>
+
+                  </>;
+                })}
               </div>
             </div>
           </div>
           <div className="butttons">
-            <button className="update_btn">update</button>
-            <button className="delete_btn">delete</button>
+            {(props.admin || token) && (
+              <>
+                <button className="add_bus update_btn" onClick={openDialog} >
+                  Update Bus
+                </button>
+                <br />
+                <button
+                  onClick={() => {
+                    openDeleteDialog();
+                  }}
+                  className="delete_btn"
+                >
+                  Delete Bus
+                </button>
+              </>
+            )}
           </div>
+
         </div>
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
+
         <br />
         <br />
         <h3>{singleBus?.GSMMobile}</h3>
@@ -299,302 +284,287 @@ const viewMore = (props) => {
           </>
         )}
 
-        {singleBus?.route.map((rt) => {
-          return <li>{rt}</li>;
-        })}
+
       </div>
 
-      {(props.admin || token) && (
-        <>
-          <button className="add_bus" onClick={openDialog}>
-            Update Bus
-          </button>
-          <br />
-          <button
-            onClick={() => {
-              openDeleteDialog();
-            }}
-          >
-            Delete Bus
-          </button>
 
-          <dialog className="dialog">
-            <div className="popUpHead">
-              <h2>Update Bus</h2>
-              <img
-                src="./static/close.svg"
-                className="cancelImg"
-                onClick={(e) => closeDialog(e)}
-                alt="close"
-              ></img>
+
+      <dialog className="dialog">
+        <div className="popUpHead">
+          <h2>Update Bus</h2>
+          <img
+            src="./static/close.svg"
+            className="cancelImg"
+            onClick={(e) => closeDialog(e)}
+            alt="close"
+          ></img>
+        </div>
+        <form className="form" onSubmit={handlesubmit}>
+          <label>
+            <div class="user-input-wrp">
+              <br />
+              <input
+                type="number"
+                className="inputText"
+                name="bus_number"
+                onChange={(e) => {
+                  setBusData({ ...busData, busNumber: e.target.value });
+                  setInpChecker({ ...inpChecker, busNumber: false });
+                }}
+                value={
+                  inpChecker.busNumber
+                    ? singleBus?.busNumber
+                    : busData.busNumber
+                }
+                required
+              />
+              <span class="floating-label">Bus Number</span>
             </div>
-            <form className="form" onSubmit={handlesubmit}>
-              <label>
-                <div class="user-input-wrp">
-                  <br />
-                  <input
-                    type="number"
-                    className="inputText"
-                    name="bus_number"
-                    onChange={(e) => {
-                      setBusData({ ...busData, busNumber: e.target.value });
-                      setInpChecker({ ...inpChecker, busNumber: false });
-                    }}
-                    value={
-                      inpChecker.busNumber
-                        ? singleBus?.busNumber
-                        : busData.busNumber
-                    }
-                    required
-                  />
-                  <span class="floating-label">Bus Number</span>
-                </div>
-              </label>
+          </label>
 
-              <label>
-                <div class="user-input-wrp">
-                  <br />
-                  <input
-                    type="text"
-                    className="inputText"
-                    name="bus_plate_number"
-                    onChange={(e) => {
+          <label>
+            <div class="user-input-wrp">
+              <br />
+              <input
+                type="text"
+                className="inputText"
+                name="bus_plate_number"
+                onChange={(e) => {
+                  setBusData({
+                    ...busData,
+                    busPlateNumber: e.target.value,
+                  });
+                  setInpChecker({ ...inpChecker, busPlateNumber: false });
+                }}
+                value={
+                  inpChecker.busPlateNumber
+                    ? singleBus?.busPlateNumber
+                    : busData.busPlateNumber
+                }
+                required
+              />
+              <span class="floating-label">Bus Plate Number</span>
+            </div>
+          </label>
+          <label>
+            <div class="user-input-wrp">
+              <br />
+              <input
+                type="text"
+                className="inputText"
+                name="gsm_mobile_number"
+                onChange={(e) => {
+                  setBusData({ ...busData, GSMMobile: e.target.value });
+                  setInpChecker({ ...inpChecker, GSMMobile: false });
+                }}
+                value={
+                  inpChecker.GSMMobile
+                    ? singleBus?.GSMMobile
+                    : busData.GSMMobile
+                }
+                pattern="^[6-9]\d{9}$"
+                required
+              />
+              <span class="floating-label">GSM mobile</span>
+            </div>
+          </label>
+          <br />
+          <h4>Driver Details</h4>
+          <div className="driverDetail">
+            <label>
+              <div class="user-input-wrp">
+                <br />
+                <input
+                  type="text"
+                  className="inputText"
+                  name="mobile_number"
+                  onChange={(e) => {
+                    setBusData({
+                      ...busData,
+                      driver: [busData.driver[0], e.target.value],
+                    });
+                    setInpChecker({
+                      ...inpChecker,
+                      driver: [inpChecker.driver[0], false],
+                    });
+                  }}
+                  value={
+                    inpChecker.driver[1]
+                      ? singleBus?.driver[1]
+                      : busData.driver[1]
+                  }
+                  pattern="^[6-9]\d{9}$"
+                  required
+                />
+                <span class="floating-label">Mobile Number</span>
+              </div>
+            </label>
+
+            <label>
+              <div class="user-input-wrp">
+                <br />
+                <input
+                  type="text"
+                  className="inputText"
+                  name="Name_number"
+                  onChange={(e) => {
+                    setBusData({
+                      ...busData,
+                      driver: [busData.driver[1], e.target.value],
+                    });
+                    setInpChecker({
+                      ...inpChecker,
+                      driver: [inpChecker.driver[1], false],
+                    });
+                  }}
+                  value={
+                    inpChecker.driver[0]
+                      ? singleBus?.driver[0]
+                      : busData.driver[0]
+                  }
+                  required
+                />
+                <span class="floating-label">Driver Name</span>
+              </div>
+            </label>
+          </div>
+
+          <h4>Route</h4>
+          {busData.route.map((rt, index) => {
+            return (
+              <>
+                <div className="routesArea">
+                  <div class="user-input-wrap">
+                    <br />
+                    <input
+                      type="text"
+                      className="inputText"
+                      name={index}
+                      onChange={(e) => {
+                        setBusData({
+                          ...busData,
+                          route: [
+                            ...busData.route.slice(0, index),
+                            e.target.value,
+                            ...busData.route.slice(index + 1),
+                          ],
+                        });
+                        setInpChecker({
+                          ...inpChecker,
+                          route: [
+                            ...inpChecker.route.slice(0, index),
+                            false,
+                            ...inpChecker.route.slice(index + 1),
+                          ],
+                        });
+                      }}
+                      value={
+                        inpChecker.route[index]
+                          ? singleBus?.route[index]
+                          : busData.route[index]
+                      }
+                      required
+                    />
+                    <span class="floating-label">Route {index + 1}</span>
+                  </div>
+
+                  <img
+                    src="./static/minus.svg"
+                    alt="delete"
+                    className="delete-route"
+                    style={{
+                      display:
+                        busData.route.length === 3 ? "none" : "inline",
+                    }}
+                    onClick={(e) => {
+                      e.preventDefault();
                       setBusData({
                         ...busData,
-                        busPlateNumber: e.target.value,
+                        route: [
+                          ...busData.route.slice(0, index),
+                          ...busData.route.slice(index + 1),
+                        ],
                       });
-                      setInpChecker({ ...inpChecker, busPlateNumber: false });
+                      setInpChecker({
+                        ...inpChecker,
+                        route: [
+                          ...inpChecker.route.slice(0, index),
+                          ...inpChecker.route.slice(index + 1),
+                        ],
+                      });
                     }}
-                    value={
-                      inpChecker.busPlateNumber
-                        ? singleBus?.busPlateNumber
-                        : busData.busPlateNumber
-                    }
-                    required
-                  />
-                  <span class="floating-label">Bus Plate Number</span>
+                  ></img>
                 </div>
-              </label>
-              <label>
-                <div class="user-input-wrp">
-                  <br />
-                  <input
-                    type="text"
-                    className="inputText"
-                    name="gsm_mobile_number"
-                    onChange={(e) => {
-                      setBusData({ ...busData, GSMMobile: e.target.value });
-                      setInpChecker({ ...inpChecker, GSMMobile: false });
-                    }}
-                    value={
-                      inpChecker.GSMMobile
-                        ? singleBus?.GSMMobile
-                        : busData.GSMMobile
-                    }
-                    pattern="^[6-9]\d{9}$"
-                    required
-                  />
-                  <span class="floating-label">GSM mobile</span>
-                </div>
-              </label>
-              <br />
-              <h4>Driver Details</h4>
-              <div className="driverDetail">
-                <label>
-                  <div class="user-input-wrp">
-                    <br />
-                    <input
-                      type="text"
-                      className="inputText"
-                      name="mobile_number"
-                      onChange={(e) => {
-                        setBusData({
-                          ...busData,
-                          driver: [busData.driver[0], e.target.value],
-                        });
-                        setInpChecker({
-                          ...inpChecker,
-                          driver: [inpChecker.driver[0], false],
-                        });
-                      }}
-                      value={
-                        inpChecker.driver[1]
-                          ? singleBus?.driver[1]
-                          : busData.driver[1]
-                      }
-                      pattern="^[6-9]\d{9}$"
-                      required
-                    />
-                    <span class="floating-label">Mobile Number</span>
-                  </div>
-                </label>
+              </>
+            );
+          })}
+          <br />
+          <div className="addArea">
+            <img
+              src="./static/plus.svg"
+              className="addBtn"
+              onClick={(e) => clickAdd(e)}
+            ></img>
+          </div>
+          <br />
+          <div className="submitCancel">
+            <input
+              className="popUpSubmit"
+              type="submit"
+              value="Update"
+            ></input>
+          </div>
+        </form>
+      </dialog>
 
-                <label>
-                  <div class="user-input-wrp">
-                    <br />
-                    <input
-                      type="text"
-                      className="inputText"
-                      name="Name_number"
-                      onChange={(e) => {
-                        setBusData({
-                          ...busData,
-                          driver: [busData.driver[1], e.target.value],
-                        });
-                        setInpChecker({
-                          ...inpChecker,
-                          driver: [inpChecker.driver[1], false],
-                        });
-                      }}
-                      value={
-                        inpChecker.driver[0]
-                          ? singleBus?.driver[0]
-                          : busData.driver[0]
-                      }
-                      required
-                    />
-                    <span class="floating-label">Driver Name</span>
-                  </div>
-                </label>
-              </div>
+      <dialog className="img-update">
+        <div className="popUpHead">
+          <h2>Update Photo</h2>
+          <img
+            src="./static/close.svg"
+            className="cancelImg"
+            onClick={(e) => closeModal(e)}
+            alt="close"
+          ></img>
+        </div>
+        <form className="form_img">
+          <input
+            type="file"
+            onChange={(e) => {
+              setUpdatedImg(e.target.files[0]);
+            }}
+            className="update_file"
+          />
+          <br />
+          <br></br>
+          <div className="submitCancel">
+            <input
+              type="submit"
+              className="popUpSubmit"
+              value="Update"
+              onClick={(e) => updateImg(e)}
+            />
+          </div>
+        </form>
+      </dialog>
 
-              <h4>Route</h4>
-              {busData.route.map((rt, index) => {
-                return (
-                  <>
-                    <div className="routesArea">
-                      <div class="user-input-wrap">
-                        <br />
-                        <input
-                          type="text"
-                          className="inputText"
-                          name={index}
-                          onChange={(e) => {
-                            setBusData({
-                              ...busData,
-                              route: [
-                                ...busData.route.slice(0, index),
-                                e.target.value,
-                                ...busData.route.slice(index + 1),
-                              ],
-                            });
-                            setInpChecker({
-                              ...inpChecker,
-                              route: [
-                                ...inpChecker.route.slice(0, index),
-                                false,
-                                ...inpChecker.route.slice(index + 1),
-                              ],
-                            });
-                          }}
-                          value={
-                            inpChecker.route[index]
-                              ? singleBus?.route[index]
-                              : busData.route[index]
-                          }
-                          required
-                        />
-                        <span class="floating-label">Route {index + 1}</span>
-                      </div>
+      <dialog className="delete-bus">
+        <form className="form_delete">
+          <h2>Are you sure you want to delete this bus?</h2>
+          <div className="deleteImgArea">
+            <button className="deleteImgBtn" onClick={(e) => deleteBus(e)}>
+              Yes,Delete
+            </button>
+            <button
+              className="deleteImgBtn"
+              onClick={(e) => closeModalDeleteBus(e)}
+            >
+              cancel
+            </button>
+          </div>
+        </form>
+      </dialog>
 
-                      <img
-                        src="./static/minus.svg"
-                        alt="delete"
-                        className="delete-route"
-                        style={{
-                          display:
-                            busData.route.length === 3 ? "none" : "inline",
-                        }}
-                        onClick={(e) => {
-                          e.preventDefault();
-                          setBusData({
-                            ...busData,
-                            route: [
-                              ...busData.route.slice(0, index),
-                              ...busData.route.slice(index + 1),
-                            ],
-                          });
-                          setInpChecker({
-                            ...inpChecker,
-                            route: [
-                              ...inpChecker.route.slice(0, index),
-                              ...inpChecker.route.slice(index + 1),
-                            ],
-                          });
-                        }}
-                      ></img>
-                    </div>
-                  </>
-                );
-              })}
-              <br />
-              <div className="addArea">
-                <img
-                  src="./static/plus.svg"
-                  className="addBtn"
-                  onClick={(e) => clickAdd(e)}
-                ></img>
-              </div>
-              <br />
-              <div className="submitCancel">
-                <input
-                  className="popUpSubmit"
-                  type="submit"
-                  value="Update"
-                ></input>
-              </div>
-            </form>
-          </dialog>
-
-          <dialog className="img-update">
-            <div className="popUpHead">
-              <h2>Update Photo</h2>
-              <img
-                src="./static/close.svg"
-                className="cancelImg"
-                onClick={(e) => closeModal(e)}
-                alt="close"
-              ></img>
-            </div>
-            <form className="form_img">
-              <input
-                type="file"
-                onChange={(e) => {
-                  setUpdatedImg(e.target.files[0]);
-                }}
-                className="update_file"
-              />
-              <br />
-              <br></br>
-              <div className="submitCancel">
-                <input
-                  type="submit"
-                  className="popUpSubmit"
-                  value="Update"
-                  onClick={(e) => updateImg(e)}
-                />
-              </div>
-            </form>
-          </dialog>
-
-          <dialog className="delete-bus">
-            <form className="form_delete">
-              <h2>Are you sure you want to delete this bus?</h2>
-              <div className="deleteImgArea">
-                <button className="deleteImgBtn" onClick={(e) => deleteBus(e)}>
-                  Yes,Delete
-                </button>
-                <button
-                  className="deleteImgBtn"
-                  onClick={(e) => closeModalDeleteBus(e)}
-                >
-                  cancel
-                </button>
-              </div>
-            </form>
-          </dialog>
-        </>
-      )}
     </>
   );
 };

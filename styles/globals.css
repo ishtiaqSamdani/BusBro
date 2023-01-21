@@ -682,123 +682,6 @@ dialog::-webkit-scrollbar{
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 .driver__profile--container{
   display: grid;
   grid-template-columns: 1fr 4fr;
@@ -869,22 +752,37 @@ dialog::-webkit-scrollbar{
 .bus__details{
   background-color: rgb(255, 255, 255);
   width:min(100% - 2rem,500px);
-  margin:2rem auto;
+  margin:1rem auto;
   border-radius: 12px;
 }
 
 .bus__details--number{
   display: flex;
   /* background-color: rebeccapurple; */
-  padding:1rem;
+  padding: .5rem;
+  align-items: flex-end;
 }
-.path{
+.trackVM{
+  margin-left: auto;
+  margin-right: 2rem;
+  background-image: -webkit-linear-gradient(100.76deg,
+  #9372c5 0%,
+  #e76bb5 50.76%,
+  #ff7487 72.43%,
+  #ff9f4b 98.83%,
+  #ffd700 137.39%);
+  padding: .2rem;
+  padding-left: .5rem;
+  padding-right: .5rem;
+  color: white;
+  border-radius: 2rem;
 }
+
 .butttons{
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 1rem;
+  gap: .2rem;
 }
 
 .update_btn{
@@ -907,7 +805,19 @@ dialog::-webkit-scrollbar{
   cursor: pointer;
 }
 
+.busNumViewD{
+  background: -webkit-linear-gradient(100.76deg,
+  #9372c5 0%,
+  #e76bb5 50.76%,
+  #ff7487 72.43%,
+  #ff9f4b 98.83%,
+  #ffd700 137.39%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: bold;
+  font-size: 3rem;
 
+}
 
 
 
@@ -1031,6 +941,7 @@ dialog::-webkit-scrollbar{
     translate: calc(-1 * calc(50% + 2.5rem)) 50%;
   }
 }
+
 
 
 /* path css end */
