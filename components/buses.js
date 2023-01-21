@@ -55,10 +55,18 @@ function Buses({ admin }) {
         </div>
       </div>
 
+      
+
       {filteredItems ? (
-        filteredItems.map((bus) => {
-          return <Bus bus={bus} admin={admin} />;
-        })
+        <div className="grid">
+          {
+            filteredItems.map((bus) => {
+              return <Bus bus={bus} admin={admin} />;
+            })
+
+          }
+        
+        </div>
       ) : (
         <div className="loader" style={{ marginTop: "3rem" }}></div>
       )}

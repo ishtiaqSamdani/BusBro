@@ -552,6 +552,7 @@ dialog::-webkit-scrollbar{
 }
 .busContainer{
   margin : 1rem;
+  cursor : pointer;
 }
 
 .busNumUpdate{
@@ -605,6 +606,7 @@ dialog::-webkit-scrollbar{
 .viewMoreText{
   margin-left : auto;
   font-size : .8rem;
+  cursor: pointer;
 }
 .routesFlex{
   display : flex;
@@ -676,6 +678,7 @@ dialog::-webkit-scrollbar{
   margin-right: 1rem;
   padding: 4px;
   border-radius: 5px;
+  cursor:pointer;
 }
 .viewMoreArea{
   margin-left:auto;
@@ -758,13 +761,25 @@ dialog::-webkit-scrollbar{
 
 .bus__details--number{
   display: flex;
-  /* background-color: rebeccapurple; */
+  /* background-color: white; */
   padding: .5rem;
   align-items: flex-end;
 }
+.btn_container{
+  position: relative;
+  margin-right: 1rem;
+}
+.location_img{
+  position: absolute;
+  height: 1.5rem;
+  top: 0%;
+    right: 0%;
+    translate: 45% -60%;
+}
 .trackVM{
   margin-left: auto;
-  margin-right: 2rem;
+  margin-bottom: auto;
+  margin-top: auto;
   background-image: -webkit-linear-gradient(100.76deg,
   #9372c5 0%,
   #e76bb5 50.76%,
@@ -784,9 +799,34 @@ dialog::-webkit-scrollbar{
   align-items: center;
   gap: .2rem;
 }
+.addBusBtnArea{
+  display: flex;
+  justify-content: flex-end;
+  
+ 
+}
+.addBusFlex{
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  background-color: white;
+  padding: .5rem;
+  border-radius: 100vh 0 0 100vh;
+  box-shadow: 2px 6px 5px grey;
+  position: fixed;
+  bottom:calc(37px + 1rem);
+  cursor: pointer;
+}
+.plusBtnAD{
+  width: 1.5rem;
+}
+.colseIconPop{
+  display: flex;
+  justify-content: flex-end;
+ 
+}
 
 .update_btn{
-  background-color: #6e00bd;
   color: white;
   padding: .5rem 1.25rem;
   border-radius: 100vh;
@@ -794,16 +834,98 @@ dialog::-webkit-scrollbar{
   font-weight: bold;
   cursor: pointer;
   margin:1rem 0;
+  background: -webkit-linear-gradient(100.76deg,
+  #9372c5 0%,
+  #e76bb5 50.76%,
+  #ff7487 72.43%,
+  #ff9f4b 98.83%,
+  #ffd700 137.39%);
+box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 .delete_btn{
   background-color: white;
-  color: #6e00bd;
+  /* color: #6e00bd; */
   padding: .425rem 1.25rem;
-  border-radius: 100vh;
-  border: 2px solid #6e00bd;
+  border:none;
   font-weight: bold;
   cursor: pointer;
+  z-index: 1;
+  position: relative;
+  border-radius: 100vh;
 }
+
+.delete_btn p{
+  font-weight: bold;
+  font-size: .85rem;
+  background: -webkit-linear-gradient(100.76deg,
+  #9372c5 0%,
+  #e76bb5 50.76%,
+  #ff7487 72.43%,
+  #ff9f4b 98.83%,
+  #ffd700 137.39%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+
+.delete_btn:before {
+  content: "";
+  z-index: -1;
+  position: absolute;
+  top: 50%;
+  right: 50%;
+  translate: 50% -50%;
+  width: 105%;
+  height: 123%;
+  background: linear-gradient(-45deg, #f89b29 0%, #ff0f7b 100% );
+  transition: opacity 0.3s;
+  border-radius: 100vh;
+}
+
+/* 
+* Prevents issues when the parent creates a 
+* stacking context. (For example, using the transform
+* property )
+*/
+.delete_btn::after {
+  content: "";
+  z-index: -1;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: inherit;
+  border-radius: inherit;
+}
+      
+
+/* .delete_btn div{
+  position: relative;
+  background-color: white;
+  width:calc(100% + calc(1.25rem * 2)) ;
+  height: calc(1.25rem * 2);
+  z-index: 1;
+  color:rgb(0, 0, 0);
+  border:1px solid #6e00bd;
+  translate:-1.25rem 0;
+} */
+
+/* .delete_btn::after{
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-image: -webkit-linear-gradient(100.76deg,
+  #9372c5 0%,
+  #e76bb5 50.76%,
+  #ff7487 72.43%,
+  #ff9f4b 98.83%,
+  #ffd700 137.39%);
+  top:0;
+  left:0;
+  z-index: -1;
+} */
 
 .busNumViewD{
   background: -webkit-linear-gradient(100.76deg,
@@ -819,27 +941,102 @@ dialog::-webkit-scrollbar{
 
 }
 
+.bus_plate_number{
+  width:min(100% - 2rem, 500px);
+  margin: 0 auto;
+  padding: 1rem;
+  background-color: white;
+  border-radius: .75rem;
+  font-weight: bold;
+}
+.bus_plate_number p{
+  font-size: 1.5rem;
+  margin: 0;
+  margin-bottom: .5rem;
+  color:rgb(255, 153, 0);
+}
+
+.pic_container{
+  height: 50vh;
+}
+.pic_container_img{
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: .75rem;
+}
+
+.update_pic_dialog{
+  border-radius:1.5rem;
+  width:min(100% - 2rem, 500px);
+}
+
+.update_pic{
+  border:none;
+  margin:0 auto;
+}
+
+.flex{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 1rem;
+}
+
+@media screen and (min-width:460px) {
+  .bus__details {
+    margin: 2rem auto;
+}
+}
+
+::selection{
+  background-color: #ac2beb;
+
+  color:white;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color:white;
+}
 
 
 
 
 
 
+.grid{
+  display: grid;
+}
 
+@media screen and (min-width:768px){
+
+  .grid{
+
+    grid-template-columns: repeat(3,1fr);
+  }
+  
+}
+@media screen and (min-width:1024px){
+
+  .grid{
+
+    grid-template-columns: repeat(4,1fr);
+  }
+  
+}
 
 
 
 /* path css start */
 .container_ {
   width: min(800px, 100% - 2rem);
-  margin: 1rem auto 0 auto;
+  margin: 1rem auto 1rem auto;
 }
 .vertical_progress {
   --number: "1";
   --col-row-number: 1;
+ 
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: repeat(6, 1fr);
+  grid-template-rows: repeat(var(--grid-elements,6), 1fr);
   gap: 1rem;
   grid-column-gap: 5rem;
 }
@@ -848,7 +1045,11 @@ dialog::-webkit-scrollbar{
   /* padding: 2rem 1rem; */
   padding: 1rem;
   border-radius: 0.25em;
-  background: linear-gradient(150deg, #3a5cca 15%, #1fa1c9 70%, #555abf 94%);
+  background: linear-gradient(100.76deg,
+  #9372c5 0%,
+  #e76bb5 50.76%,
+  #ff7487 72.43%
+  );
   color: white;
 }
 .vertical_progress > *::after {
@@ -864,7 +1065,9 @@ dialog::-webkit-scrollbar{
   grid-row: var(--col-row-number) / span 1;
 }
 .progress_cards:nth-child(2n + 1)::after {
-  content: var(--number);
+  background-image: url("../static/locationTick.svg");
+  background-size: contain;
+  content: "";
   position: absolute;
   bottom: 50%;
   right: 0;
@@ -872,7 +1075,7 @@ dialog::-webkit-scrollbar{
   width: 2rem;
   aspect-ratio: 1/1;
   border-radius: 50%;
-  background-color: rebeccapurple;
+  background-color: white;
   color: white;
 }
 .progress_cards:not(:last-child):nth-child(2n + 1)::before {
@@ -882,19 +1085,22 @@ dialog::-webkit-scrollbar{
   top: 0;
   height: calc(100% + 0.5rem);
   width: 3px;
-  background-color: rgba(53, 16, 90, 0.37);
+  background-color: #8e6bbd;
   translate: calc(50% + 2.5rem) 50%;
 }
 .progress_cards:nth-child(2n)::after {
-  content: var(--number);
+  background-image: url("../static/locationTick.svg");
+  background-size: contain;
+  content: "";
   position: absolute;
+  
   top: 50%;
   left: 0;
   translate: calc(-1 * calc(100% + 1.5rem)) -50%;
   width: 2rem;
   aspect-ratio: 1/1;
   border-radius: 50%;
-  background-color: rebeccapurple;
+  background-color: rgb(255, 255, 255);
   color: white;
 }
 .progress_cards:not(:last-child):nth-child(2n)::before {
@@ -913,31 +1119,33 @@ dialog::-webkit-scrollbar{
     display: block;
   }
   .vertical_progress > * {
-    margin: 0 0 1rem 3rem;
+    margin: 0 0 1rem 2rem;
   }
   /* .vertical_progress>*::after,.vertical_progress>*::before{
         display: none;
     } */
   .progress_cards:nth-child(n)::after {
-    content: var(--number);
+    background-image: url("../static/locationTick.svg");
+  background-size: contain;
+    content: "";
     position: absolute;
     top: 50%;
-    left: 0;
+    left: 1.1rem;
     translate: calc(-1 * calc(100% + 1.5rem)) -50%;
     width: 2rem;
     aspect-ratio: 1/1;
     border-radius: 50%;
-    background-color: rebeccapurple;
+    /* background-color: white; */
     color: white;
   }
   .progress_cards:not(:last-child):nth-child(n)::before {
     content: "";
     position: absolute;
-    left: 0;
+    left: 1.1rem;
     top: 0;
     height: calc(100% + 0.5rem);
     width: 3px;
-    background-color: rgba(53, 16, 90, 0.37);
+    background-color: #8e6bbd;
     translate: calc(-1 * calc(50% + 2.5rem)) 50%;
   }
 }

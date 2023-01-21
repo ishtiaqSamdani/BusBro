@@ -44,8 +44,8 @@ const viewMore = (props) => {
   const busNumber = router.query.busNumber;
   const singleBus = data
     ? data.find((bus) => {
-      return bus.busNumber == busNumber;
-    })
+        return bus.busNumber == busNumber;
+      })
     : null;
   const [token, setToken] = useState(null);
   useEffect(() => {
@@ -142,8 +142,8 @@ const viewMore = (props) => {
 
   singleBus?.img
     ? getDownloadURL(ref(storage, `drivers/${singleBus.img}`)).then((url) => {
-      setImgSrc(url);
-    })
+        setImgSrc(url);
+      })
     : null;
 
   const clickAdd = (e) => {
@@ -179,41 +179,58 @@ const viewMore = (props) => {
     deleteBusDialog.close();
   };
 
+  const openUpdatePic=()=>{
+    const updateImgDialog = document.querySelector(".update_pic_dialog");
+    updateImgDialog.showModal();
+  }
+
+  const closeUpdatePic=()=>{
+    const updateImgDialog = document.querySelector(".update_pic_dialog");
+    updateImgDialog.close();
+  }
+
+
   return (
     <>
-      <div className="driver__profile--container">
-        <div className="driver__profile--pic--container">
-          <img className="driver__profile--pic" src={imgSrc} alt="driver pic" />
-        </div>
-        <div className="driver__profile--details">
-          <div className="driver__profile--details--name">
-            <img
-              className="call-img"
-              src="static/driverProfile.svg"
-              alt=""
-              srcset=""
-            />
-            <p>{singleBus?.driver[0]}</p>
+      {singleBus ? (
+        <>
+          <div className="driver__profile--container">
+            <div className="driver__profile--pic--container" onClick={openUpdatePic}>
+              <img
+                className="driver__profile--pic"
+                src={imgSrc}
+                alt="driver pic"
+              />
+            </div>
+            <div className="driver__profile--details">
+              <div className="driver__profile--details--name">
+                <img
+                  className="call-img"
+                  src="static/driverProfile.svg"
+                  alt=""
+                  srcset=""
+                />
+                <p>{singleBus?.driver[0]}</p>
+              </div>
+              <div className="driver__profile--details--number">
+                <img
+                  className="profie-img"
+                  src="static/callDriver.svg"
+                  alt=""
+                  srcset=""
+                />
+                <p>{singleBus?.driver[1]}</p>
+              </div>
+            </div>
           </div>
-          <div className="driver__profile--details--number">
-            <img
-              className="profie-img"
-              src="static/callDriver.svg"
-              alt=""
-              srcset=""
-            />
-            <p>{singleBus?.driver[1]}</p>
-          </div>
-        </div>
-      </div>
 
-      <div>
-        {/* a tag for tel ph number */}
-        {/* <a href={`tel:${singleBus?.GSMMobile}`}></a> */}
+          <div>
+            {/* a tag for tel ph number */}
+            {/* <a href={`tel:${singleBus?.GSMMobile}`}></a> */}
 
-        {/* <a href={`sms:${singleBus?.GSMMobile}?&body=Location`}>Track </a> */}
+            {/* <a href={`sms:${singleBus?.GSMMobile}?&body=Location`}>Track </a> */}
 
-        {/* <h3>{singleBus?.driver[0]}</h3>
+            {/* <h3>{singleBus?.driver[0]}</h3>
         <h3>{singleBus?.driver[1]}</h3>
         {busData.img ? (
           <img
@@ -225,69 +242,108 @@ const viewMore = (props) => {
           <p>loading</p>
         )} */}
 
-        <div className="bus__details">
-          <div className="bus__details--number">
-            <h1 className="busNumViewD">{singleBus?.busNumber}</h1>
-            <a className="trackVM" href={`sms:${singleBus?.GSMMobile}?&body=Location`}>Track </a>
-          </div>
-          <div className="path">
-            <div class="container_">
-              <div class="vertical_progress">
-
-                {/* ekada */}
-                {singleBus?.route.map((rt) => {
-                  return <>
-                    <div
-                      style={{ "--number": `'V'`, "--col-row-number": "1" }}
-                      class="progress_cards"
+            <div className="bus__details">
+              <div className="bus__details--number">
+                <h1 className="busNumViewD">{singleBus?.busNumber}</h1>
+                <div className="btn_container trackVM">
+                  <img
+                    src="./static/location.svg"
+                    alt="location image"
+                    className="location_img"
+                  />
+                  <a
+                    className="trackVM"
+                    href={`sms:${singleBus?.GSMMobile}?&body=Location`}
+                  >
+                    Track{" "}
+                  </a>
+                </div>
+              </div>
+              <div className="path">
+                <div class="container_">
+                  <div
+                    class="vertical_progress"
+                    style={{ "--grid-elements": singleBus?.route.length }}
+                  >
+                    {/* ekada */}
+                    {singleBus?.route.map((rt, index) => {
+                      return (
+                        <>
+                          <div
+                            style={{ "--col-row-number": `${index + 1}` }}
+                            class="progress_cards"
+                          >
+                            <p>{rt}</p>
+                          </div>
+                        </>
+                      );
+                    })}
+                  </div>
+                </div>
+              </div>
+              <div className="butttons">
+                {(props.admin || token) && (
+                  <>
+                    <button className="add_bus update_btn" onClick={openDialog}>
+                      Update Bus
+                    </button>
+                    <br />
+                    <button
+                      onClick={() => {
+                        openDeleteDialog();
+                      }}
+                      className="delete_btn"
                     >
-                      <p>{rt}</p>
-                    </div>
-
-                  </>;
-                })}
+                      <p>Delete Bus</p>
+                    </button>
+                  </>
+                )}
               </div>
             </div>
-          </div>
-          <div className="butttons">
-            {(props.admin || token) && (
+
+            <div className="bus_plate_number">
+              Bus Plate Number :<p>{singleBus?.busPlateNumber}</p>
+            </div>
+            <br />
+            {/* {(props.admin || token) && (
               <>
-                <button className="add_bus update_btn" onClick={openDialog} >
-                  Update Bus
-                </button>
-                <br />
-                <button
-                  onClick={() => {
-                    openDeleteDialog();
-                  }}
-                  className="delete_btn"
-                >
-                  Delete Bus
+                <button className="update_pic" onClick={UpdatePicBtn}>
+                  Update pic
                 </button>
               </>
-            )}
+            )} */}
           </div>
+        </>
+      ) : (
+        <div class="loader"></div>
+      )}
+
+      <dialog className="update_pic_dialog">
+        <div className="colseIconPop" onClick={closeUpdatePic}>
+        <img
+          src="./static/close.svg"
+          className="cancelImg"
+          
+          alt="close"
+        ></img>
 
         </div>
+        
+        <div className="pic_container">
+          <img className="pic_container_img" src={imgSrc} alt="driver pic" />
+        </div>
 
-        <br />
-        <br />
-        <h3>{singleBus?.GSMMobile}</h3>
-
-        <h3>{singleBus?.busPlateNumber}</h3>
-        <br />
         {(props.admin || token) && (
-          <>
-            <button className="update_pic" onClick={UpdatePicBtn}>
-              Update pic
-            </button>
-          </>
-        )}
+              <>
+              <div className="flex">
 
-
-      </div>
-
-
+                <button className="update_pic update_btn" onClick={UpdatePicBtn}>
+                  Update pic
+                </button>
+              </div>
+              </>
+            )}
+      </dialog>
 
       <dialog className="dialog">
         <div className="popUpHead">
@@ -473,8 +529,7 @@ const viewMore = (props) => {
                     alt="delete"
                     className="delete-route"
                     style={{
-                      display:
-                        busData.route.length === 3 ? "none" : "inline",
+                      display: busData.route.length === 3 ? "none" : "inline",
                     }}
                     onClick={(e) => {
                       e.preventDefault();
@@ -508,11 +563,7 @@ const viewMore = (props) => {
           </div>
           <br />
           <div className="submitCancel">
-            <input
-              className="popUpSubmit"
-              type="submit"
-              value="Update"
-            ></input>
+            <input className="popUpSubmit" type="submit" value="Update"></input>
           </div>
         </form>
       </dialog>
@@ -564,7 +615,6 @@ const viewMore = (props) => {
           </div>
         </form>
       </dialog>
-
     </>
   );
 };

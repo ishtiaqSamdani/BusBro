@@ -167,10 +167,15 @@ const AdminDashboard = ({ admin, setAdmin }) => {
       </div>
 
       <Buses admin={admin} />
+        
+      <div className="addBusBtnArea" >
+        <div className="addBusFlex" onClick={openDialog}>
+          <img src="./static/plus.svg" alt="plus" className="plusBtnAD"></img>
+          <h4>Add Bus</h4>
+        </div>
 
-      <button className="add_bus" onClick={openDialog}>
-        Add Bus
-      </button>
+      </div>
+      
 
       <dialog className="dialog">
         <div className="popUpHead">
