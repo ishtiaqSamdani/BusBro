@@ -36,7 +36,7 @@ const Login = (props) => {
           <center>
             <h1>Login</h1>
           </center>
-          <div class="user-input-wrp">
+          <div class="user-input-wrap">
             <br />
             <input type="text"
               className="inputText"
@@ -49,7 +49,7 @@ const Login = (props) => {
           </div>
 
           <div className="show-password">
-            <div class="user-input-wrp">
+            <div class="user-input-wrap">
               <br />
               <input type={showPassword ? "text" : "password"}
                 className="inputText"
