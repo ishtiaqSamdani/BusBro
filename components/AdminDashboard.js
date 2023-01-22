@@ -190,7 +190,7 @@ const AdminDashboard = ({ admin, setAdmin }) => {
         <form className="form" onSubmit={handlesubmit}>
           <div>
             <label>
-              <div class="user-input-wrp">
+              <div class="user-input-wrap">
                 <br />
                 <input
                   type="number"
@@ -206,7 +206,7 @@ const AdminDashboard = ({ admin, setAdmin }) => {
               </div>
             </label>
             <label>
-              <div class="user-input-wrp">
+              <div class="user-input-wrap">
                 <br />
                 <input
                   type="text"
@@ -222,7 +222,7 @@ const AdminDashboard = ({ admin, setAdmin }) => {
               </div>
             </label>
             <label>
-              <div class="user-input-wrp">
+              <div class="user-input-wrap">
                 <br />
                 <input
                   type="text"
@@ -242,7 +242,7 @@ const AdminDashboard = ({ admin, setAdmin }) => {
             <h4>Driver Details</h4>
             <div className="driverDetail">
               <label>
-                <div class="user-input-wrp">
+                <div class="user-input-wrap">
                   <br />
                   <input
                     type="text"
@@ -263,7 +263,7 @@ const AdminDashboard = ({ admin, setAdmin }) => {
               </label>
 
               <label>
-                <div class="user-input-wrp">
+                <div class="user-input-wrap">
                   <br />
                   <input
                     type="text"

@@ -357,7 +357,7 @@ const viewMore = (props) => {
         </div>
         <form className="form" onSubmit={handlesubmit}>
           <label>
-            <div class="user-input-wrp">
+            <div class="user-input-wrap">
               <br />
               <input
                 type="number"
@@ -379,7 +379,7 @@ const viewMore = (props) => {
           </label>
 
           <label>
-            <div class="user-input-wrp">
+            <div class="user-input-wrap">
               <br />
               <input
                 type="text"
@@ -403,7 +403,7 @@ const viewMore = (props) => {
             </div>
           </label>
           <label>
-            <div class="user-input-wrp">
+            <div class="user-input-wrap">
               <br />
               <input
                 type="text"
@@ -428,7 +428,7 @@ const viewMore = (props) => {
           <h4>Driver Details</h4>
           <div className="driverDetail">
             <label>
-              <div class="user-input-wrp">
+              <div class="user-input-wrap">
                 <br />
                 <input
                   type="text"
@@ -457,7 +457,7 @@ const viewMore = (props) => {
             </label>
 
             <label>
-              <div class="user-input-wrp">
+              <div class="user-input-wrap">
                 <br />
                 <input
                   type="text"

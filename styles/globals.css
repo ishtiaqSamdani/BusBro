@@ -309,9 +309,7 @@ nav.navbar {
 .inpLabel {
   font-size: 10px;
 }
-.floating-label {
-  font-size: 0.9rem;
-}
+
 .user-input-wrp {
   position: relative;
   width: 90%;
