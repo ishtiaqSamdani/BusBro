@@ -12,6 +12,7 @@ import {
   list,
 } from "firebase/storage";
 import { storage } from "../firebaseConfig";
+import moment from "moment";
 
 const AdminDashboard = ({ admin, setAdmin }) => {
   const auth = getAuth();
@@ -83,7 +84,7 @@ const AdminDashboard = ({ admin, setAdmin }) => {
     // setImgurl(temp);
     // console.log('-------------------------url-------------------',imgurl);
     // console.log("awiat eorking");
-    // console.log('----------------imgUpload-----------------',imageUpload.name);
+    // console.log('----------------imgUploadmoment().format('MMMM Do YYYY, h:mm:ss a');d-----------------',imageUpload.name);
     // fetch('https://worldtimeapi.org/api/ip')
     //   .then((res) => res.json())
     //   .then((data) => {
@@ -92,8 +93,9 @@ const AdminDashboard = ({ admin, setAdmin }) => {
 
     // give serverTimestamp() in firebase
 
-    const dateTime = new Date().toLocaleString();
-    // console.log('----------------date-----------------',dateTime);
+    // let dateTime = new Date();
+    let dateTime=moment().format('');
+    console.log('----------------date-----------------',dateTime);
 
     addDoc(databaseRef, {
       ...busData,
@@ -114,6 +116,7 @@ const AdminDashboard = ({ admin, setAdmin }) => {
   };
   const clickAdd = (e) => {
     e.preventDefault();
+   
     // setRoute([...route, ""]);
     setBusData({ ...busData, route: [...busData.route, ""] });
   };

@@ -69,7 +69,9 @@ function Buses({ admin }) {
         
         </div>
       ) : (
-        <div className="loader" style={{ marginTop: "3rem",marginBottom:"100vh" }}></div>
+        // <div className="loader" style={{ marginTop: "3rem",marginBottom:"100vh" }}></div>
+        <img className="loader-bus" src="https://cdn.dribbble.com/users/13629280/screenshots/19734211/media/297ce93165b798b9d40c724a0e01d611.gif" alt="" srcset="" />
+
       )}
     </div>
       

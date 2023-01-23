@@ -4,7 +4,10 @@ import {
   deleteDoc,
   doc,
   getDocs,
+  onSnapshot,
+  query,
   updateDoc,
+  where,
 } from "firebase/firestore";
 import {
   ref,
@@ -17,6 +20,7 @@ import { storage } from "../firebaseConfig";
 import Router, { useRouter } from "next/router";
 import React, { use, useEffect, useState } from "react";
 import { database } from "../firebaseConfig";
+import moment from "moment";
 
 const viewMore = (props) => {
   const dataToPush = {
@@ -41,12 +45,38 @@ const viewMore = (props) => {
   const [updatedImg, setUpdatedImg] = useState(null);
   const [imgSrc, setImgSrc] = useState(null);
   const router = useRouter();
-  const busNumber = router.query.busNumber;
-  const singleBus = data
-    ? data.find((bus) => {
+  let busNumber = router.query.busNumber;
+  // const singleBus = data
+  //   ? data.find((bus) => {
+  //       return bus.busNumber == busNumber;
+  //     })
+  //   : null;
+    // console.log(router.query,"======================")
+  const [singleBus, setSingleBus] = useState(null)
+// use snapshot to get data
+
+  useEffect(() => {
+    let busNumber = router.query.busNumber;
+    console.log(router.query);
+    // const q = query(databaseRef, where("busNumber", "==",props.busNumber));
+    const unsubscribe = onSnapshot(databaseRef, (snapshot) => {
+      const data = snapshot.docs.map((doc) => ({
+        ...doc.data(),
+        id: doc.id,
+      }));
+      console.log("lopala");
+      console.log(props);
+      setSingleBus(data.find((bus) => {
         return bus.busNumber == busNumber;
-      })
-    : null;
+      }))
+    });
+    return () => unsubscribe();
+  }, [busNumber]);
+
+  // useEffect(() => {
+
+  // console.log('single bus',singleBus);
+  // }, [singleBus])
   const [token, setToken] = useState(null);
   useEffect(() => {
     setToken(window.localStorage.getItem("busbro-token"));
@@ -85,7 +115,8 @@ const viewMore = (props) => {
         search += item + ",";
       }
     });
-    updateDoc(fieldToEdit, { ...busData, search: search })
+    let dateTime=moment().format('');
+    updateDoc(fieldToEdit, { ...busData, search: search,timestamp:dateTime })
       .then(() => {
         alert("Data Updated");
         Router.push("/");
@@ -315,7 +346,8 @@ const viewMore = (props) => {
           </div>
         </>
       ) : (
-        <div class="loader" style={{marginBottom:"100vh"}}></div>
+        // <div class="loader" style={{marginBottom:"100vh"}}></div>
+        <img className="loader-bus" src="https://cdn.dribbble.com/users/13629280/screenshots/19734211/media/297ce93165b798b9d40c724a0e01d611.gif" alt="" srcset="" />
       )}
 
       <dialog className="update_pic_dialog">

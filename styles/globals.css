@@ -735,8 +735,6 @@ dialog::-webkit-scrollbar {
   height: 1.5em;
   margin-right: 0.5em;
 }
-.driver__profile--details *:first-child {
-}
 .driver__profile--details--name {
   font-weight: bold;
 }
@@ -1138,4 +1136,10 @@ dialog::-webkit-scrollbar {
 
 .minHeight{
   min-height: calc(calc(100vh - 37px) - var(--mt));
+}
+
+.loader-bus{
+  display: block;
+  width:min(100% - 2rem,500px);
+  margin: 0 auto;
 }
