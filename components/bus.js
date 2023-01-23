@@ -11,9 +11,9 @@ const Bus = (props) => {
   const bus = props.bus;
   const moment = require("moment");
   let momentA = moment(props.bus.timestamp);
-  let days = moment(new Date().toLocaleString()).diff(momentA, "days");
-  let hours = moment(new Date().toLocaleString()).diff(momentA, "hours");
-  let minutes = moment(new Date().toLocaleString()).diff(momentA, "minutes");
+  let days = moment(moment().format('')).diff(momentA, "days");
+  let hours = moment(moment().format('')).diff(momentA, "hours");
+  let minutes = moment(moment().format('')).diff(momentA, "minutes");
 
   //console.log("----------------date-----------------", hours, days, minutes);
   // console.log(bus)
