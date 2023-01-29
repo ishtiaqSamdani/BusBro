@@ -34,7 +34,7 @@ const Login = (props) => {
       <form className="cont minHeight" onSubmit={(e) => signIn(e)}>
         <div className="loginBox">
           <center>
-            <h1>Login</h1>
+            <h1 className="loginText">Login</h1>
           </center>
           <div class="user-input-wrap">
             <br />

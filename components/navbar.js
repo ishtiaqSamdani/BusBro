@@ -30,14 +30,14 @@ const Navbar = () => {
             alt="logo"
           />
 
-          {/* <input
+          <input
             type="radio"
             name="theme"
             id="light"
             className="theme_ops"
             checked
           />
-          <input type="radio" className="theme_ops" name="theme" id="dark" /> */}
+          <input type="radio" className="theme_ops" name="theme" id="dark" />
         </div>
 
         <div className="burger-menu">
