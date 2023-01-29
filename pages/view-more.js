@@ -333,7 +333,7 @@ const viewMore = (props) => {
             </div>
 
             <div className="bus_plate_number">
-              Bus Plate Number :<p>{singleBus?.busPlateNumber}</p>
+              <span>Bus Plate Number </span>:<p>{singleBus?.busPlateNumber}</p>
             </div>
             <br />
             {/* {(props.admin || token) && (
