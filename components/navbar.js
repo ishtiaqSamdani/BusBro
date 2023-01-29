@@ -29,7 +29,7 @@ const Navbar = () => {
             onClick={navigateHome}
             alt="logo"
           />
-
+{/* 
           <input
             type="radio"
             name="theme"
@@ -37,7 +37,7 @@ const Navbar = () => {
             className="theme_ops"
             checked
           />
-          <input type="radio" className="theme_ops" name="theme" id="dark" />
+          <input type="radio" className="theme_ops" name="theme" id="dark" /> */}
         </div>
 
         <div className="burger-menu">
