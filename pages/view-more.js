@@ -498,11 +498,11 @@ const viewMore = (props) => {
                   onChange={(e) => {
                     setBusData({
                       ...busData,
-                      driver: [busData.driver[1], e.target.value],
+                      driver: [ e.target.value,busData.driver[1]],
                     });
                     setInpChecker({
                       ...inpChecker,
-                      driver: [inpChecker.driver[1], false],
+                      driver: [ false,inpChecker.driver[1]],
                     });
                   }}
                   value={
