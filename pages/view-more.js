@@ -57,15 +57,15 @@ const viewMore = (props) => {
 
   useEffect(() => {
     let busNumber = router.query.busNumber;
-    console.log(router.query);
+    //console.log(router.query);
     // const q = query(databaseRef, where("busNumber", "==",props.busNumber));
     const unsubscribe = onSnapshot(databaseRef, (snapshot) => {
       const data = snapshot.docs.map((doc) => ({
         ...doc.data(),
         id: doc.id,
       }));
-      console.log("lopala");
-      console.log(props);
+      //console.log("lopala");
+      //console.log(props);
       setSingleBus(data.find((bus) => {
         return bus.busNumber == busNumber;
       }))

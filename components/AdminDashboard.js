@@ -95,7 +95,7 @@ const AdminDashboard = ({ admin, setAdmin }) => {
 
     // let dateTime = new Date();
     let dateTime=moment().format('');
-    console.log('----------------date-----------------',dateTime);
+    //console.log('----------------date-----------------',dateTime);
 
     addDoc(databaseRef, {
       ...busData,

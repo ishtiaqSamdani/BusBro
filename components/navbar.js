@@ -14,7 +14,7 @@ const Navbar = () => {
   useEffect(() => {
     const header = document.querySelector("nav");
     // set propert --mt to client height
-    console.log(header.clientHeight);
+    //console.log(header.clientHeight);
     document.body.style.setProperty("--mt", `${header.clientHeight}px`);
   }, []);
 
