@@ -404,7 +404,7 @@ const viewMore = (props) => {
                     ? singleBus?.busNumber
                     : busData.busNumber
                 }
-                required
+                //required
               />
               <span class="floating-label">Bus Number</span>
             </div>
@@ -429,7 +429,7 @@ const viewMore = (props) => {
                     ? singleBus?.busPlateNumber
                     : busData.busPlateNumber
                 }
-                required
+                //required
               />
               <span class="floating-label">Bus Plate Number</span>
             </div>
@@ -451,7 +451,7 @@ const viewMore = (props) => {
                     : busData.GSMMobile
                 }
                 pattern="^[6-9]\d{9}$"
-                required
+                //required
               />
               <span class="floating-label">GSM mobile</span>
             </div>
@@ -482,7 +482,7 @@ const viewMore = (props) => {
                       : busData.driver[1]
                   }
                   pattern="^[6-9]\d{9}$"
-                  required
+                  //required
                 />
                 <span class="floating-label">Mobile Number</span>
               </div>
@@ -510,7 +510,7 @@ const viewMore = (props) => {
                       ? singleBus?.driver[0]
                       : busData.driver[0]
                   }
-                  required
+                  //required
                 />
                 <span class="floating-label">Driver Name</span>
               </div>
@@ -551,7 +551,7 @@ const viewMore = (props) => {
                           ? singleBus?.route[index]
                           : busData.route[index]
                       }
-                      required
+                      //required
                     />
                     <span class="floating-label">Route {index + 1}</span>
                   </div>

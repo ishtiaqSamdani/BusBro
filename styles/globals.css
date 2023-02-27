@@ -1339,12 +1339,12 @@ dialog::-webkit-scrollbar {
 
 @media (prefers-color-scheme: dark) {
   :root{
-    --transparent-200: rgb(49 32 48 / .5);
-    --white: #312030;
-    --body-background: #1a111a;
-    --black: white;
-    --transparent-400: lightgrey;
-    --accent-blue-100:white;
+    --transparent-200: rgb(49 32 48 / .5)!important;
+    --white: #312030!important;
+    --body-background: #1a111a!important;
+    --black: white!important;
+    --transparent-400: lightgrey!important;
+    --accent-blue-100:white!important;
     --brand-color:linear-gradient(
       100.76deg,
       /* 180deg,
@@ -1354,6 +1354,39 @@ dialog::-webkit-scrollbar {
       hsl(324, 72%, 20%) 50.76%,
       hsl(352, 100%, 20%) 72.43%,
       hsl(28, 100%, 20%) 98.83%,
-      hsl(51, 100%, 20%) 137.39%);
+      hsl(51, 100%, 20%) 137.39%)!important;
   }
+  /* :root:has(#light:checked) {
+    --brand-color: -webkit-linear-gradient(
+    100.76deg,
+    #9372c5 0%,
+    #e76bb5 50.76%,
+    #ff7487 72.43%,
+    #ff9f4b 98.83%,
+    #ffd700 137.39%
+  )!important;
+  --linear-gradient-100: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.5) 0%,
+    rgba(0, 0, 0, 0.5) 100%
+  )!important;
+  --transparent-100: rgba(255, 255, 255, 0.18)!important;
+  --transparent-200: rgba(255, 255, 255, 0.5)!important;
+  --transparent-400: rgba(255, 255, 255, 0.726)!important;
+  --accent-blue-100: #ac2beb!important;
+  --accent-blue-200: #6e00bd!important;
+  --accent-yellow: rgb(255, 153, 0)!important;
+  --shadow-dark: grey!important;
+
+  --radius-100: 12px!important;
+  --radius-200: 16px!important;
+  --blur: 5px!important;
+  --bx-shadow-100: 0px 4px 4px rgba(0, 0, 0, 0.25)!important;
+  --bx-shadow-200: 4px 6px 8px rgba(0, 0, 0, 0.25)!important;
+
+  --body-background: #d9d9d9!important;
+
+  --white: #fff!important;
+  --black: #111!important;
+  } */
 } 

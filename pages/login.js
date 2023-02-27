@@ -38,41 +38,47 @@ const Login = (props) => {
           </center>
           <div class="user-input-wrap">
             <br />
-            <input type="text"
+            <input
+              type="text"
               className="inputText"
               name=""
               id=""
               onChange={(event) => setEmail(event.target.value)}
-
-              required />
+              required
+            />
             <span class="floating-label">Email</span>
           </div>
 
           <div className="show-password">
             <div class="user-input-wrap">
               <br />
-              <input type={showPassword ? "text" : "password"}
+              <input
+                type={showPassword ? "text" : "password"}
                 className="inputText"
                 name=""
                 id=""
                 onChange={(event) => setPassword(event.target.value)}
-                required />
+                required
+              />
               <span class="floating-label">Password</span>
             </div>
 
-            
             <Image
               className="eye"
               src={showPassword ? eyeClose : eyeOpen}
               alt="eye-open"
-              onClick={showPassword ? () => setShowPassword(false) : () => setShowPassword(true)}
+              onClick={
+                showPassword
+                  ? () => setShowPassword(false)
+                  : () => setShowPassword(true)
+              }
             />
           </div>
           <br></br>
-          
+
           <div className="submitCancel">
-              <input className="popUpSubmit" type="submit"></input>
-            </div>
+            <input className="popUpSubmit" type="submit"></input>
+          </div>
         </div>
       </form>
     </>

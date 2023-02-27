@@ -100,7 +100,7 @@ const AdminDashboard = ({ admin, setAdmin }) => {
     addDoc(databaseRef, {
       ...busData,
       search: search,
-      img: imageUpload.name,
+      img: "driver-p-3.svg",
       timestamp: dateTime,
     })
       .then(() => {
@@ -203,7 +203,7 @@ const AdminDashboard = ({ admin, setAdmin }) => {
                     validateBus(e);
                   }}
                   value={busData.busNumber}
-                  required
+                  //required
                 />
                 <span class="floating-label">Bus Number</span>
               </div>
@@ -219,7 +219,7 @@ const AdminDashboard = ({ admin, setAdmin }) => {
                     setBusData({ ...busData, busPlateNumber: e.target.value });
                   }}
                   value={busData.busPlateNumber}
-                  required
+                  //required
                 />
                 <span class="floating-label">Bus Plate Number</span>
               </div>
@@ -236,7 +236,7 @@ const AdminDashboard = ({ admin, setAdmin }) => {
                   }}
                   value={busData.GSMMobile}
                   pattern="^[6-9]\d{9}$"
-                  required
+                  //required
                 />
                 <span class="floating-label">GSM mobile</span>
               </div>
@@ -259,7 +259,7 @@ const AdminDashboard = ({ admin, setAdmin }) => {
                     }}
                     value={busData.driver[1]}
                     pattern="^[6-9]\d{9}$"
-                    required
+                    //required
                   />
                   <span class="floating-label">Mobile Number</span>
                 </div>
@@ -279,7 +279,7 @@ const AdminDashboard = ({ admin, setAdmin }) => {
                       });
                     }}
                     value={busData.driver[0]}
-                    required
+                    //required
                   />
                   <span class="floating-label">Driver Name</span>
                 </div>
@@ -291,7 +291,7 @@ const AdminDashboard = ({ admin, setAdmin }) => {
                 <input
                   type="file"
                   onChange={(e) => setImageUpload(e.target.files[0])}
-                  required
+                  //required
                 />
               </label>
             </div>
@@ -310,7 +310,7 @@ const AdminDashboard = ({ admin, setAdmin }) => {
                           name={index}
                           onChange={(e) => routeChange(e)}
                           value={item}
-                          required
+                          //required
                         />
                         <span class="floating-label">Route {index + 1}</span>
                       </div>
