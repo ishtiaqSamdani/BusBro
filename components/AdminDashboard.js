@@ -98,7 +98,7 @@ const AdminDashboard = ({ admin, setAdmin }) => {
 
     // give serverTimestamp() in firebase
 
-    // let dateTime = new Date();
+    // let dateTime = new Date();git 
     let dateTime=moment().format('');
     //console.log('----------------date-----------------',dateTime);
 
