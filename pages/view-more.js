@@ -30,6 +30,7 @@ const viewMore = (props) => {
     GSMMobile: "",
     route: ["", "", ""],
     img: "",
+    exam : ""
   };
   const inpTemp = {
     busNumber: true,
@@ -38,6 +39,7 @@ const viewMore = (props) => {
     GSMMobile: true,
     route: [true, true, true],
     img: true,
+    exam: true
   };
   const [busData, setBusData] = useState(dataToPush);
   const [inpChecker, setInpChecker] = useState(inpTemp);
@@ -46,6 +48,7 @@ const viewMore = (props) => {
   const [imgSrc, setImgSrc] = useState(null);
   const router = useRouter();
   let busNumber = router.query.busNumber;
+  
   // const singleBus = data
   //   ? data.find((bus) => {
   //       return bus.busNumber == busNumber;
@@ -57,15 +60,15 @@ const viewMore = (props) => {
 
   useEffect(() => {
     let busNumber = router.query.busNumber;
-    console.log(router.query);
+    //console.log(router.query);
     // const q = query(databaseRef, where("busNumber", "==",props.busNumber));
     const unsubscribe = onSnapshot(databaseRef, (snapshot) => {
       const data = snapshot.docs.map((doc) => ({
         ...doc.data(),
         id: doc.id,
       }));
-      console.log("lopala");
-      console.log(props);
+      //console.log("lopala");
+      //console.log(props);
       setSingleBus(data.find((bus) => {
         return bus.busNumber == busNumber;
       }))
@@ -88,6 +91,16 @@ const viewMore = (props) => {
       // console.log(singleBus.id);
     }
   }, [data]);
+
+
+  const [exam, setExam ]= useState(singleBus?.exam);
+
+  useEffect(()=>{
+    if(singleBus)
+    {
+      setExam(singleBus.exam);
+    }
+  },[singleBus])
   // console.log(busData);
   const openDialog = () => {
     document.querySelector(".dialog").showModal();
@@ -107,6 +120,10 @@ const viewMore = (props) => {
     closeDialog(e);
   };
 
+  const handleRadio = (e) => {
+    setExam(e.target.value);
+  }
+
   const updateFields = () => {
     let fieldToEdit = doc(database, "buses", singleBus.id);
     let search = busData.busNumber + ",";
@@ -116,7 +133,7 @@ const viewMore = (props) => {
       }
     });
     let dateTime=moment().format('');
-    updateDoc(fieldToEdit, { ...busData, search: search,timestamp:dateTime })
+    updateDoc(fieldToEdit, { ...busData, search: search,timestamp:dateTime,exam : exam })
       .then(() => {
         alert("Data Updated");
         Router.push("/");
@@ -225,6 +242,7 @@ const viewMore = (props) => {
     <div className="minHeight">
       {singleBus ? (
         <>
+        
           <div className="driver__profile--container">
             <div className="driver__profile--pic--container" onClick={openUpdatePic}>
               <img
@@ -272,7 +290,6 @@ const viewMore = (props) => {
         ) : (
           <p>loading</p>
         )} */}
-
             <div className="bus__details">
               <div className="bus__details--number">
                 <h1 className="busNumViewD">{singleBus?.busNumber}</h1>
@@ -284,7 +301,7 @@ const viewMore = (props) => {
                   />
                   <a
                     className="trackVM"
-                    href={`sms:${singleBus?.GSMMobile}?&body=Location`}
+                    href={`sms:${9912457345}?&body=Location`}
                   >
                     Track{" "}
                   </a>
@@ -456,6 +473,16 @@ const viewMore = (props) => {
               <span class="floating-label">GSM mobile</span>
             </div>
           </label>
+          <label>
+              <div >
+                <br></br>
+                <span class="floating-label">Exam</span>&nbsp;&nbsp;
+                <input type="radio" value="yes" name="yes_no" onChange={(e)=>{handleRadio(e)}} checked={exam == "yes"}></input>Yes &nbsp;
+                <input type="radio" value="no" name="yes_no" onChange={(e)=>{handleRadio(e)}} checked={exam == "no"}></input>No
+                <br></br>
+                <br></br>
+              </div>
+            </label>
           <br />
           <h4>Driver Details</h4>
           <div className="driverDetail">
@@ -498,11 +525,11 @@ const viewMore = (props) => {
                   onChange={(e) => {
                     setBusData({
                       ...busData,
-                      driver: [busData.driver[1], e.target.value],
+                      driver: [ e.target.value,busData.driver[1]],
                     });
                     setInpChecker({
                       ...inpChecker,
-                      driver: [inpChecker.driver[1], false],
+                      driver: [ false,inpChecker.driver[1]],
                     });
                   }}
                   value={

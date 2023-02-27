@@ -6,7 +6,7 @@ import "../styles/globals.css";
 
 function MyApp({ Component, pageProps }) {
   const expand = () => {
-    console.log("rem");
+    //console.log("rem");
     const theme = document.querySelector(".theme_expanded");
     theme.classList.toggle("expanded");
   };
