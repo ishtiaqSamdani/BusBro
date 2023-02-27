@@ -20,6 +20,7 @@ function Buses({ admin }) {
   const databaseRef = collection(database, "buses");
   const [data, setData] = useState(null);
   const [query, setQuery] = useState("");
+  const [examcheck, setExamcheck] = useState(false);
 
   // onsnapshot
   useEffect(() => {
@@ -34,6 +35,19 @@ function Buses({ admin }) {
     return unsub;
   }, []);
 
+  // useEffect(() => {
+    
+  //   if (examcheck) {
+  //     filteredItems = filteredItems.filter((item) => {
+  //       return item.exam == "yes";
+  //     })
+  //   }
+  // }, [examcheck]);
+
+  const handleExamFilter = (e) => {
+    setExamcheck(!examcheck)
+  }
+
   const filteredItems = useMemo(() => {
     return data?.filter((item) => {
       return item.search?.toLowerCase().includes(query.toLowerCase());
@@ -41,40 +55,49 @@ function Buses({ admin }) {
   }, [data, query]);
   return (
     <>
-    <div className="minHeight">
-    <div className="landing__page">
-        <Image className="landing__page--img" src={background} />
-        <div className="search__container">
-          <img src="./static/search.svg" alt="search-icon" className="search__img" />
-          <input
-            type="search"
-            onChange={(e) => setQuery(e.target.value)}
-            value={query}
-            className="search"
-            placeholder="Destination or Bus Number"
-          />
+      <div className="minHeight">
+        <div className="landing__page">
+          <Image className="landing__page--img" src={background} />
+          <div className="search__container">
+            <img src="./static/search.svg" alt="search-icon" className="search__img" />
+            <input
+              type="search"
+              onChange={(e) => setQuery(e.target.value)}
+              value={query}
+              className="search"
+              placeholder="Destination or Bus Number"
+            />
+          </div>
         </div>
+        <h1>{examcheck}</h1>
+        <input className="examStyle" type="checkbox" checked={examcheck} id="examFilter" onChange={(e) => { handleExamFilter(e) }}></input> Exam
+        {filteredItems ? (
+          <div className="grid">
+
+            {
+              examcheck?(
+                filteredItems.filter((item) => {
+                        return item.exam === "yes";
+                      }).map((bus) => {
+                            return <Bus bus={bus} admin={admin} />;
+                          })
+              ):(
+                filteredItems.map((bus) => {
+                      return <Bus bus={bus} admin={admin} />;
+                    })
+              )
+
+
+            }
+
+          </div>
+        ) : (
+          // <div className="loader" style={{ marginTop: "3rem",marginBottom:"100vh" }}></div>
+          <img className="loader-bus" src="https://cdn.dribbble.com/users/13629280/screenshots/19734211/media/297ce93165b798b9d40c724a0e01d611.gif" alt="" srcset="" />
+
+        )}
       </div>
 
-      
-
-      {filteredItems ? (
-        <div className="grid">
-          {
-            filteredItems.map((bus) => {
-              return <Bus bus={bus} admin={admin} />;
-            })
-
-          }
-        
-        </div>
-      ) : (
-        // <div className="loader" style={{ marginTop: "3rem",marginBottom:"100vh" }}></div>
-        <img className="loader-bus" src="https://cdn.dribbble.com/users/13629280/screenshots/19734211/media/297ce93165b798b9d40c724a0e01d611.gif" alt="" srcset="" />
-
-      )}
-    </div>
-      
     </>
   );
 }

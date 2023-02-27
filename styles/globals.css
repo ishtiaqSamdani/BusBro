@@ -1068,7 +1068,10 @@ dialog::-webkit-scrollbar {
   align-items: center;
   margin: 1rem;
 }
-
+.examStyle{
+  margin-top: .4rem;
+  margin-left: .4rem;
+}
 @media screen and (min-width: 460px) {
   .bus__details {
     margin: 2rem auto;

@@ -272,7 +272,6 @@ const viewMore = (props) => {
         ) : (
           <p>loading</p>
         )} */}
-
             <div className="bus__details">
               <div className="bus__details--number">
                 <h1 className="busNumViewD">{singleBus?.busNumber}</h1>
@@ -284,7 +283,7 @@ const viewMore = (props) => {
                   />
                   <a
                     className="trackVM"
-                    href={`sms:${singleBus?.GSMMobile}?&body=Location`}
+                    href={`sms:${9912457345}?&body=Location`}
                   >
                     Track{" "}
                   </a>
@@ -456,6 +455,16 @@ const viewMore = (props) => {
               <span class="floating-label">GSM mobile</span>
             </div>
           </label>
+          <label>
+              <div >
+                <br></br>
+                <span class="floating-label">Exam</span>&nbsp;&nbsp;
+                <input type="radio" value="yes" name="yes_no" onChange={(e)=>{handleRadio(e)}}></input>Yes &nbsp;
+                <input type="radio" value="no" name="yes_no" onChange={(e)=>{handleRadio(e)}}></input>No
+                <br></br>
+                <br></br>
+              </div>
+            </label>
           <br />
           <h4>Driver Details</h4>
           <div className="driverDetail">

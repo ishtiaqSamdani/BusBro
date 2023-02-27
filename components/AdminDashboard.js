@@ -24,6 +24,7 @@ const AdminDashboard = ({ admin, setAdmin }) => {
     route: ["", "", ""],
     search: "",
     img: "",
+    exam : ""
   };
   const submitBtn = useRef(null);
   const [imageUpload, setImageUpload] = useState(null);
@@ -31,6 +32,7 @@ const AdminDashboard = ({ admin, setAdmin }) => {
   const [busData, setBusData] = useState(dataToPush);
   const databaseRef = collection(database, "buses");
   const [data, setData] = useState(null);
+  const [exam, setExam ]= useState(null);
   // const [route, setRoute] = useState(["", "", ""]);
   useEffect(() => {
     const unsub = onSnapshot(databaseRef, (querySnapshot) => {
@@ -63,6 +65,9 @@ const AdminDashboard = ({ admin, setAdmin }) => {
     addData();
     closeDialog(e);
   };
+  const handleRadio = (e) => {
+    setExam(e.target.value);
+  }
 
   // var diff = Math.abs(new Date() - compareDate);
 
@@ -102,6 +107,7 @@ const AdminDashboard = ({ admin, setAdmin }) => {
       search: search,
       img: imageUpload.name,
       timestamp: dateTime,
+      exam : exam
     })
       .then(() => {
         alert("Data Sent");
@@ -239,6 +245,16 @@ const AdminDashboard = ({ admin, setAdmin }) => {
                   required
                 />
                 <span class="floating-label">GSM mobile</span>
+              </div>
+            </label>
+            <label>
+              <div >
+                <br></br>
+                <span class="floating-label">Exam</span>&nbsp;&nbsp;
+                <input type="radio" value="yes" name="yes_no" onChange={(e)=>{handleRadio(e)}}></input>Yes &nbsp;
+                <input type="radio" value="no" name="yes_no" onChange={(e)=>{handleRadio(e)}}></input>No
+                <br></br>
+                <br></br>
               </div>
             </label>
 
