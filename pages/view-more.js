@@ -30,6 +30,7 @@ const viewMore = (props) => {
     GSMMobile: "",
     route: ["", "", ""],
     img: "",
+    exam : ""
   };
   const inpTemp = {
     busNumber: true,
@@ -38,6 +39,7 @@ const viewMore = (props) => {
     GSMMobile: true,
     route: [true, true, true],
     img: true,
+    exam: true
   };
   const [busData, setBusData] = useState(dataToPush);
   const [inpChecker, setInpChecker] = useState(inpTemp);
@@ -46,6 +48,7 @@ const viewMore = (props) => {
   const [imgSrc, setImgSrc] = useState(null);
   const router = useRouter();
   let busNumber = router.query.busNumber;
+  
   // const singleBus = data
   //   ? data.find((bus) => {
   //       return bus.busNumber == busNumber;
@@ -88,6 +91,16 @@ const viewMore = (props) => {
       // console.log(singleBus.id);
     }
   }, [data]);
+
+
+  const [exam, setExam ]= useState(singleBus?.exam);
+
+  useEffect(()=>{
+    if(singleBus)
+    {
+      setExam(singleBus.exam);
+    }
+  },[singleBus])
   // console.log(busData);
   const openDialog = () => {
     document.querySelector(".dialog").showModal();
@@ -107,6 +120,10 @@ const viewMore = (props) => {
     closeDialog(e);
   };
 
+  const handleRadio = (e) => {
+    setExam(e.target.value);
+  }
+
   const updateFields = () => {
     let fieldToEdit = doc(database, "buses", singleBus.id);
     let search = busData.busNumber + ",";
@@ -116,7 +133,7 @@ const viewMore = (props) => {
       }
     });
     let dateTime=moment().format('');
-    updateDoc(fieldToEdit, { ...busData, search: search,timestamp:dateTime })
+    updateDoc(fieldToEdit, { ...busData, search: search,timestamp:dateTime,exam : exam })
       .then(() => {
         alert("Data Updated");
         Router.push("/");
@@ -225,6 +242,7 @@ const viewMore = (props) => {
     <div className="minHeight">
       {singleBus ? (
         <>
+        
           <div className="driver__profile--container">
             <div className="driver__profile--pic--container" onClick={openUpdatePic}>
               <img
@@ -459,8 +477,8 @@ const viewMore = (props) => {
               <div >
                 <br></br>
                 <span class="floating-label">Exam</span>&nbsp;&nbsp;
-                <input type="radio" value="yes" name="yes_no" onChange={(e)=>{handleRadio(e)}}></input>Yes &nbsp;
-                <input type="radio" value="no" name="yes_no" onChange={(e)=>{handleRadio(e)}}></input>No
+                <input type="radio" value="yes" name="yes_no" onChange={(e)=>{handleRadio(e)}} checked={exam == "yes"}></input>Yes &nbsp;
+                <input type="radio" value="no" name="yes_no" onChange={(e)=>{handleRadio(e)}} checked={exam == "no"}></input>No
                 <br></br>
                 <br></br>
               </div>
