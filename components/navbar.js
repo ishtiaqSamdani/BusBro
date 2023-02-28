@@ -29,6 +29,9 @@ const Navbar = () => {
             onClick={navigateHome}
             alt="logo"
           />
+          
+            
+          
 {/* 
           <input
             type="radio"
@@ -39,7 +42,7 @@ const Navbar = () => {
           />
           <input type="radio" className="theme_ops" name="theme" id="dark" /> */}
         </div>
-
+        <h2 className="heading_aditya">Aditya Bus Management</h2>
         <div className="burger-menu">
           <img src="./static/burger-menu2.svg" alt="" onClick={showList} />
         </div>

@@ -46,6 +46,8 @@
 
   --white: #fff;
   --black: #111;
+
+  --table-gray:hsl(240, 2%, 56%)
 }
 
 body {
@@ -762,6 +764,9 @@ dialog::-webkit-scrollbar {
   cursor: pointer;
 }
 .viewMoreArea {
+
+  display: flex;
+  justify-content: flex-end;
   margin-left: auto;
 }
 
@@ -1311,6 +1316,97 @@ dialog::-webkit-scrollbar {
   transition: left 250ms ease-in-out,opacity 250ms ease-in-out 20ms;
 }
 
+.heading_aditya{
+  margin-left: auto;
+  background: -webkit-linear-gradient(
+    100.76deg,
+    #9372c5 0%,
+    #e76bb5 50.76%,
+    #ff7487 72.43%,
+    #ff9f4b 98.83%,
+    #ffd700 137.39%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  
+}
+.filterTexts{
+  color: var(--black);
+  margin: .3rem;
+}
+.checkboxFlex{
+  display: flex;
+}
+.tableStyle{
+  margin-left: auto;
+}
+.tableText{
+  color: var(--black);
+  padding: 1rem;
+}
+table{
+  margin-bottom: 2rem;
+  border: none;
+}
+
+
+.table_span:has(.table_data:is(:empty)){
+  background-color: rebeccapurple;
+  display: none;
+}
+.table_span:last-child .separator{
+  display: none;
+  background-color: hotpink;
+}
+
+table,
+td {
+    /* border: 1px solid #333; */
+    background-color: var(--white);
+    /* border-bottom: 1px; */
+    box-shadow: var(--bx-shadow-200);
+}
+
+thead,
+tfoot {
+    background-color:var(--table-gray) ;
+    color: #fff;
+}
+.examStyle{
+  --webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    outline: 2px solid var(--accent-blue-200, #333);
+    width: .75em;
+    height: .75em;
+    border-radius: 50%;
+    display: block;
+    outline-offset: 2px;
+    cursor: pointer;
+    margin: 0rem;
+
+}
+
+.examStyle:checked{
+  background-color: var(--accent-blue-100);
+}
+
+.checkbx{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.checkbx:first-child{
+  /* background-color: red; */
+  margin-left:.5rem;
+}
+
+@media screen and (max-width: 767px) {
+  .heading_aditya{
+    display: none;
+  }
+}
 
 :root:has(#light:checked) {
   --transparent-200: rgba(255, 255, 255, 0.5);
@@ -1336,7 +1432,9 @@ dialog::-webkit-scrollbar {
     hsl(352, 100%, 20%) 72.43%,
     hsl(28, 100%, 20%) 98.83%,
     hsl(51, 100%, 20%) 137.39%
+
   );
+  --table-gray:hsl(304deg 35% 12%);
 }
 
 
@@ -1393,3 +1491,4 @@ dialog::-webkit-scrollbar {
   --black: #111!important;
   } */
 } 
+

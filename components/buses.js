@@ -21,6 +21,7 @@ function Buses({ admin }) {
   const [data, setData] = useState(null);
   const [query, setQuery] = useState("");
   const [examcheck, setExamcheck] = useState(false);
+  const [tableCheck, setTableCheck] = useState(false);
 
   // onsnapshot
   useEffect(() => {
@@ -36,7 +37,7 @@ function Buses({ admin }) {
   }, []);
 
   // useEffect(() => {
-    
+
   //   if (examcheck) {
   //     filteredItems = filteredItems.filter((item) => {
   //       return item.exam == "yes";
@@ -46,6 +47,12 @@ function Buses({ admin }) {
 
   const handleExamFilter = (e) => {
     setExamcheck(!examcheck)
+  }
+
+  const handleTableFilter = (e) => {
+    setTableCheck(!tableCheck)
+
+    console.log(tableCheck);
   }
 
   const filteredItems = useMemo(() => {
@@ -70,21 +77,135 @@ function Buses({ admin }) {
           </div>
         </div>
         <h1>{examcheck}</h1>
-        <input className="examStyle" type="checkbox" checked={examcheck} id="examFilter" onChange={(e) => { handleExamFilter(e) }}></input> Exam
+        <div className="checkboxFlex">
+
+          <label className="checkbx">
+
+          <input className="examStyle" type="checkbox" checked={examcheck} id="examFilter" onChange={(e) => { handleExamFilter(e) }}></input> <span className="filterTexts">Exam</span>
+
+          </label>
+          <label className="tableStyle checkbx">
+
+          <input className="examStyle " type="checkbox" checked={tableCheck} id="table" onChange={(e) => { handleTableFilter(e) }}></input> <span className="filterTexts">Table</span>
+
+          </label>
+
+        </div>
+
+        {
+          tableCheck ?
+            (
+              <center>
+                <table >
+                  <thead className="tableHeadBackground">
+                    <tr>
+                      <th className="tableText">Bus Number</th>
+                      <th className="tableText">Route</th>
+                      <th className="tableText">Driver Name</th>
+                      <th className="tableText">Driver Contact</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {
+                      examcheck ? (
+                        <>
+                          {
+                            filteredItems.filter((item) => {
+                              return item.exam === "yes";
+                            }).map((bus) => {
+                              return (
+                                <>
+                                  <tr>
+                                    <td className="tableText">{bus.busNumber}</td>
+                                    <td className="tableText">
+                                      {bus.route.map((rt) => {
+                                        return (<>{rt} {" ,"} </>)
+
+                                      }
+                                      )}
+                                    </td>
+                                    <td className="tableText">{bus.driver[0]}</td>
+                                    <td className="tableText">{bus.driver[1]}</td>
+                                  </tr>
+
+
+                                </>
+                              )//<Bus bus={bus} admin={admin} istable={tableCheck} />;
+                            }
+                            )
+                          }
+                        </>
+                      ) : (
+                        <>
+                          {
+                            filteredItems.map((bus) => {
+                              return (
+                                <>
+                                  <tr>
+                                    <td className="tableText">{bus.busNumber}</td>
+                                    <td className="tableText">
+                                      {bus.route.map((rt) => {
+                                        return (
+                                          
+                                            <>
+                                            {
+                                              rt?(<span class= "table_span" >
+                                                <span class="table_data">{rt}</span>
+                                                <span class="separator">{" ,"}</span>
+                                                </span>):<></>
+
+                                            }
+                                            </>
+
+                                          
+                                    )
+                                  
+                                }
+                                )}
+                                  </td>
+                                  <td className="tableText">{bus.driver[0]}</td>
+                                  <td className="tableText">{bus.driver[1]}</td>
+                                </tr>
+                              
+                              
+                              </>
+                      )
+                    })
+                          }
+                  </>
+                  )
+
+
+                    }
+                </tbody>
+              </table>
+              </center>
+
+      ) :
+      (
+      <>
         {filteredItems ? (
           <div className="grid">
 
             {
-              examcheck?(
-                filteredItems.filter((item) => {
-                        return item.exam === "yes";
-                      }).map((bus) => {
-                            return <Bus bus={bus} admin={admin} />;
-                          })
-              ):(
-                filteredItems.map((bus) => {
-                      return <Bus bus={bus} admin={admin} />;
+              examcheck ? (
+                <>
+                  {
+                    filteredItems.filter((item) => {
+                      return item.exam === "yes";
+                    }).map((bus) => {
+                      return <Bus bus={bus} admin={admin} istable={tableCheck} />;
                     })
+                  }
+                </>
+              ) : (
+                <>
+                  {
+                    filteredItems.map((bus) => {
+                      return <Bus bus={bus} admin={admin} istable={tableCheck} />;
+                    })
+                  }
+                </>
               )
 
 
@@ -96,7 +217,13 @@ function Buses({ admin }) {
           <img className="loader-bus" src="https://cdn.dribbble.com/users/13629280/screenshots/19734211/media/297ce93165b798b9d40c724a0e01d611.gif" alt="" srcset="" />
 
         )}
-      </div>
+
+      </>
+      )
+        }
+
+
+    </div>
 
     </>
   );

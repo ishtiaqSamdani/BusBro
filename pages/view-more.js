@@ -30,7 +30,7 @@ const viewMore = (props) => {
     GSMMobile: "",
     route: ["", "", ""],
     img: "",
-    exam : ""
+    exam: ""
   };
   const inpTemp = {
     busNumber: true,
@@ -48,15 +48,15 @@ const viewMore = (props) => {
   const [imgSrc, setImgSrc] = useState(null);
   const router = useRouter();
   let busNumber = router.query.busNumber;
-  
+
   // const singleBus = data
   //   ? data.find((bus) => {
   //       return bus.busNumber == busNumber;
   //     })
   //   : null;
-    // console.log(router.query,"======================")
+  // console.log(router.query,"======================")
   const [singleBus, setSingleBus] = useState(null)
-// use snapshot to get data
+  // use snapshot to get data
 
   useEffect(() => {
     let busNumber = router.query.busNumber;
@@ -93,14 +93,13 @@ const viewMore = (props) => {
   }, [data]);
 
 
-  const [exam, setExam ]= useState(singleBus?.exam);
+  const [exam, setExam] = useState(singleBus?.exam);
 
-  useEffect(()=>{
-    if(singleBus)
-    {
+  useEffect(() => {
+    if (singleBus) {
       setExam(singleBus.exam);
     }
-  },[singleBus])
+  }, [singleBus])
   // console.log(busData);
   const openDialog = () => {
     document.querySelector(".dialog").showModal();
@@ -132,8 +131,8 @@ const viewMore = (props) => {
         search += item + ",";
       }
     });
-    let dateTime=moment().format('');
-    updateDoc(fieldToEdit, { ...busData, search: search,timestamp:dateTime,exam : exam })
+    let dateTime = moment().format('');
+    updateDoc(fieldToEdit, { ...busData, search: search, timestamp: dateTime, exam: exam })
       .then(() => {
         alert("Data Updated");
         Router.push("/");
@@ -190,8 +189,8 @@ const viewMore = (props) => {
 
   singleBus?.img
     ? getDownloadURL(ref(storage, `drivers/${singleBus.img}`)).then((url) => {
-        setImgSrc(url);
-      })
+      setImgSrc(url);
+    })
     : null;
 
   const clickAdd = (e) => {
@@ -227,12 +226,12 @@ const viewMore = (props) => {
     deleteBusDialog.close();
   };
 
-  const openUpdatePic=()=>{
+  const openUpdatePic = () => {
     const updateImgDialog = document.querySelector(".update_pic_dialog");
     updateImgDialog.showModal();
   }
 
-  const closeUpdatePic=()=>{
+  const closeUpdatePic = () => {
     const updateImgDialog = document.querySelector(".update_pic_dialog");
     updateImgDialog.close();
   }
@@ -242,7 +241,7 @@ const viewMore = (props) => {
     <div className="minHeight">
       {singleBus ? (
         <>
-        
+
           <div className="driver__profile--container">
             <div className="driver__profile--pic--container" onClick={openUpdatePic}>
               <img
@@ -268,7 +267,7 @@ const viewMore = (props) => {
                   alt=""
                   srcset=""
                 />
-                <p>{singleBus?.driver[1]}</p>
+                <a href={`tel:${singleBus?.driver[1]}`}>{singleBus?.driver[1]}</a>
               </div>
             </div>
           </div>
@@ -293,19 +292,27 @@ const viewMore = (props) => {
             <div className="bus__details">
               <div className="bus__details--number">
                 <h1 className="busNumViewD">{singleBus?.busNumber}</h1>
-                <div className="btn_container trackVM">
-                  <img
-                    src="./static/location.svg"
-                    alt="location image"
-                    className="location_img"
-                  />
-                  <a
-                    className="trackVM"
-                    href={`sms:${9912457345}?&body=Location`}
-                  >
-                    Track{" "}
-                  </a>
-                </div>
+                {(props.admin || token) && (
+                  <>
+                    <div className="btn_container trackVM">
+
+                      <img
+                        src="./static/location.svg"
+                        alt="location image"
+                        className="location_img"
+                      />
+
+                      <a
+                        className="trackVM"
+                        href={`sms:${9912457345}?&body=*`}
+                      >
+                        Track{" "}
+                      </a>
+
+                    </div>
+                  </>
+                )}
+
               </div>
               <div className="path">
                 <div class="container_">
@@ -317,12 +324,18 @@ const viewMore = (props) => {
                     {singleBus?.route.map((rt, index) => {
                       return (
                         <>
-                          <div
-                            style={{ "--col-row-number": `${index + 1}` }}
-                            class="progress_cards"
-                          >
-                            <p>{rt}</p>
-                          </div>
+                          {
+                            rt ? (
+                              <>
+                                <div
+                                  style={{ "--col-row-number": `${index + 1}` }}
+                                  class="progress_cards"
+                                >
+                                  <p>{rt}</p>
+                                </div>
+                              </>
+                            ) : (<></>)
+                          }
                         </>
                       );
                     })}
@@ -369,29 +382,29 @@ const viewMore = (props) => {
 
       <dialog className="update_pic_dialog">
         <div className="colseIconPop" onClick={closeUpdatePic}>
-        <img
-          src="./static/close.svg"
-          className="cancelImg"
-          
-          alt="close"
-        ></img>
+          <img
+            src="./static/close.svg"
+            className="cancelImg"
+
+            alt="close"
+          ></img>
 
         </div>
-        
+
         <div className="pic_container">
           <img className="pic_container_img" src={imgSrc} alt="driver pic" />
         </div>
 
         {(props.admin || token) && (
-              <>
-              <div className="flex">
+          <>
+            <div className="flex">
 
-                <button className="update_pic update_btn" onClick={UpdatePicBtn}>
-                  Update pic
-                </button>
-              </div>
-              </>
-            )}
+              <button className="update_pic update_btn" onClick={UpdatePicBtn}>
+                Update pic
+              </button>
+            </div>
+          </>
+        )}
       </dialog>
 
       <dialog className="dialog">
@@ -421,7 +434,7 @@ const viewMore = (props) => {
                     ? singleBus?.busNumber
                     : busData.busNumber
                 }
-                required
+
               />
               <span class="floating-label">Bus Number</span>
             </div>
@@ -446,7 +459,7 @@ const viewMore = (props) => {
                     ? singleBus?.busPlateNumber
                     : busData.busPlateNumber
                 }
-                required
+
               />
               <span class="floating-label">Bus Plate Number</span>
             </div>
@@ -468,21 +481,21 @@ const viewMore = (props) => {
                     : busData.GSMMobile
                 }
                 pattern="^[6-9]\d{9}$"
-                required
+
               />
               <span class="floating-label">GSM mobile</span>
             </div>
           </label>
           <label>
-              <div >
-                <br></br>
-                <span class="floating-label">Exam</span>&nbsp;&nbsp;
-                <input type="radio" value="yes" name="yes_no" onChange={(e)=>{handleRadio(e)}} checked={exam == "yes"}></input>Yes &nbsp;
-                <input type="radio" value="no" name="yes_no" onChange={(e)=>{handleRadio(e)}} checked={exam == "no"}></input>No
-                <br></br>
-                <br></br>
-              </div>
-            </label>
+            <div >
+              <br></br>
+              <span class="floating-label">Exam</span>&nbsp;&nbsp;
+              <input type="radio" value="yes" name="yes_no" onChange={(e) => { handleRadio(e) }} checked={exam == "yes"}></input>Yes &nbsp;
+              <input type="radio" value="no" name="yes_no" onChange={(e) => { handleRadio(e) }} checked={exam == "no"}></input>No
+              <br></br>
+              <br></br>
+            </div>
+          </label>
           <br />
           <h4>Driver Details</h4>
           <div className="driverDetail">
@@ -509,7 +522,7 @@ const viewMore = (props) => {
                       : busData.driver[1]
                   }
                   pattern="^[6-9]\d{9}$"
-                  required
+
                 />
                 <span class="floating-label">Mobile Number</span>
               </div>
@@ -525,11 +538,11 @@ const viewMore = (props) => {
                   onChange={(e) => {
                     setBusData({
                       ...busData,
-                      driver: [ e.target.value,busData.driver[1]],
+                      driver: [e.target.value, busData.driver[1]],
                     });
                     setInpChecker({
                       ...inpChecker,
-                      driver: [ false,inpChecker.driver[1]],
+                      driver: [false, inpChecker.driver[1]],
                     });
                   }}
                   value={
@@ -537,7 +550,7 @@ const viewMore = (props) => {
                       ? singleBus?.driver[0]
                       : busData.driver[0]
                   }
-                  required
+
                 />
                 <span class="floating-label">Driver Name</span>
               </div>
@@ -578,7 +591,7 @@ const viewMore = (props) => {
                           ? singleBus?.route[index]
                           : busData.route[index]
                       }
-                      required
+
                     />
                     <span class="floating-label">Route {index + 1}</span>
                   </div>

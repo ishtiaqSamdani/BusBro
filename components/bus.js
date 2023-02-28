@@ -43,42 +43,55 @@ const Bus = (props) => {
 
   return (
     <>
-      <div className="busContainer">
-        <div className="busNumUpdate">
-          <h1 className="bus_number busNumBox">{bus.busNumber}</h1>
-          {/* <p className="updatedBox">
+      {
+        props.istable ? (
+          <>
+  <tr>{bus.busNumber}</tr>
+          
+
+          </>
+        ) : (
+          <>
+            <div className="busContainer">
+              <div className="busNumUpdate">
+                <h1 className="bus_number busNumBox">{bus.busNumber}</h1>
+                {/* <p className="updatedBox">
             updated {timeDiff > 1 && <span>{timeDiff} days ago</span>}
             {timeDiff <= 1 && <span>today</span>}
           </p> */}
-          <p className="updatedBox">
-          Updated {days > 0 && <span>{days} days </span>}
-          {(hours>0 && hours<24) && <span>{hours} {hours==1?"hour":"hours"} </span>}
-          {(minutes>0 && minutes<60) && <span>{minutes} {minutes==1?"minute":"minutes"}  </span>} 
-          { (days==0 && hours==0 && minutes==0) ? <span>just now</span>:<span>ago</span> }
-        </p>
-          
-        </div>
-        <div className="routeViewFlex">
+                <p className="updatedBox">
+                  Updated {days > 0 && <span>{days} days </span>}
+                  {(hours > 0 && hours < 24) && <span>{hours} {hours == 1 ? "hour" : "hours"} </span>}
+                  {(minutes > 0 && minutes < 60) && <span>{minutes} {minutes == 1 ? "minute" : "minutes"}  </span>}
+                  {(days == 0 && hours == 0 && minutes == 0) ? <span>just now</span> : <span>ago</span>}
+                </p>
 
-          <div className="routesFlex">
-            <p className="routeText routeAditya">{route[0]}</p>
-            {/* <p className="routeText">{route[1]}</p> */}
-            <img className="rightArrowRoute" src="./static/rightArrow.svg" alt="right"></img>
-            <p className="routeText routeHyd">{route[2]}</p>
-          </div>
-          <div className="viewMoreArea">
-          <a
-            onClick={() => {
-              pushData();
-            }}
-            className="viewMoreText"
-          >
-            view more&nbsp;
-          </a>
-          <img src="./static/rightArrow.svg" alt="right"></img>
-          </div>
-        </div>
-      </div>
+              </div>
+              <div className="routeViewFlex">
+
+                <div className="routesFlex">
+                  <p className="routeText routeAditya">{route[0]}</p>
+                  {/* <p className="routeText">{route[1]}</p> */}
+                  <img className="rightArrowRoute" src="./static/rightArrow.svg" alt="right"></img>
+                  <p className="routeText routeHyd">{route[2] ? route[2] : route[1]}</p>
+                </div>
+             
+              </div>
+              <div className="viewMoreArea">
+                  <a
+                    onClick={() => {
+                      pushData();
+                    }}
+                    className="viewMoreText"
+                  >
+                    view more&nbsp;
+                  </a>
+                  <img src="./static/rightArrow.svg" alt="right"></img>
+                </div>
+            </div>
+          </>
+        )
+      }
     </>
   );
 };
