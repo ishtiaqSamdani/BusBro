@@ -95,7 +95,7 @@ function Buses({ admin }) {
         {
           tableCheck ?
             (
-              <center>
+              <div class="table_container">
                 <table >
                   <thead className="tableHeadBackground">
                     <tr>
@@ -179,7 +179,7 @@ function Buses({ admin }) {
                     }
                 </tbody>
               </table>
-              </center>
+              </div>
 
       ) :
       (

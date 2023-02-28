@@ -1402,6 +1402,12 @@ tfoot {
   margin-left:.5rem;
 }
 
+.table_container{
+  width:min(800px,100% - .45rem);
+  overflow-x: scroll;
+  margin:0 auto;
+}
+
 @media screen and (max-width: 767px) {
   .heading_aditya{
     display: none;
