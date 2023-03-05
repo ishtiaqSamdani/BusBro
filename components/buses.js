@@ -86,7 +86,7 @@ function Buses({ admin }) {
           </label>
           <label className="tableStyle checkbx">
 
-          <input className="examStyle " type="checkbox" checked={tableCheck} id="table" onChange={(e) => { handleTableFilter(e) }}></input> <span className="filterTexts">Table</span>
+          <input className="examStyle " type="checkbox" checked={tableCheck} id="table" onChange={(e) => { handleTableFilter(e) }}></input> <span className="filterTexts">Switch View</span>
 
           </label>
 
