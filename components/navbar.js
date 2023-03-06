@@ -29,10 +29,8 @@ const Navbar = () => {
             onClick={navigateHome}
             alt="logo"
           />
-          
-            
-          
-{/* 
+
+          {/* 
           <input
             type="radio"
             name="theme"
@@ -56,7 +54,13 @@ const Navbar = () => {
           >
             <div className="login__text">Login</div>
           </li>
-          <li className="list__item">
+          <li
+            className="list__item"
+            onClick={() => {
+              router.push("/about");
+              showList();
+            }}
+          >
             <div className="login__text">About</div>
           </li>
         </ul>
