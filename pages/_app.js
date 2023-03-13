@@ -1,4 +1,5 @@
 import Head from "next/head";
+import { useRouter } from "next/router";
 import { useState } from "react";
 import Navbar from "../components/navbar";
 import ThemeComp from "../components/themeComp";
@@ -11,6 +12,7 @@ function MyApp({ Component, pageProps }) {
     theme.classList.toggle("expanded");
   };
   const [admin, setAdmin] = useState(null);
+  const router = useRouter();
   return<>
   <Head>
     <title>Bus Bro</title>
@@ -41,6 +43,12 @@ function MyApp({ Component, pageProps }) {
         />
         <input type="radio" className="theme_ops" name="theme" id="dark" />
       </div>
+    </div>
+    <div className="chat_area">
+      <button className="chat_btn" onClick={() => {
+              router.push("/chat");
+             
+            }}>Chat</button>
     </div>
     <div className="footer">
         <p>Made with </p>

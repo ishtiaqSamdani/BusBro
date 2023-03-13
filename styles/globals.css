@@ -1318,6 +1318,42 @@ dialog::-webkit-scrollbar {
   opacity: 1;
   transition: left 250ms ease-in-out,opacity 250ms ease-in-out 20ms;
 }
+.chat_area{
+  display: flex;
+}
+.chat_btn{
+  margin-left: auto;
+}
+.chatDiv{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.chatBox{
+  display: flex;
+  margin: 4rem;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.queryBox{
+  margin-left: auto;
+  margin-top: .5rem;
+  background: -webkit-linear-gradient(
+    100.76deg,
+    #9372c5 0%,
+    #e76bb5 50.76%,
+    #ff7487 72.43%,
+    #ff9f4b 98.83%,
+    #ffd700 137.39%
+  );
+  padding: .3rem;
+  padding-left: .5rem;
+  padding-right: .5rem;
+  color: white;
+  border-radius: 15px;
+}
 
 .heading_aditya{
   margin-left: auto;
