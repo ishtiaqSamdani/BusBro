@@ -44,12 +44,17 @@ function MyApp({ Component, pageProps }) {
         <input type="radio" className="theme_ops" name="theme" id="dark" />
       </div>
     </div>
-    <div className="chat_area">
+    {/* <div className="chat_area">
       <button className="chat_btn" onClick={() => {
-              router.push("/chat");
+              router.push({
+                pathname: "/chat",
+                query: {
+                  admin: admin,
+                },
+              });
              
             }}>Chat</button>
-    </div>
+    </div> */}
     <div className="footer">
         <p>Made with </p>
         <img src="./static/love.svg" alt="love" className="loveImg"></img>

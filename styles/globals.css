@@ -579,12 +579,23 @@ nav.navbar {
   width: min(100% - 2rem, 600px);
   z-index: 10;
 }
+.chat__container{
+  position: fixed;
+  top:auto;
+  bottom: 37px;
+}
 .search__img {
   position: absolute;
   top: 50%;
   left: 0.5rem;
   transform: translateY(-50%);
   height: 1.75rem;
+}
+
+.chat__img{
+  left: auto;
+  right: 0.5rem;
+  
 }
 .search {
   border: none;
@@ -595,6 +606,11 @@ nav.navbar {
   color: var(--accent-blue-100);
   background-color: var(--white);
   box-shadow: 0px 2px 2px 4px #ab2beb25;
+}
+.chat__input{
+  padding-left: 1rem;
+  padding-right: 2.5rem;
+
 }
 
 .search:focus-visible {
@@ -1330,16 +1346,25 @@ dialog::-webkit-scrollbar {
   align-items: center;
   flex-direction: column;
 }
+.chat_interface{
+  width:min(600px,100% - 2rem);
+  margin:0rem auto;
+  height: calc(calc(100vh - 37px) - var(--mt));
+  background-color: var(--white);
+  padding: 0 1rem;
+  position: relative;
+  
+  overflow-y: auto;
+}
 .chatBox{
   display: flex;
-  margin: 4rem;
+  gap:.5rem;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  height: 100%;
+  padding:1rem 0 6rem 0;
+  /* overflow-y: auto; */
 }
 .queryBox{
-  margin-left: auto;
-  margin-top: .5rem;
   background: -webkit-linear-gradient(
     100.76deg,
     #9372c5 0%,
@@ -1352,7 +1377,14 @@ dialog::-webkit-scrollbar {
   padding-left: .5rem;
   padding-right: .5rem;
   color: white;
-  border-radius: 15px;
+  border-radius: .5em;
+}
+
+.left_chat{
+  margin-right:auto;
+}
+.right_chat{
+  margin-left: auto;
 }
 
 .heading_aditya{
