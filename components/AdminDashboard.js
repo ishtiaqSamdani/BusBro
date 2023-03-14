@@ -13,6 +13,7 @@ import {
 } from "firebase/storage";
 import { storage } from "../firebaseConfig";
 import moment from "moment";
+import { useRouter } from "next/router";
 
 const AdminDashboard = ({ admin, setAdmin }) => {
   const auth = getAuth();
@@ -33,6 +34,7 @@ const AdminDashboard = ({ admin, setAdmin }) => {
   const databaseRef = collection(database, "buses");
   const [data, setData] = useState(null);
   const [exam, setExam ]= useState(null);
+  const router = useRouter();
   // const [route, setRoute] = useState(["", "", ""]);
   useEffect(() => {
     const unsub = onSnapshot(databaseRef, (querySnapshot) => {
@@ -162,6 +164,13 @@ const AdminDashboard = ({ admin, setAdmin }) => {
       <div className="AdminDashHead">
         <h3 className="amHeading">Admin Dashboard</h3>
         <div className="verticalLine"></div>
+        <img src="./static/chatmsg.svg" alt="chat" className="chat_btn classInNav" onClick={() => {
+          router.push({
+            pathname: "/chat",
+            query: {
+              admin: admin,
+            },
+          }) ;}}></img>
         <button
         className="signOutBtn"
           onClick={() => {

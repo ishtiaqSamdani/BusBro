@@ -763,8 +763,9 @@ dialog::-webkit-scrollbar {
   font-size: 1.3rem;
 }
 .AdminDashHead {
-  display: flex;
-  flex-direction: row;
+  display: grid;
+  grid-template-columns: 25% 60% 5% 10%;
+  justify-content: flex-start;
   align-items: center;
 }
 .verticalLine {
@@ -1383,6 +1384,10 @@ dialog::-webkit-scrollbar {
   align-items: center;
   gap: .4rem;
   margin-top: 1rem;
+}
+.classInNav{
+  justify-content: flex-end;
+  
 }
 .chat_left{
   margin-right: auto;
