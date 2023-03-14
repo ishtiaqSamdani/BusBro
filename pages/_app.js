@@ -13,16 +13,16 @@ function MyApp({ Component, pageProps }) {
   };
   const [admin, setAdmin] = useState(null);
   const router = useRouter();
-  return<>
-  <Head>
-    <title>Bus Bro</title>
-  <link rel="shortcut icon" href="/images/bus.png" />
-  </Head>
+  return <>
+    <Head>
+      <title>Bus Bro</title>
+      <link rel="shortcut icon" href="/images/bus.png" />
+    </Head>
     <Navbar admin={admin} setAdmin={setAdmin} />
     <Component {...pageProps} admin={admin} setAdmin={setAdmin} />
     <div className="theme_expanded">
       <div className="theme_icon">
-        <img className="moon" src="./static/moon.svg" alt="" srcset="" onClick={expand}/>
+        <img className="moon" src="./static/moon.svg" alt="" srcset="" onClick={expand} />
         {/* <img className="moon" src="./static/moon2.svg" alt="" srcset="" /> */}
         {/* <svg
           className="moon"
@@ -44,21 +44,24 @@ function MyApp({ Component, pageProps }) {
         <input type="radio" className="theme_ops" name="theme" id="dark" />
       </div>
     </div>
-    {/* <div className="chat_area">
-      <button className="chat_btn" onClick={() => {
-              router.push({
-                pathname: "/chat",
-                query: {
-                  admin: admin,
-                },
-              });
-             
-            }}>Chat</button>
-    </div> */}
+
     <div className="footer">
-        <p>Made with </p>
-        <img src="./static/love.svg" alt="love" className="loveImg"></img>
+      <div className="center_footer">
+
+      <p>Made with </p>
+      <img src="./static/love.svg" alt="love" className="loveImg"></img>
       </div>
+      
+      <div className="chat_area">
+      <img src="./static/chatmsg.svg" alt="chat" className="chat_btn" onClick={() => {
+          router.push({
+            pathname: "/chat",
+            query: {
+              admin: admin,
+            },
+          }) ;}}></img>
+      </div>
+    </div>
   </>;
 }
 

@@ -583,6 +583,7 @@ nav.navbar {
   position: fixed;
   top:auto;
   bottom: 37px;
+  padding: .5rem;
 }
 .search__img {
   position: absolute;
@@ -594,7 +595,7 @@ nav.navbar {
 
 .chat__img{
   left: auto;
-  right: 0.5rem;
+  right: 0.8rem;
   
 }
 .search {
@@ -736,8 +737,8 @@ dialog::-webkit-scrollbar {
 .footer {
   display: flex;
   flex-direction: row;
-  align-items: center;
-  justify-content: center;
+  /* align-items: center;
+  justify-content: center; */
   gap: 0.5rem;
   color: white;
   width: 100%;
@@ -1335,10 +1336,21 @@ dialog::-webkit-scrollbar {
   transition: left 250ms ease-in-out,opacity 250ms ease-in-out 20ms;
 }
 .chat_area{
+  margin-left: auto;
+}
+.center_footer{
   display: flex;
+  flex-direction: row;
+  gap: .5rem;
+  justify-content: center;
+  align-items: center;
+  margin-left: auto;
+  margin-right: auto;
 }
 .chat_btn{
-  margin-left: auto;
+  left: auto;
+  width: 2rem;
+  cursor: pointer;
 }
 .chatDiv{
   display: flex;
