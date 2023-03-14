@@ -1376,6 +1376,20 @@ dialog::-webkit-scrollbar {
   padding:1rem 0 6rem 0;
   /* overflow-y: auto; */
 }
+.chatDon{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  gap: .4rem;
+  margin-top: 1rem;
+}
+.chat_left{
+  margin-right: auto;
+}
+.chat_right{
+  margin-left: auto;
+}
 .queryBox{
   background: -webkit-linear-gradient(
     100.76deg,
@@ -1398,7 +1412,13 @@ dialog::-webkit-scrollbar {
 .right_chat{
   margin-left: auto;
 }
-
+.chatImg{
+  width: 1.5rem;
+}
+.chatText{
+  color: var(--black);
+  font-size: 12px;
+}
 .heading_aditya{
   margin-left: auto;
   background: -webkit-linear-gradient(
