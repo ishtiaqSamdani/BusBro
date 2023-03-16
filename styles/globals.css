@@ -1656,6 +1656,10 @@ tfoot {
   .heading_aditya{
     display: none;
   }
+  .AdminDashHead{
+    grid-template-columns: 50% 10% 20% 20%;
+    /* grid-template-columns: 25% 60% 5% 10%; */
+  }
 }
 
 :root:has(#light:checked) {
