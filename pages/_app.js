@@ -2,7 +2,6 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import Navbar from "../components/navbar";
-import ThemeComp from "../components/themeComp";
 import "../styles/globals.css";
 
 function MyApp({ Component, pageProps }) {
@@ -22,7 +21,7 @@ function MyApp({ Component, pageProps }) {
     <Component {...pageProps} admin={admin} setAdmin={setAdmin} />
     <div className="theme_expanded">
       <div className="theme_icon">
-        <img className="moon" src="./static/moon.svg" alt="" srcset="" onClick={expand} />
+        <img className="moon icon icon-shadow" src="./static/moon.svg" alt="" onClick={expand} />
         {/* <img className="moon" src="./static/moon2.svg" alt="" srcset="" /> */}
         {/* <svg
           className="moon"
@@ -52,15 +51,6 @@ function MyApp({ Component, pageProps }) {
       <img src="./static/love.svg" alt="love" className="loveImg"></img>
       </div>
       
-      <div className="chat_area">
-      <img src="./static/chatmsg.svg" alt="chat" className="chat_btn" onClick={() => {
-          router.push({
-            pathname: "/chat",
-            query: {
-              admin: admin,
-            },
-          }) ;}}></img>
-      </div>
     </div>
   </>;
 }

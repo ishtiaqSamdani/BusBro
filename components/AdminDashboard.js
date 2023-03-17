@@ -164,13 +164,6 @@ const AdminDashboard = ({ admin, setAdmin }) => {
       <div className="AdminDashHead">
         <h3 className="amHeading">Admin Dashboard</h3>
         <div className="verticalLine"></div>
-        <img src="./static/chatmsg.svg" alt="chat" className="chat_btn classInNav" onClick={() => {
-          router.push({
-            pathname: "/chat",
-            query: {
-              admin: admin,
-            },
-          }) ;}}></img>
         <button
         className="signOutBtn"
           onClick={() => {
@@ -188,7 +181,7 @@ const AdminDashboard = ({ admin, setAdmin }) => {
         
       <div className="addBusBtnArea" >
         <div className="addBusFlex" onClick={openDialog}>
-          <img src="./static/plus.svg" alt="plus" className="plusBtnAD"></img>
+          <img src="./static/plus.svg" alt="plus" className="plusBtnAD icon"></img>
           <h4>Add Bus</h4>
         </div>
 
@@ -200,7 +193,7 @@ const AdminDashboard = ({ admin, setAdmin }) => {
           <h2>Add Bus</h2>
           <img
             src="./static/close.svg"
-            className="cancelImg"
+            className="cancelImg icon"
             onClick={(e) => closeDialog(e)}
             alt="close"
           ></img>
@@ -361,7 +354,7 @@ const AdminDashboard = ({ admin, setAdmin }) => {
             <div className="addArea">
               <img
                 src="./static/plus.svg"
-                className="addBtn"
+                className="addBtn icon"
                 onClick={(e) => clickAdd(e)}
               ></img>
             </div>

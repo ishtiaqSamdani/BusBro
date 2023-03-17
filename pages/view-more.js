@@ -245,7 +245,7 @@ const viewMore = (props) => {
           <div className="driver__profile--container">
             <div className="driver__profile--pic--container" onClick={openUpdatePic}>
               <img
-                className="driver__profile--pic"
+                className="driver__profile--pic icon"
                 src={imgSrc}
                 alt="driver pic"
               />
@@ -253,7 +253,7 @@ const viewMore = (props) => {
             <div className="driver__profile--details">
               <div className="driver__profile--details--name">
                 <img
-                  className="call-img"
+                  className="call-img icon"
                   src="static/driverProfile.svg"
                   alt=""
                   srcset=""
@@ -262,7 +262,7 @@ const viewMore = (props) => {
               </div>
               <div className="driver__profile--details--number">
                 <img
-                  className="profie-img"
+                  className="profie-img icon"
                   src="static/callDriver.svg"
                   alt=""
                   srcset=""
@@ -384,7 +384,7 @@ const viewMore = (props) => {
         <div className="colseIconPop" onClick={closeUpdatePic}>
           <img
             src="./static/close.svg"
-            className="cancelImg"
+            className="cancelImg icon"
 
             alt="close"
           ></img>
@@ -412,7 +412,7 @@ const viewMore = (props) => {
           <h2>Update Bus</h2>
           <img
             src="./static/close.svg"
-            className="cancelImg"
+            className="cancelImg icon"
             onClick={(e) => closeDialog(e)}
             alt="close"
           ></img>
@@ -629,7 +629,7 @@ const viewMore = (props) => {
           <div className="addArea">
             <img
               src="./static/plus.svg"
-              className="addBtn"
+              className="addBtn icon"
               onClick={(e) => clickAdd(e)}
             ></img>
           </div>
@@ -645,7 +645,7 @@ const viewMore = (props) => {
           <h2>Update Photo</h2>
           <img
             src="./static/close.svg"
-            className="cancelImg"
+            className="cancelImg icon"
             onClick={(e) => closeModal(e)}
             alt="close"
           ></img>

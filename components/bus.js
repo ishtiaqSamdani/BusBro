@@ -72,7 +72,7 @@ const Bus = (props) => {
                 <div className="routesFlex">
                   <p className="routeText routeAditya">{route[0]}</p>
                   {/* <p className="routeText">{route[1]}</p> */}
-                  <img className="rightArrowRoute" src="./static/rightArrow.svg" alt="right"></img>
+                  <img className="rightArrowRoute rightArrow icon" src="./static/rightArrow.svg" alt="right"></img>
                   <p className="routeText routeHyd">{route[2] ? route[2] : route[1]}</p>
                 </div>
              
@@ -86,7 +86,7 @@ const Bus = (props) => {
                   >
                     view more&nbsp;
                   </a>
-                  <img src="./static/rightArrow.svg" alt="right"></img>
+                  <img className="view_more-arrow icon" src="./static/rightArrow.svg" alt="right"></img>
                 </div>
             </div>
           </>
